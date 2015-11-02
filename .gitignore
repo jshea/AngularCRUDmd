@@ -1,0 +1,7 @@
+build/
+dist/
+bower_components
+gulp/node_modules
+nbproject/private/
+bower_components/
+node_modules/

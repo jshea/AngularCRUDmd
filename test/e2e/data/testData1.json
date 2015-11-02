@@ -1,0 +1,27 @@
+[
+   {
+      "description": "This object contains a 'tests' object which lists all the files and tests that testData1.json is used in.",
+      "tests": {
+         "spec.reviewController.js": [
+            "should load the manager form correctly",
+            "should load the employee list correctly",
+            "should review a complete employee correctly",
+            "should not change an active incomplete employee after clicking follow-up"
+         ]
+      }
+   },
+   {
+      "managerBadgeNumber": "123456",
+      "managerName": "John Doe",
+      "managerOrg": "2205",
+      "weekEnding": "2/22/15",
+      "employeeCount": 8
+   },
+   {
+      "managerBadgeNumber": "654321",
+      "managerName": "Jane Doe",
+      "managerOrg": "2720",
+      "weekEnding": "2/8/15",
+      "employeeCount": 9
+   }
+]

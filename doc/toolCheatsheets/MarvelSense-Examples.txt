@@ -1,0 +1,277 @@
+# Cluster level info and status
+GET /
+GET /_cluster/health
+GET /_nodes
+GET /_cat/indices
+GET /_search
+POST /_shutdown
+
+
+# CRUD operations
+
+# Delete the index
+DELETE /myindex
+
+# Use our own id (primary key)
+PUT /myindex/people/sheajim
+{
+  "lastname":  "Shea",
+  "firstname": "Jim"
+}
+GET /myindex/_search
+
+# Have Elasticsearch autogenerate a key for us 
+# (22 character, URL-safe, Base64-encoded UUID)
+POST /myindex/people/
+{
+  "lastname":  "Shea",
+  "firstname": "Jim"
+}
+GET /myindex/_search
+
+# Show the structure of our type
+GET /myindex/people/_mapping
+
+# To ensure creation or fail if it already exists
+# (HTTP 201 if created, 409 if it already exists)
+#
+# PUT /myindex/people/sheajim?op_type=create
+# {...}
+#
+# or
+#
+# PUT /myindex/people/sheajim/_create
+# {...}
+
+# Get by id
+GET /myindex/people/sheajim
+# Get _source only, no other meta data
+GET /myindex/people/sheajim/_source
+
+# Get just the last name
+GET /myindex/people/sheajim?_source=lastname
+
+# Get just the data (_source) without any Elasticsearch meta data
+GET /myindex/people/sheajim/_source
+
+# Check if a document exists
+HEAD /myindex/people/sheajim
+
+#Update a document (actually replaces the existing document with a new one)
+PUT /myindex/people/sheajim
+{
+  "lastname":  "Shea",
+  "firstname": "Jim",
+  "mi": "T"
+}
+
+# To ensure the document wasn't updated underneath us
+PUT /myindex/people/sheajim?version=x // use actual version, not 'x'!
+{
+  "lastname": "Shea",
+  "firstname": "Jim",
+  "mi": "T"
+}
+
+# Partial updates to documents - Pass the updates as a "doc" parameter
+POST /myindex/people/sheajim/_update
+{
+  "doc": {
+    "firstname" : "James",
+    "work": {
+      "street": "4800 Oak Grove Dr",
+      "city":   "Pasadena",
+      "state":  "CA",
+      "zip":    "91109"
+    }
+  }
+}
+
+
+# Searching and analytics
+
+# Load some sample data using the Flintstones
+DELETE /myindex
+PUT /myindex/people/flintstonefred
+{
+  "firstName":  "Fred",
+  "lastName":   "Flintstone",
+  "address": {
+    "street": "345 Cave Stone Rd",
+    "city":       "Bedrock",
+    "state":      "NA",
+    "zip":        "123"
+  },
+  "phone": {
+    "mobile":"33",
+    "home":  "111",
+    "work":  "x"
+  },
+  "email":      "Fred@Flintstone.com",
+  "birthday":   "1970-01-01",
+  "age":        35,
+  "children":   "1",
+  "notes":      "husband father loves bowling"
+}
+PUT /myindex/people/flintstonewilma
+{
+  "firstName":  "Wilma",
+  "lastName":   "Flintstone",
+  "address": {
+    "street":     "345 Cave Stone Rd",
+    "city":       "Bedrock",
+    "state":      "NA",
+    "zip":        "123"
+  },
+  "phone": {
+    "mobile":"44",
+    "home":  "11",
+    "work":  "x"
+  },
+  "email":      "Wilma@Flintstone.com",
+  "birthday":   "1971-01-01",
+  "age":        32,
+  "children":   "1",
+  "notes":      "spending money charge it"
+}
+PUT /myindex/people/rubblebarney
+{
+  "firstName":  "Barney",
+  "lastName":   "Rubble",
+  "address": {
+    "street":     "123 Granite Way",
+    "city":       "Bedrock",
+    "state":      "NA",
+    "zip":        "123"
+  },
+  "phone": {
+    "mobile":"55",
+    "home":  "22",
+    "work":  "x"
+  },
+  "email":      "Barney@Rubble.com",
+  "birthday":   "1972-01-01",
+  "age":        33,
+  "children":   "1",
+  "notes":      "father husband bowling golf"
+}
+PUT /myindex/people/rubblebetty
+{
+  "firstName":  "Betty",
+  "lastName":   "Rubble",
+  "address": {
+    "street":     "123 Granite Way",
+    "city":       "Bedrock",
+    "state":      "NA",
+    "zip":        "123"
+  },
+  "phone": {
+    "mobile":"66",
+    "home":  "22",
+    "work":  "x"
+  },
+  "email":      "Betty@Rubble.com",
+  "birthday":   "1973-01-01",
+  "age":        29,
+  "children":   "1",
+  "notes":      "spending money charge it"
+}
+GET /myindex/people/_search
+
+# Get multiple docs - _mget
+GET /myindex/people/_mget
+{
+  "ids": ["flintstonefred", "rubblebarney"]
+}
+
+# Match query
+GET /myindex/people/_search
+{
+  "query" : {
+    "match" : {
+      "lastName" : "flintstone"
+    }
+  }
+}
+
+# Gets two docs with bowling. Why the Barney document?
+GET /myindex/people/_search
+{
+  "query" : {
+    "match" : {
+      "notes" : "loves bowling"
+    }
+  }
+}
+
+# Gets one doc with the phrase "loves bowling"
+GET /myindex/people/_search
+{
+  "query" : {
+      "match_phrase" : {
+      "notes" : "loves bowling"
+    }
+  }
+}
+
+# Gets one doc with the phrase "loves bowling" with highlighting
+GET /myindex/people/_search
+{
+  "query" : {
+    "match_phrase" : {
+      "notes" : "loves bowling"
+    }
+  },
+  "highlight": {
+    "fields" : {
+      "notes" : {}
+    }
+  }
+}
+
+# Gets one doc with the phrase "loves bowling" and adds a filter for mobile value less than 40
+GET /myindex/people/_search
+{
+  "query" : {
+    "filtered" : {
+      "query" : {
+        "match" : {
+          "lastName" : "flintstone"
+        }
+      },
+      "filter" : {
+        "range" : {
+          "mobile" : { "lt" : "40" }
+        }
+      }
+    }
+  }
+}
+
+
+# Analytics
+
+# How often are keywords included in the notes
+GET /myindex/people/_search
+{
+  "aggs": {
+    "all_notes": {
+      "terms": { "field": "notes" }
+    }
+  }
+}
+
+# How often are keywords included in the notes
+GET /myindex/people/_search
+{
+  "aggs": {
+    "all_notess": {
+      "terms": { "field": "notes" },
+      "aggs" : {
+        "avg_age" : {
+          "avg" : { "field" : "age" }
+        }
+      }
+    }
+  }
+}

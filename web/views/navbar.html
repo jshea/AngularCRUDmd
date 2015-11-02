@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default navbar-custom" role="navigation">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                </button>
+                <a href="#/list" class="navbar-brand">AngularJS CRUD</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav">
+                  <li id="menu-list">    <a href="#/">Contact List</a></li>
+                  <li id="menu-new">     <a href="#/new">New Contact</a></li>
+                  <li id="menu-loaddata"><a href="#/load">Initialize Data</a></li>
+                  <li id="menu-settings"><a href="#/settings">Settings</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#/instructions">Instructions</a></li>
+                  <li><a href="#/faq">FAQs</a></li>
+               </ul>
+            </div>
+         </div>
+    </div>
+</nav>
+
+<!-- Warning message for when we have lost our network connection -->
+<div class="alert alert-warning" ng-if="!online">
+   We went Offline. We cannot operate until the network connection is restored.
+</div>
+
+<!-- Container for our popup messages -->
+<toaster-container
+   toaster-options="{'time-out': 3000,
+                     'close-button': false,
+                     'animation-class': 'toast-top-center'}">
+</toaster-container>
+
+<!-- Busy indicator for long background processes -->
+<div cg-busy="{promise: myPromise,
+               delay: 500,
+               message: 'Loading...'}"></div>

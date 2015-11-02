@@ -1,0 +1,30 @@
+[
+   {
+      "description": "This object contains a 'tests' object which lists all the files and tests that testData3.json is used in.",
+      "tests": {
+         "spec.reviewController.js": [
+            "should disable/enable prev week and next week properly"
+         ]
+      }
+   },
+   {
+      "managerBadgeNumber": "123456",
+      "managerName": "John Doe",
+      "managerOrg": "2205",
+      "weekEnding": "5/11/14",
+      "employeeCount": 10,
+      "employeeFullName": "Jane Doe",
+      "disabledButtonId": "prevWeek",
+      "enabledButtonId": "nextWeek"
+   },
+   {
+      "managerBadgeNumber": "123456",
+      "managerName": "Jone Doe",
+      "managerOrg": "2205",
+      "weekEnding": "5/4/14",
+      "employeeCount": 10,
+      "employeeFullName": "Jay Doh!",
+      "disabledButtonId": "nextWeek",
+      "enabledButtonId": "prevWeek"
+   }
+]

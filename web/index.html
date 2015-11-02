@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="angularcrud">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- CSS -->
+      <link href="AngularCRUD.debug.css" rel="stylesheet" />
+
+      <link rel="icon" href="assets/favicon.ico" type="image/x-icon"/>
+
+   <title>AngularJS CRUD Example</title>
+</head>
+
+<!--
+   ng-cloak prevents the template from being briefly displayed in it's raw (uncompiled)
+   form while application is loading. AKA FOUC (Flash Of Unstyled Content).
+-->
+<body ng-cloak>
+
+   <div ng-include src=" './views/navbar.html' "></div>
+
+   <div class="container-fluid">
+
+      <div class="panel">
+         <div ng-view></div> <!-- This is where Angular will swap in our templates. -->
+      </div>
+
+   </div>
+
+   <!-- JS Libs - 3rd party libs we're using -->
+   <script src="AngularCRUDLibs.debug.js"></script>
+
+   <!-- AngularCRUD Application - Our application files -->
+   <script src="AngularCRUDApp.debug.js"></script>
+
+</body>
+</html>
