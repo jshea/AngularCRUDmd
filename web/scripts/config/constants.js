@@ -14,7 +14,8 @@
       {"firstName": "Betty", "lastName": "Rubble"}
    ]);
 
-// Set a default URL
-//   angular.module("angularcrud").constant("URL", "ws/review/"); // Java/Jersey
-   angular.module("angularcrud").constant("WS_URL", "http://localhost:9200/angularcrud/person/");   // Elastic
+// Set a default REST WS URL - Sample as a constant. This app sets it in the
+// two httpFactory files.
+// 
+//   angular.module("angularcrud").constant("URL", ); // Java/Jersey
 })();

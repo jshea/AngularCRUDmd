@@ -6,7 +6,9 @@
 
    "use strict";
 
-   function SettingsController(WS_URL, $scope, $location) {
+   function SettingsController($scope, $location) { // WS_URL, Here as an example
+      var WS_URL; // Have to have this as we're not using dependency injection
+
       $scope.settings = {};
 
       // Set default value to be used for form input field
@@ -40,5 +42,5 @@
 
    // Register our controller
    angular.module("angularcrud")
-   .controller("SettingsController", ["WS_URL", "$scope", "$location", SettingsController]);
+   .controller("SettingsController", ["$scope", "$location", SettingsController]); // "WS_URL",
 })();

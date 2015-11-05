@@ -21,9 +21,11 @@
     *
     * @param {type} $http Angular service for making web service calls
     * @param {type} $rootScope Angular root scope, used by busy indicator ($rootScope.myPromise)
-    * @param {type} WS_URL Our base web service url
     */
-   function HttpFactory($http, $rootScope, WS_URL) {
+   function HttpFactory($http, $rootScope) {
+
+      // This is the path to the Elasticsearch REST url
+      var WS_URL = "http://localhost:9200/angularcrud/person/";
 
       /*
        * Factory return object. This contains all our individual data factory
@@ -155,42 +157,44 @@
           * @returns {undefined}
           */
          updateAll: function (successCallback) {
-            var sampleDataUrl = "sampledata/sample.json";   // Sample data url
+            var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
             var sampleData = "";
 
             // Read our sample data from the file system
-//          $rootScope.myPromise =
-            $http.get(sampleDataUrl)
-               .success(function(data) {
-                  sampleData = data;
-               })
-               .error(function (data, status, headers, config) {
-                  console.log("httpFactory.getAll() Error: " + data);
-               })
-            // Now we have the sample data, delete the old data and load the sample data
-            .then(
-               $http.delete(WS_URL)
-                  // Old data existed
-                  .success(function () {
-                     for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-                        $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
-                     }
-                     successCallback();
+            $rootScope.myPromise =
+               $http.get(sampleDataUrl)
+                  .success(function(data) {
+                     sampleData = data;
                   })
-                  // Old data didn't exist (or some other error!)
-                  .error(function (data) {
-                     console.log("httpFactory.updateAll() Error: " + data);
-                     for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-                        $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
-                     }
-                     successCallback();  // No failure callback here. We don't need it as we eat errors in case the data never existed.
+                  .error(function (data, status, headers, config) {
+                     console.log("httpFactory.getAll() Error: " + data);
                   })
-            );
+               // Now we have the sample data, delete the old data and load the sample data
+               .then(
+                  $http.delete(WS_URL)
+                     // Old data existed
+                     .success(function () {
+                        for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
+                           $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
+                        }
+                        successCallback();
+                     })
+                     // Old data didn't exist (or some other error!)
+                     .error(function (data) {
+                        console.log("httpFactory.updateAll() Error: " + data);
+                        for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
+                           $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
+                        }
+                        // No failure callback here. We don't need it as we eat errors in case the data never existed.
+                        successCallback();
+                     })
+               );
          }
       };
       return httpFactory;
    };
 
    // Register our factory
-   angular.module("angularcrud").factory("httpFactory", ["$http", "$rootScope", "WS_URL", HttpFactory]);
+   angular.module("angularcrud")
+   .factory("httpFactory", ["$http", "$rootScope", HttpFactory]);
 })();

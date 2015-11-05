@@ -12,57 +12,58 @@ var basename = require("gulp-css-url-basename");
 var protractor = require("gulp-protractor").protractor;
 var karma = require("gulp-karma");
 
-// Location of our Oracle httpFactory.
-var javaHttpFactory = '../web/scripts/services/httpFactory.java.js';
-
-// Location of our Elastic httpFactory.
-var elasticHttpFactory = '../web/scripts/services/httpFactory.elastic.js';
+/*   Custom paths   */
+var javaHttpFactory    = "../web/scripts/services/httpFactory.java.js";                  // Location of the Java version of httpFactory
+var elasticHttpFactory = "../web/scripts/services/httpFactory.elastic.js";               // Location of the Elasticsearch version of httpFactory
+var elasticPluginPath  = "c:/users/jshea/apps/elasticsearch/plugins/angularcrud/_site";  // Path to the elasticsearch plugin. Used for ES hosting.
 
 
 // All of our application .js files
 var jsAppFiles = [
-   "../public_html/scripts/app.js",
-   "../public_html/scripts/config/routes.js",
-   "../public_html/scripts/config/constants.js",            // This is before run.js as this may reset default constant values
-   "../public_html/scripts/config/run.js",
-   "../public_html/scripts/controllers/editController.js",
-   "../public_html/scripts/controllers/listController.js",
-   "../public_html/scripts/controllers/loadController.js",
-   "../public_html/scripts/controllers/newController.js",
-   "../public_html/scripts/controllers/settingsController.js",
-   "../public_html/scripts/controllers/viewController.js",
-   "../public_html/scripts/filters/titleCase.js"
-// "../public_html/scripts/services/httpFactory.js"         // Will be added on the task line
+   "../web/scripts/app.js",
+   "../web/scripts/config/routes.js",
+   "../web/scripts/config/constants.js",            // This is before run.js as this may reset default constant values
+   "../web/scripts/config/run.js",
+   "../web/scripts/controllers/editController.js",
+   "../web/scripts/controllers/listController.js",
+   "../web/scripts/controllers/loadController.js",
+   "../web/scripts/controllers/newController.js",
+   "../web/scripts/controllers/settingsController.js",
+   "../web/scripts/controllers/viewController.js",
+   "../web/scripts/filters/titleCase.js"
+//       One of these will be added in the build tasks
+// "../web/scripts/services/httpFactory.java.js"
+// "../web/scripts/services/httpFactory.elastic.js"
 ];
 
 /* All of our library .js files. Angular, jquery and bootstrap are first in case other libs have
  * dependencies. The rest of the libs are in alphabetic order.
  */
 var jsLibFiles = [
-   "../public_html/lib/angular.js",
-   "../public_html/lib/jquery.js",
-   "../public_html/lib/bootstrap.js",
-   "../public_html/lib/angular-animate.js",
-   "../public_html/lib/angular-busy.js",
-   "../public_html/lib/angular-messages.js",
-   "../public_html/lib/angular-route.js",
-   "../public_html/lib/moment.js",
-   "../public_html/lib/pdfmake.js",
-   "../public_html/lib/toaster.js",
-   "../public_html/lib/ui-bootstrap-tpls.js",
-   "../public_html/lib/ui-grid.js",
-   "../public_html/lib/vfs_fonts.js"
+   "../web/lib/angular.js",
+   "../web/lib/jquery.js",
+   "../web/lib/bootstrap.js",
+   "../web/lib/angular-animate.js",
+   "../web/lib/angular-busy.js",
+   "../web/lib/angular-messages.js",
+   "../web/lib/angular-route.js",
+   "../web/lib/moment.js",
+   "../web/lib/pdfmake.js",
+   "../web/lib/toaster.js",
+   "../web/lib/ui-bootstrap-tpls.js",
+   "../web/lib/ui-grid.js",
+   "../web/lib/vfs_fonts.js"
 ];
 
 /* All of our .css files (includes Bootstrap extensions). Note in increasing order of importance as css will
  * override previous settings.
  */
 var cssFiles = [
-    "../public_html/css/bootstrap.css",     // Bootstrap is foundational
-    "../public_html/css/app.css",           // However we may do some overrides
-    "../public_html/css/angular-busy.css",
-    "../public_html/css/toaster.css",
-    "../public_html/css/ui-grid.css"
+    "../web/css/bootstrap.css",     // Bootstrap is foundational
+    "../web/css/app.css",           // However we may do some overrides
+    "../web/css/angular-busy.css",
+    "../web/css/toaster.css",
+    "../web/css/ui-grid.css"
 ];
 
 
@@ -73,7 +74,7 @@ gulp.task("debug-app-js-java", function() {
     jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
     return gulp.src(jsAppFiles)                          // Add our custom .js files
                .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Java WS - Release mode
@@ -82,7 +83,7 @@ gulp.task("release-app-js-java", function() {
     return gulp.src(jsAppFiles)                          // Add our custom .js files
                .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
                .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Elastic DB/Hosting/WS - Debug mode
@@ -90,7 +91,7 @@ gulp.task("debug-app-js-elastic", function() {
     jsAppFiles[jsAppFiles.length] = elasticHttpFactory;  // Add our Elastic httpFactory to our .js file list.
     return gulp.src(jsAppFiles)                          // Add our custom .js files
                .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Elastic DB/Hosting/WS - Release mode
@@ -99,7 +100,7 @@ gulp.task("release-app-js-elastic", function() {
     return gulp.src(jsAppFiles)                          // Add our custom .js files
                .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
                .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 
@@ -109,7 +110,7 @@ gulp.task("release-app-js-elastic", function() {
 gulp.task("debug-libs-js", function() {
     return gulp.src(jsLibFiles)                          // Add our .js files
                .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Release mode
@@ -117,7 +118,7 @@ gulp.task("release-libs-js", function() {
     return gulp.src(jsLibFiles)                          // Add our .js files
                .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
                .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
+               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 
@@ -125,11 +126,11 @@ gulp.task("release-libs-js", function() {
 
 // Debug mode
 gulp.task("debug-css", function () {
-    return gulp.src(cssFiles)                            // Get our css files (by directory and/or file name)
-               .pipe(gulpFilter("**/*.css"))             // Make sure we have just .css files (for directory globbing)
-               .pipe(basename({prefix: "../angularcrud/assets"}))    // Add "../assets" base name to CSS URLs (all images and fonts must be here)
-               .pipe(concatCss("AngularCRUD.debug.css")) // Concatenate all .css files.
-               .pipe(gulp.dest("../web/dist"));              // Put it with our other Bootstrap .css files.
+    return gulp.src(cssFiles)                                     // Get our css files (by directory and/or file name)
+               .pipe(gulpFilter("**/*.css"))                      // Make sure we have just .css files (for directory globbing)
+               .pipe(basename({prefix: "../angularcrud/assets"})) // Add "../assets" base name to CSS URLs (all images and fonts must be here)
+               .pipe(concatCss("AngularCRUD.debug.css"))          // Concatenate all .css files.
+               .pipe(gulp.dest("../web/dist"));                   // Put it with our other Bootstrap .css files.
 });
 
 // Release mode
@@ -139,7 +140,7 @@ gulp.task("release-css", function () {
                .pipe(basename({prefix: "../assets"}))    // Add "../assets" base name to CSS URLs (all images and fonts must be here)
                .pipe(concatCss("AngularCRUD.min.css"))   // Concatenate all .css files.
                .pipe(cssmin())                           // Minify all .css files.
-               .pipe(gulp.dest("../web/dist"));              // Put it with our other Bootstrap .css files.
+               .pipe(gulp.dest("../web/dist"));          // Put it with our other Bootstrap .css files.
 });
 
 
@@ -172,18 +173,19 @@ gulp.task("debug-test-all", ["default", "e2e-test", "unit-test"]);
 
 
 // Deploy the application to our Elasticsearch plugin
-gulp.task("deployES", ["debug-app-js-elastic", "debug-libs-js", "debug-css"], function() {
+gulp.task("deploy-elastic", ["debug-app-js-elastic", "debug-libs-js", "debug-css"], function() {
     return gulp
       // Select all runtime files - concatenated CSS/JS/Libs and our html
       .src(["../web/dist/*", "../web/**/*.html", "../web/a**/*", "../web/sample**/*"])
-      // Copy it all to our Eelasticsearch app plugin folder
-      .pipe(gulp.dest("c:/users/jshea/apps/elasticsearch/plugins/angularcrud/_site"));
+
+      // Copy it all to our Elasticsearch app plugin folder, appropriate path was set above in a variable.
+      .pipe(gulp.dest(elasticPluginPath));
 });
 
 
 
 // Debug build without tests (call "gulp" to run).
-gulp.task("default", ['debug-app-js-java', 'debug-libs-js', 'debug-css']);
+gulp.task("default", ["debug-app-js-java", "debug-libs-js", "debug-css"]);
 
 // Debug build with all tests (call "gulp debug-test").
 gulp.task("debug-test-all", ["default", "e2e-test", "unit-test"]);

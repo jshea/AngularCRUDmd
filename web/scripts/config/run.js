@@ -12,7 +12,7 @@
     * @param {type} WS_URL      Constant containing our Web Service URL
     * @returns {undefined}
     */
-   function Run($window, $rootScope, WS_URL) {
+   function Run($window, $rootScope) { // , WS_URL
 
       /*
        * Sets a global variable ($rootScope.online) to true when we gain network availability.
@@ -50,13 +50,15 @@
       $window.addEventListener("online",  onOnline,  false);
 
 
-      /* Get the REST web service URL from localStorage. If this is the first run (or localStorage
+      /* This is an example of saving user variables in the browsers localStorage.
+       *
+       * Get the REST web service URL from localStorage. If this is the first run (or localStorage
        * has been cleared) the returned value will be null. If null the user will be redirected to
        * the settings page where it can be set.
        *
        * In localStorage, if the key isn't found null is returned
        */
-      WS_URL = localStorage.getItem("WS_URL");
+//      WS_URL = localStorage.getItem("WS_URL");
 
       // This is how we could automatically set the URL at startup. By using this with localstorage we could have
       // a default data url that the user could override.
@@ -68,5 +70,5 @@
       */
    }
 
-   angular.module("angularcrud").run(["$window", "$rootScope", "WS_URL", Run]);
+   angular.module("angularcrud").run(["$window", "$rootScope", Run]);   // , "WS_URL"
 })();

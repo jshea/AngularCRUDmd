@@ -6,14 +6,15 @@
 
    "use strict";
 
-   function ListController(WS_URL, $scope, $location, httpFactory, toaster) {
+   function ListController($scope, $location, httpFactory, toaster) { // WS_URL, needed for dependency injection
 
-      // Get all data and show it in a list. If the web service url isn't established
-      // show settings page.
-      if (WS_URL === null) {
-         $location.path("/settings");
-      }
-      else {
+      // Get all data and show it in a list.
+      //
+      // Show the settings page if the web service url isn't established.
+//      if (WS_URL === null) {
+//         $location.path("/settings");
+//      }
+//      else {
          httpFactory.getAll(
             // WS Success
             function (data) {
@@ -24,10 +25,10 @@
                toaster.pop("error", "Web Service call failed", "getAll " + url + " failed.");
             }
          );
-      }
+//      }
    };
 
    // Register our controller
-   angular.module("angularcrud")
-   .controller("ListController", ["WS_URL", "$scope", "$location", "httpFactory", "toaster", ListController]);
+   angular.module("angularcrud") // "WS_URL", needed for dependency injection
+   .controller("ListController", ["$scope", "$location", "httpFactory", "toaster", ListController]);
 })();
