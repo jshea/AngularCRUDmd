@@ -17,7 +17,7 @@ This is a [NetBeans](https://netbeans.org/) project. While any IDE or text edito
 ### NetBeans
 [NetBeans](https://netbeans.org/) is an Open Source IDE that has good Java and SPA support. The latest versions has built in support for AngularJS, Cordova and many other Web application development technologies, frameworks and libraries.
 
-# Folders and files in the application
+## Folders and files in the application
 The following is a quick tour of the folders and files that comprise the application. Not every folder and file
 is listed here, just the highlights.
 
@@ -30,23 +30,27 @@ readme.md | This is the file you're reading!
 todo.md | Things I need to get around to.
 
 
-## \doc
+### \doc
 Scripts for creating the RDBMS objects, loading data and other misc documentation.
 
-## \gulp
+### \gulp
 The web application (Javascript, HTML, CSS) build system.
 
-## \lib
+### \lib
 Libraries for the Java\Jersey REST web service middle tier for access to a RDBMS data store. Not used when using Elasticsearch.
 
-## \nbproject
+### \nbproject
 Netbeans settings files, not normally edited by a developer.
 
-## \src
+### \src
 Java source code for the Java\Jersey REST web service middle tier for access to a RDBMS data store. Not used when using Elasticsearch.
 
-## \test
+### \test
 Test infrastructure for the Java\Jersey middle tier, application front end and end-to-end application testing.
 
-## \web
+### \web
 The client portion of the application. This is the AngularJS/Bootstrap SPA.
+
+## Contributors
+The following people have contributed to this effort:
+[Chris Camargo](https://github.com/camargo)
