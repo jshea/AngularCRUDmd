@@ -38,9 +38,7 @@ Here are some documentation, tutorial and user group resources for the technolog
   * [JS.next: A Manager’s Guide](http://chimera.labs.oreilly.com/books/1234000001623)
   * [HTML5 Canvas](http://chimera.labs.oreilly.com/books/1234000001654)
   * [JavaScript Cookbook](http://chimera.labs.oreilly.com/books/1234000001681)
-  * [Heroku: Up and Running](http://chimera.labs.oreilly.com/books/1234000000018)
   * [Node: Up and Running](http://chimera.labs.oreilly.com/books/1234000001808/index.html)
-  * [Programming 3D Applications with HTML5 and WebGL](http://chimera.labs.oreilly.com/books/1234000000802)
 
 ### User groups
 * JS LA - http://js.la/
@@ -49,12 +47,6 @@ Here are some documentation, tutorial and user group resources for the technolog
   * http://meetup.com/AngularJS-OC/
   * http://meetup.com/Elasticsearch-Los-Angeles/
 
-### Cloud IDE/Runtime
-* https://codio.com/
-* https://orionhub.org/
-* [Chrome dev editor](https://chrome.google.com/webstore/detail/chrome-dev-editor-develop/pnoffddplpippgcfjdhbmhkofpnaalpg)
-
 ### Hosting
 * https://heroku.com/
 * https://firebase.com/
-
