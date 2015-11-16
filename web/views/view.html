@@ -1,18 +1,18 @@
 <div class="well well-sm app-blue">
-   <h3>{{person.firstName}} {{person.lastName}}</h3>
+   <h3>{{vm.person.firstName}} {{vm.person.lastName}}</h3>
 
    <h4>Address</h4>
-   {{person.address.street}}<br>
-   {{person.address.city}} {{person.address.state}} {{person.address.zip}}<br>
+   {{vm.person.address.street}}<br>
+   {{vm.person.address.city}} {{vm.person.address.state}} {{vm.person.address.zip}}<br>
 
    <h4>Phone</h4>
-   Home {{person.homePhone}}<br>
-   Mobile {{person.mobile}}<br>
+   Home {{vm.person.homePhone}}<br>
+   Mobile {{vm.person.mobile}}<br>
 
    <h4>Electronic</h4>
-   eMail {{person.email}}<br>
-   Website {{person.website}}<br>
+   eMail {{vm.person.email}}<br>
+   Website {{vm.person.website}}<br>
 
-    <button type="button" id="btnEdit"   ng-click="edit()"   class="btn btn-primary">Edit</button>
-    <button type="button" id="btnDelete" ng-click="remove()" class="btn btn-danger">Delete</button>
+    <button type="button" id="btnEdit"   ng-click="vm.edit()"   class="btn btn-primary">Edit</button>
+    <button type="button" id="btnDelete" ng-click="vm.remove()" class="btn btn-danger">Delete</button>
 </div>

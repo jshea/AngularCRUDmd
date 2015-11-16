@@ -6,12 +6,15 @@
 
    "use strict";
 
-   function NewController($scope, $location, httpFactory, toaster) {
-      $scope.person = {};
+   function NewController($location, httpFactory, toaster) {
+
+      // Save a pointer to our current context
+      var self = this;
+      self.person = {};
 
       // Save our changes and display a view of the new data
-      $scope.save = function () {
-         httpFactory.add($scope.person,
+      self.save = function () {
+         httpFactory.add(self.person,
             // WS Success
             function(id) {
                toaster.pop("success", "Changes saved", "Your data has been saved", 2000);
@@ -27,5 +30,5 @@
 
    // Register our controller
    angular.module("angularcrud")
-   .controller("NewController", ["$scope", "$location", "httpFactory", "toaster", NewController]);
+   .controller("NewController", ["$location", "httpFactory", "toaster", NewController]);
 })();

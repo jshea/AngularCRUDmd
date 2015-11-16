@@ -48,6 +48,7 @@ var jsLibFiles = [
    "../web/lib/angular-messages.js",
    "../web/lib/angular-route.js",
    "../web/lib/moment.js",
+   "../web/lib/ng-table.js",
    "../web/lib/pdfmake.js",
    "../web/lib/toaster.js",
    "../web/lib/ui-bootstrap-tpls.js",
@@ -62,6 +63,7 @@ var cssFiles = [
     "../web/css/bootstrap.css",     // Bootstrap is foundational
     "../web/css/app.css",           // However we may do some overrides
     "../web/css/angular-busy.css",
+    "../web/css/ng-table.css",
     "../web/css/toaster.css",
     "../web/css/ui-grid.css"
 ];

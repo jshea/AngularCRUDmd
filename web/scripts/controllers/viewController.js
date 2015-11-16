@@ -6,12 +6,15 @@
 
    "use strict";
 
-   function ViewController($scope, $location, $routeParams, httpFactory, toaster) {
+   function ViewController($location, $routeParams, httpFactory, toaster) {
+
+      // Save a pointer to our current context
+      var self = this;
 
       // Initialize our data based on id parameter
       httpFactory.getById($routeParams.id,
          function (data) {
-            $scope.person = data;
+            self.person = data;
          },
          // WS Failure
          function (url) {
@@ -20,8 +23,8 @@
       );
 
       // Handler for remove button
-      $scope.remove = function () {
-         httpFactory.delete($scope.person.id,
+      self.remove = function () {
+         httpFactory.delete(self.person.id,
             function() {
                toaster.pop("success", "Changes saved", "Item deleted", 2000);
                $location.path("/");
@@ -34,12 +37,12 @@
       };
 
       // Handler for edit button
-      $scope.edit = function () {
-         $location.path("/edit/" + $scope.person.id);
+      self.edit = function () {
+         $location.path("/edit/" + self.person.id);
       };
    };
 
    // Register our controller
    angular.module("angularcrud")
-   .controller("ViewController", ["$scope", "$location", "$routeParams", "httpFactory", "toaster", ViewController]);
+   .controller("ViewController", ["$location", "$routeParams", "httpFactory", "toaster", ViewController]);
 })();

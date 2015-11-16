@@ -16,6 +16,7 @@
                   "ui.bootstrap",          // Extra Bootstrap based widgets
                   "toaster",               // Popup messages (toasts)
                   "cgBusy",                // Busy indicator
+                  "ngTable",               // Fancy table - sorting, pagination and much more
                   "ui.grid",               // Grid
                   "ui.grid.resizeColumns", // Give our grid superpowers
                   "ui.grid.exporter",      // Grid export to csv, pdf...

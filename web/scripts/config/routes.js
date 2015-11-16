@@ -22,31 +22,37 @@
       $routeProvider
          .when("/", {
             controller: "ListController",
+            controllerAs: 'vm',
             templateUrl: "./views/list.html"
          })
 
          .when("/edit/:id", {
             controller: "EditController",
+            controllerAs: 'vm',
             templateUrl: "./views/edit.html"
          })
 
          .when("/view/:id", {
             controller: "ViewController",
+            controllerAs: 'vm',
             templateUrl: "./views/view.html"
          })
 
          .when("/new", {
             controller: "NewController",
+            controllerAs: 'vm',
             templateUrl: "./views/edit.html"
          })
 
          .when("/load", {
             controller: "LoadController",
+            controllerAs: 'vm',
             templateUrl: "./views/load.html"
          })
 
          .when("/settings", {
             controller: "SettingsController",
+            controllerAs: 'vm',
             templateUrl: "./views/settings.html"
          })
 

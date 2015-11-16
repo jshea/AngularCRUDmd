@@ -8,6 +8,9 @@
 
    function LoadController($location, httpFactory, toaster) {
 
+      // Save a pointer to our current context
+      var self = this;
+
       // Delete all existing data and reload our sample data
       httpFactory.updateAll(
          // WS Success

@@ -1,6 +1,24 @@
 <div class="well well-sm app-blue">
 
-   <table class="table table-striped">
+   <table ng-table="vm.tableParams" class="table table-striped" show-filter="true">
+
+      <!-- ng-table puts the data in $data -->
+      <tr ng-repeat="person in $data">
+
+         <td title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
+            <a href="#/view/{{person.id}}">{{person.lastName}}</a>
+         </td>
+
+         <td title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
+            <a href="#/view/{{person.id}}">{{person.firstName}}</a>
+         </td>
+
+      </tr>
+
+   </table>
+
+<!--
+   <table class="table table-striped table-responsive">
       <thead>
          <tr><h3>Contact List</h3></tr>
          <tr><th>#</th><th>Name</th></tr>
@@ -13,5 +31,5 @@
          </tr>
       </tbody>
    </table>
-
+-->
 </div>
