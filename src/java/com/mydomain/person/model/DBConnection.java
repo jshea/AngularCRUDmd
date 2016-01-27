@@ -19,6 +19,11 @@ public class DBConnection {
 		Connection conn = null;
 
 		try {
+         // MySQL
+//       Class.forName("com.mysql.jdbc.Driver");
+//       conn = DriverManager.getConnection("jdbc:mysql://server:port/DATABASE", UID, PW);
+
+         // Oracle
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@server:port:sid", "uid", "pw");
 		}
