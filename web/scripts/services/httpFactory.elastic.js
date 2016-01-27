@@ -40,30 +40,45 @@
           * @returns {undefined}
           */
          getAll: function (successCallback, failureCallback) {
+/*
+POST angularcrud/person/_search
+{
+  "_source" : ["lastName", "firstName"],
+  "size": 500,
+  "sort" : ["lastName", "firstName"],
+  "query": {
+    "match_all": {}
+  }
+}
+*/
             $rootScope.myPromise =
                $http.get(WS_URL + "_search")  // , "{\"sort\" : [{\"lastName\" : {\"order\" : \"asc\"}}]}")
-                  .success(function(data) {
-                     var resultArray = [], oneResult = {};
+                  .then(
+                     // success
+                     function(response) {
+                        var resultArray = [], oneResult = {};
 
-                     // hits.total is how may documents match, but hits.hits.length is what was actually returned!
-                     // for (var i=0; i<data.hits.total; i++) {
+                        // hits.total is how may documents match, but hits.hits.length is what was actually returned!
+                        // for (var i=0; i<data.hits.total; i++) {
 
-                     for (var i=0; i<data.hits.hits.length; i++) {
-                        if (data.hits.hits[i].hasOwnProperty("_source") && data.hits.hits[i].hasOwnProperty("_id")) {
-                           oneResult = data.hits.hits[i]._source;
-                           oneResult.id = data.hits.hits[i]._id;
-                           resultArray.push(oneResult);
+                        for (var i=0; i<response.data.hits.hits.length; i++) {
+                           if (response.data.hits.hits[i].hasOwnProperty("_source") && response.data.hits.hits[i].hasOwnProperty("_id")) {
+                              oneResult = response.data.hits.hits[i]._source;
+                              oneResult.id = response.data.hits.hits[i]._id;
+                              resultArray.push(oneResult);
+                           }
+                           else {
+                              console.log("hasOwnProperty failed! " + response.data.hits.hits[i]);
+                           }
                         }
-                        else {
-                           console.log("hasOwnProperty failed! " + data.hits.hits[i]);
-                        }
+                        successCallback(resultArray);
+                     },
+                     // Failure
+                     function (response) {
+                        console.log("httpFactory.getAll() Error: " + response.data);
+                        failureCallback(response.config.url);
                      }
-                     successCallback(resultArray);
-                  })
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.getAll() Error: " + data);
-                     failureCallback(config.url);
-                  });
+                  );
          },
 
          /**
@@ -76,16 +91,18 @@
          getById: function (id, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.get(WS_URL + id)
-                  .success(function(data) {
-                     var temp;
-                     temp = data._source;
-                     temp.id = data._id;
-                     successCallback(temp);
-                  })
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.getById() Error: " + data);
-                     failureCallback(config.url);
-                  });
+                  .then(
+                     function(response) {
+                        var temp;
+                        temp = response.data._source;
+                        temp.id = response.data._id;
+                        successCallback(temp);
+                     },
+                     function (response) {
+                        console.log("httpFactory.getById() Error: " + response.data);
+                        failureCallback(response.config.url);
+                     }
+                  );
          },
 
          /**
@@ -98,13 +115,14 @@
          delete: function (id, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.delete(WS_URL + id + "?refresh=true")
-                  .success(
+                  .then(
                      successCallback
-                  )
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.delete() Error: " + data);
-                     failureCallback(config.url);
-                  });
+                     ,
+                     function (response) {
+                        console.log("httpFactory.delete() Error: " + response.data);
+                        failureCallback(response.config.url);
+                     }
+                  );
          },
 
          /**
@@ -120,13 +138,15 @@
 
             $rootScope.myPromise =
                $http.put(WS_URL + id + "?refresh=true", data)   // we use the id not the name as the name could have changed.
-                  .success(function (data, status, headers, config) {
-                     successCallback(id);
-                  })
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.update() Error: " + data);
-                     failureCallback(config.url);
-                  });
+                  .then(
+                     function (response) {
+                        successCallback(id);
+                     },
+                     function (response) {
+                        console.log("httpFactory.update() Error: " + response.data);
+                        failureCallback(response.config.url);
+                     }
+                  );
          },
 
          /**
@@ -142,13 +162,15 @@
 
             $rootScope.myPromise =
                $http.put(WS_URL + id + "?refresh=true", data)
-                  .success(function (data, status, headers, config) {
-                     successCallback(id);
-                  })
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.add() Error: " + data);
-                     failureCallback(config.url);
-                  });
+                  .then(
+                     function (response) {
+                        successCallback(id);
+                     },
+                     function (response) {
+                        console.log("httpFactory.add() Error: " + response.data);
+                        failureCallback(response.config.url);
+                     }
+                  );
          },
 
          /**
@@ -163,31 +185,37 @@
             // Read our sample data from the file system
             $rootScope.myPromise =
                $http.get(sampleDataUrl)
-                  .success(function(data) {
-                     sampleData = data;
-                  })
-                  .error(function (data, status, headers, config) {
-                     console.log("httpFactory.getAll() Error: " + data);
-                  })
+                  .then(
+                     function(response) {
+                        console.dir("updateAll - 1 - Got json data");
+                        sampleData = response.data;
+                     },
+                     function (response) {
+                        console.log("httpFactory.getAll() Error: " + response.data);
+                     }
+               )
                // Now we have the sample data, delete the old data and load the sample data
                .then(
                   $http.delete(WS_URL)
                      // Old data existed
-                     .success(function () {
-                        for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-                           $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
+                     .then(
+                        function () {
+                           console.dir("updateAll - 2 - Loading data to ES");
+                           for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
+                              $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
+                           }
+                           successCallback();
+                        },
+                        // Old data didn't exist (or some other error!)
+                        function (response) {
+                           console.log("httpFactory.updateAll() Error: " + response.data);
+                           for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
+                              $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
+                           }
+                           // No failure callback here. We don't need it as we eat errors in case the data never existed.
+                           successCallback();
                         }
-                        successCallback();
-                     })
-                     // Old data didn't exist (or some other error!)
-                     .error(function (data) {
-                        console.log("httpFactory.updateAll() Error: " + data);
-                        for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-                           $http.put(WS_URL + (sampleData[i].lastName + sampleData[i].firstName).toLowerCase() + "?refresh=true", sampleData[i]);
-                        }
-                        // No failure callback here. We don't need it as we eat errors in case the data never existed.
-                        successCallback();
-                     })
+                  )
                );
          }
       };

@@ -90,10 +90,10 @@ public class Person implements Serializable {
 		return homePhone;
 	}
 	public String getHomePhoneFormatted() {
-		return formatPhoneNumber(homePhone);
+		return Util.formatPhoneNumber(homePhone);
 	}
 	public void setHomePhone(String homePhone) {
-		this.homePhone = stripPhoneNumber(homePhone);
+		this.homePhone = Util.stripPhoneNumber(homePhone);
 	}
 
 	// Mobile phone number
@@ -101,10 +101,10 @@ public class Person implements Serializable {
 		return mobilePhone;
 	}
 	public String getMobilePhoneFormatted() {
-		return formatPhoneNumber(mobilePhone);
+		return Util.formatPhoneNumber(mobilePhone);
 	}
 	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = stripPhoneNumber(mobilePhone);
+		this.mobilePhone = Util.stripPhoneNumber(mobilePhone);
 	}
 
 	// Email
@@ -120,82 +120,20 @@ public class Person implements Serializable {
 		return website;
 	}
 	public String getWorkPhoneFormatted() {
-		return formatPhoneNumber(website);
+		return Util.formatPhoneNumber(website);
 	}
 	public void setWebsite(String website) {
-		this.website = stripPhoneNumber(website);
+		this.website = Util.stripPhoneNumber(website);
 	}
 
 
 	/* Utility methods */
 
 	public String getName() {
-		return this.getProperCase(firstName+" "+lastName);
+		return Util.getProperCase(firstName+" "+lastName);
 	}
 	public String getFullName() {
 		return getName();
-	}
-
-
-	private String stripPhoneNumber(String phoneNumber) {
-		String tmpPhone = phoneNumber;
-
-		if (tmpPhone==null || tmpPhone.equals("")) { return ""; }
-		tmpPhone = tmpPhone.replace(" ", "");
-		tmpPhone = tmpPhone.replace("-", "");
-		tmpPhone = tmpPhone.replace(".", "");
-		tmpPhone = tmpPhone.replace("(", "");
-		tmpPhone = tmpPhone.replace(")", "");
-		//phoneNumber.replaceAll("[\s-\.()]", "");
-		return tmpPhone;
-	}
-
-
-	private String formatPhoneNumber(String phoneNumber) {
-		if (phoneNumber==null || phoneNumber.equals("")) {
-			return phoneNumber;
-		}
-		else if (phoneNumber.length()==7) {
-			return phoneNumber.substring(0, 3 )+ "-" + phoneNumber.substring(3, 7);
-		}
-		return "(" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
-	}
-
-
-
-
-	/**
-	 * Capitalize first letter of every word.
-	 * @param str
-	 * @return
-	 */
-	protected String getProperCase(String str) {
-		StringBuffer filter;
-		String retVal;
-
-	   if (str==null || str.equals("")) {
-	   	retVal = str;
-	   }
-	   else {
-	   	str = str.trim().toLowerCase();
-
-	   	// Convert the String to a StringBuffer for faster manipulation
-	   	filter = new StringBuffer(str.length());
-	   	char c;
-	   	// Loop through each character in the String.
-	   	for (int i=0; i < str.length(); i++) {
-	   		c = str.charAt(i);
-	   		if (i == 0 || str.charAt(i - 1) == ' ') {
-	   			filter.append(String.valueOf(c).toUpperCase());
-				}
-	   		else {
-	   			filter.append(c);
-				}
-			}
-		   retVal = filter.toString();
-		}
-	   return retVal;
-
 	}
 
 

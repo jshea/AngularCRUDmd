@@ -15,7 +15,7 @@ public class PersonDAO {
 	private static final Logger logger = Logger.getLogger(PersonDAO.class.getName());
 	// TODO - Set the schema to your user name. If you changed the schema in PersonDDL.sql
 	//        to your username then this project just might work.
-	private static final String yourUserName = "Your Name";
+	private static final String YOUR_USER_NAME = "Your Name";
 
 
 	/**
@@ -35,7 +35,7 @@ public class PersonDAO {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
 					  "select * " +
-                 "from " + yourUserName + "_angularcrud " +
+                 "from " + YOUR_USER_NAME + "_angularcrud " +
 					  "where id = ?" +
 					  "order by lastName, firstName");
 			ps.setLong(1, id);
@@ -82,7 +82,7 @@ public class PersonDAO {
 	 * @throws PersonException
 	 */
 	public static List<Person> getAll() throws PersonException {
-		List<Person> entryList = new ArrayList<Person>();
+		List<Person> entryList = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -91,7 +91,7 @@ public class PersonDAO {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
 					  "select * " +
-                 "from " + yourUserName + "_angularcrud " +
+                 "from " + YOUR_USER_NAME + "_angularcrud " +
 					  "order by lastName, firstName");
 			rs = ps.executeQuery();
 
@@ -146,7 +146,7 @@ public class PersonDAO {
 	 * @throws PersonException
 	 */
 	public static List<Person> find(Person searchCriteria) throws PersonException {
-		List<Person> entryList = new ArrayList<Person>();
+		List<Person> entryList = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -157,7 +157,7 @@ public class PersonDAO {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
 					  "select * " +
-                 "from " + yourUserName + "_angularcrud " +
+                 "from " + YOUR_USER_NAME + "_angularcrud " +
 					  (whereClause.length() > 0 ? "where " + whereClause : "") +
 					  "order by lastName, firstName");
 			rs = ps.executeQuery();
@@ -219,12 +219,12 @@ public class PersonDAO {
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
-					  "insert into " + yourUserName + "__angularcrud (" +
+					  "insert into " + YOUR_USER_NAME + "__angularcrud (" +
 					  "id, firstName, lastName, " +
 					  "street, city, state, zip, " +
 					  "homePhone, mobilePhone, " +
 					  "email, website) " +
-					  "values (" + yourUserName + "__angularcrud_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+					  "values (" + YOUR_USER_NAME + "__angularcrud_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString( 1, p.getFirstName());
 			ps.setString( 2, p.getLastName());
@@ -248,7 +248,7 @@ public class PersonDAO {
 				conn.commit();
 
 				Statement s = conn.createStatement();
-            rs = s.executeQuery("select " + yourUserName + "_angularcrud_seq.currval from dual");
+            rs = s.executeQuery("select " + YOUR_USER_NAME + "_angularcrud_seq.currval from dual");
 				int newId = 0;
 				while (rs.next()) {
 					newId = rs.getInt(1);
@@ -321,7 +321,7 @@ public class PersonDAO {
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
-                 "update " + yourUserName + "_angularcrud set " +
+                 "update " + YOUR_USER_NAME + "_angularcrud set " +
 					  "firstName=?, " +
 					  "lastName=?, " +
 					  "street=?, " +
@@ -397,7 +397,7 @@ public class PersonDAO {
 
 		try {
 			conn = DBConnection.getConnection();
-         ps = conn.prepareStatement("delete from " + yourUserName + "_angularcrud where id = ?");
+         ps = conn.prepareStatement("delete from " + YOUR_USER_NAME + "_angularcrud where id = ?");
 			ps.setLong(1, id);
 
 			int rowCount = ps.executeUpdate();
@@ -443,7 +443,7 @@ public class PersonDAO {
 
 		try {
 			conn = DBConnection.getConnection();
-         ps = conn.prepareStatement("delete from " + yourUserName + "_angularcrud");
+         ps = conn.prepareStatement("delete from " + YOUR_USER_NAME + "_angularcrud");
 
 			ps.executeUpdate();
 
@@ -482,52 +482,52 @@ public class PersonDAO {
 	private static String buildWhereClause(Person searchCriteria) {
 		StringBuilder sb = new StringBuilder();
 
-		if (searchCriteria.getLastName() != null && !searchCriteria.getLastName().equals("")) {
+		if (searchCriteria.getLastName() != null && !searchCriteria.getLastName().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(lastName) like '").append(searchCriteria.getLastName().toLowerCase()).append("%'");
 		}
 
-		if (searchCriteria.getFirstName() != null && !searchCriteria.getFirstName().equals("")) {
+		if (searchCriteria.getFirstName() != null && !searchCriteria.getFirstName().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(firstName) like '").append(searchCriteria.getFirstName().toLowerCase()).append("%'");
 		}
 
-		if (searchCriteria.getAddress().getStreet() != null && !searchCriteria.getAddress().getStreet().equals("")) {
+		if (searchCriteria.getAddress().getStreet() != null && !searchCriteria.getAddress().getStreet().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(street) like '").append(searchCriteria.getAddress().getStreet().toLowerCase()).append("%'");
 		}
 
-		if (searchCriteria.getAddress().getCity() != null && !searchCriteria.getAddress().getCity().equals("")) {
+		if (searchCriteria.getAddress().getCity() != null && !searchCriteria.getAddress().getCity().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(city) like '").append(searchCriteria.getAddress().getCity().toLowerCase()).append("%'");
 		}
 
-		if (searchCriteria.getAddress().getState() != null && !searchCriteria.getAddress().getState().equals("")) {
+		if (searchCriteria.getAddress().getState() != null && !searchCriteria.getAddress().getState().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(state) = '").append(searchCriteria.getAddress().getState().toLowerCase()).append("'");
 		}
 
-		if (searchCriteria.getAddress().getZip() != null && !searchCriteria.getAddress().getZip().equals("")) {
+		if (searchCriteria.getAddress().getZip() != null && !searchCriteria.getAddress().getZip().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("zip like '").append(searchCriteria.getAddress().getZip()).append("%'");
 		}
 
-		if (searchCriteria.getHomePhone() != null && !searchCriteria.getHomePhone().equals("")) {
+		if (searchCriteria.getHomePhone() != null && !searchCriteria.getHomePhone().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("homePhone like '%").append(searchCriteria.getHomePhone()).append("%'");
 		}
 
-		if (searchCriteria.getMobilePhone() != null && !searchCriteria.getMobilePhone().equals("")) {
+		if (searchCriteria.getMobilePhone() != null && !searchCriteria.getMobilePhone().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("mobilePhone like '%").append(searchCriteria.getMobilePhone()).append("%'");
 		}
 
-		if (searchCriteria.getEmail() != null && !searchCriteria.getEmail().equals("")) {
+		if (searchCriteria.getEmail() != null && !searchCriteria.getEmail().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(email) like '%").append(searchCriteria.getEmail().toLowerCase()).append("%'");
 		}
 
-		if (searchCriteria.getWebsite()!= null && !searchCriteria.getWebsite().equals("")) {
+		if (searchCriteria.getWebsite()!= null && !searchCriteria.getWebsite().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
 			sb.append("lower(website) like '%").append(searchCriteria.getWebsite().toLowerCase()).append("%'");
 		}

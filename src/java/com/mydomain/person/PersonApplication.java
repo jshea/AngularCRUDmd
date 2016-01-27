@@ -28,4 +28,5 @@ public class PersonApplication extends Application {
    public Set<Object> getSingletons() {
       return singletons;
    }
+   
 }

@@ -45,10 +45,10 @@ An index is a logical namespace that points to one or more physical shards. Docu
 A shard can be either a primary shard or a replica shard. Each document in the index belongs to a single primary shard, so the number of primary shards determines the maximum amount of data that your index can hold.
 
 
-### Type
-Every type has its own mapping or schema definition, which defines the data structure for documents of that type, much like the columns in a database table. Documents of all types can be stored in the same index, but the mapping for the type tells Elasticsearch how the data in each document should be indexed.
+### Type - Deprecated (or maybe a better term is de-emphasized)!
+*Every type has its own mapping or schema definition, which defines the data structure for documents of that type, much like the columns in a database table. Documents of all types can be stored in the same index, but the mapping for the type tells Elasticsearch how the data in each document should be indexed.*
 
-Documents don't have to have the same structure but one shouldn't mix documents of independent structures into the same type because it complicates the mapping that contains all document fields.
+*Documents don't have to have the same structure but one shouldn't mix documents of independent structures into the same type because it complicates the mapping that contains all document fields.*
 
 A type name can be lowercase or uppercase, but shouldn’t begin with an underscore or contain commas.
 
@@ -68,25 +68,45 @@ The number of primary shards is established when an index is created (default 5)
 
 When a document is indexed it's first stored on a primary shard and then copied in parallel to the replica shards.
 
-### Marvel
-Marvel is a management and monitoring tool for Elasticsearch, and is free for development use. It can be installed with the plugin program. On my system this is the command:
+## Utilities
 
-`\Users\jshea\apps\elasticsearch\bin\plugin install elasticsearch/marvel/latest`
-
-If you're monitoring a remote cluster and don’t want Marvel to monitor your local cluster, you can disable local data collection with this entry in your config file:
-
-`marvel.agent.enabled: false`
+For Kibana based tools, you'll need to first install [Kibana](https://elastic.co/downloads/kibana), then 
 
 ### Sense
-Marvel comes with an interactive console called Sense, which makes it easy to talk to Elasticsearch directly from your browser. This provides interactive data manipulation along the lines of SQL Plus/SQL Developer.
+Sense is a browser based query tool for Elasticsearch. It's also packaged as a Kibana app. This provides interactive data manipulation along the lines of SQL Plus/SQL Developer. You [install Sense](https://elastic.co/guide/en/sense/current/installing.html) with
+```
+$./bin/kibana plugin --install elastic/sense
+```
 
-[http://localhost:9200/_plugin/marvel/sense/](http://localhost:9200/_plugin/marvel/sense/)
+[http://localhost:5601/app/sense](http://localhost:5601/app/sense)
 
 ### Head
 elasticsearch-head is a web front end for browsing and interacting with an Elastic Search cluster.
 
     \Users\jshea\apps\elasticsearch\bin\plugin install mobz/elasticsearch-head
     open http://localhost:9200/_plugin/head/
+
+### Marvel
+Marvel is a Kibana management and monitoring tool for Elasticsearch. Installation is described [here](https://elastic.co/downloads/marvel).
+
+```
+# Step 1: Install Marvel into Elasticsearch:
+bin/plugin install license
+bin/plugin install marvel-agent
+
+# Step 2: Install Marvel into Kibana
+bin/kibana plugin --install elasticsearch/marvel/latest
+
+# Step 3: Start Elasticsearch and Kibana
+bin/elasticsearch
+bin/kibana
+```
+
+Step 4: Navigate to [http://localhost:5601/app/marvel](http://localhost:5601/app/marvel)
+
+If you're monitoring a remote cluster and don’t want Marvel to monitor your local cluster, you can disable local data collection with this entry in your config file:
+
+`marvel.agent.enabled: false`
 
 ## Hosting a website via an Elasticsearch plugin
 HTML pages (and Single Page Applications) can be hosted/served from your Elasticsearch server. This is done by installing your web app as an Elasticsearch plugin. Your url will be `http://localhost:9200/_plugin/APPNAME/index.html`

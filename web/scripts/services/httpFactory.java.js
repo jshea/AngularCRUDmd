@@ -103,10 +103,11 @@
                });
          }
       };
+
       return httpFactory;
    };
 
    // Register our factory
    angular.module("angularcrud")
-   .factory("httpFactory", ["$http", "$rootScope", HttpFactory]);
+          .factory("httpFactory", ["$http", "$rootScope", HttpFactory]);
 })();

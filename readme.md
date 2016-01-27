@@ -1,13 +1,15 @@
 
 # AngularCRUD
 
-**Note** *This repo is undergoing reorganization. Multiple versions of this application with different backends (Java WS & Oracle db, Firebase, MongoDB and Elasticsearch) are being consolidated. Enterprise application layouts  and features (directives, components and 3rd party widgets) are also being incorporated.*
+This is a sample AngularJS client application supporting both a Java middle tier/RDBMS backend as well as  Elasticsearch as the middle tier/data base.  These architectures are incorporated because
+* Elasticsearch makes a great development platform as it's the easiest to download, install, configure and run. This allows the repo to concentrate on sharing AngularJS knowledge and be the basis for business/CRUD applications.
+* Java middle tier with a RDBMS backend happens to be the architecture of my day job.
 
-This reorganization will result in a single AngularJS client application supporting both a Java middle tier/RDBMS backend as well as  Elasticsearch as the middle tier/data base. Elasticsearch makes a great development platform as it's the easiest to download, install, configure and run. This allows the repo to concentrate on sharing AngularJS knowledge and be the basis for business/CRUD applications. Other backends will have notes and artifacts under the doc folder.
+Platform specific notes and artifacts are contained in the doc folder.
 
-This example application demonstrates CRUD (Create, Report, Update and Delete) operations on a simple data model of a person (name, address, phone numbers...). It's a SPA (Single Page Application) built with the AngularJS and Bootstrap frameworks. AngularJS is the Single Page Application framework and Bootstrap provides UI formatting and components.
+This example application demonstrates CRUD (Create, Report, Update and Delete) operations on a simple data model of a person (name, address, phone numbers...). It's a SPA (Single Page Application) built with the AngularJS  1.x framework and Bootstrap 3.x. AngularJS is the Single Page Application framework and Bootstrap provides UI formatting and components.
 
-This is a [NetBeans](https://netbeans.org/) project. While any IDE or text editor can be used to work with the source of this application, it's setup with the Netbeans default folder structure.
+This is setup as a [NetBeans](https://netbeans.org/) project. While any IDE or text editor can be used to work with the source of this application, it's setup with the Netbeans default folder structure.
 
 ## Overview
 The doc folder contains documentation on the overall application, tools and technologies used, installation and configuration instructions as well as information on additional backend technologies that can be used.

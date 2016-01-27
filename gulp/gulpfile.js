@@ -73,36 +73,36 @@ var cssFiles = [
 
 // Java WS - Debug mode
 gulp.task("debug-app-js-java", function() {
-    jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
-    return gulp.src(jsAppFiles)                          // Add our custom .js files
-               .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
+   return gulp.src(jsAppFiles)                          // Add our custom .js files
+              .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Java WS - Release mode
 gulp.task("release-app-js-java", function() {
-    jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
-    return gulp.src(jsAppFiles)                          // Add our custom .js files
-               .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
-               .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
+   return gulp.src(jsAppFiles)                          // Add our custom .js files
+              .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
+              .pipe(uglify())                           // Minify all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Elastic DB/Hosting/WS - Debug mode
 gulp.task("debug-app-js-elastic", function() {
-    jsAppFiles[jsAppFiles.length] = elasticHttpFactory;  // Add our Elastic httpFactory to our .js file list.
-    return gulp.src(jsAppFiles)                          // Add our custom .js files
-               .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   jsAppFiles[jsAppFiles.length] = elasticHttpFactory;  // Add our Elastic httpFactory to our .js file list.
+   return gulp.src(jsAppFiles)                          // Add our custom .js files
+              .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Elastic DB/Hosting/WS - Release mode
 gulp.task("release-app-js-elastic", function() {
-    jsAppFiles[jsAppFiles.length] = elasticHttpFactory;  // Add our Elastic httpFactory to our .js file list.
-    return gulp.src(jsAppFiles)                          // Add our custom .js files
-               .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
-               .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   jsAppFiles[jsAppFiles.length] = elasticHttpFactory;  // Add our Elastic httpFactory to our .js file list.
+   return gulp.src(jsAppFiles)                          // Add our custom .js files
+              .pipe(concat("AngularCRUDApp.min.js"))    // Concatenate all .js files
+              .pipe(uglify())                           // Minify all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 
@@ -110,17 +110,17 @@ gulp.task("release-app-js-elastic", function() {
 
 // Debug mode
 gulp.task("debug-libs-js", function() {
-    return gulp.src(jsLibFiles)                          // Add our .js files
-               .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   return gulp.src(jsLibFiles)                          // Add our .js files
+              .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 // Release mode
 gulp.task("release-libs-js", function() {
-    return gulp.src(jsLibFiles)                          // Add our .js files
-               .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
-               .pipe(uglify())                           // Minify all .js files
-               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+   return gulp.src(jsLibFiles)                          // Add our .js files
+              .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
+              .pipe(uglify())                           // Minify all .js files
+              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
 
@@ -128,21 +128,21 @@ gulp.task("release-libs-js", function() {
 
 // Debug mode
 gulp.task("debug-css", function () {
-    return gulp.src(cssFiles)                                     // Get our css files (by directory and/or file name)
-               .pipe(gulpFilter("**/*.css"))                      // Make sure we have just .css files (for directory globbing)
-               .pipe(basename({prefix: "../angularcrud/assets"})) // Add "../assets" base name to CSS URLs (all images and fonts must be here)
-               .pipe(concatCss("AngularCRUD.debug.css"))          // Concatenate all .css files.
-               .pipe(gulp.dest("../web/dist"));                   // Put it with our other Bootstrap .css files.
+   return gulp.src(cssFiles)                                     // Get our css files (by directory and/or file name)
+              .pipe(gulpFilter("**/*.css"))                      // Make sure we have just .css files (for directory globbing)
+              .pipe(basename({prefix: "../angularcrud/assets"})) // Add "../assets" base name to CSS URLs (all images and fonts must be here)
+              .pipe(concatCss("AngularCRUD.debug.css"))          // Concatenate all .css files.
+              .pipe(gulp.dest("../web/dist"));                   // Put it with our other Bootstrap .css files.
 });
 
 // Release mode
 gulp.task("release-css", function () {
-    return gulp.src(cssFiles)                            // Get our css files (by directory and/or file name)
-               .pipe(gulpFilter("**/*.css"))             // Make sure we have just .css files (for directory globbing)
-               .pipe(basename({prefix: "../assets"}))    // Add "../assets" base name to CSS URLs (all images and fonts must be here)
-               .pipe(concatCss("AngularCRUD.min.css"))   // Concatenate all .css files.
-               .pipe(cssmin())                           // Minify all .css files.
-               .pipe(gulp.dest("../web/dist"));          // Put it with our other Bootstrap .css files.
+   return gulp.src(cssFiles)                            // Get our css files (by directory and/or file name)
+              .pipe(gulpFilter("**/*.css"))             // Make sure we have just .css files (for directory globbing)
+              .pipe(basename({prefix: "../assets"}))    // Add "../assets" base name to CSS URLs (all images and fonts must be here)
+              .pipe(concatCss("AngularCRUD.min.css"))   // Concatenate all .css files.
+              .pipe(cssmin())                           // Minify all .css files.
+              .pipe(gulp.dest("../web/dist"));          // Put it with our other Bootstrap .css files.
 });
 
 
@@ -150,23 +150,23 @@ gulp.task("release-css", function () {
 
 // Protractor E2E tests
 gulp.task("e2e-test", function() {
-    return gulp.src(["../test/e2e/**/spec.*.js"]) // Pass in our spec files.
-               .pipe(protractor({
-                     seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar", // Local location of Selenium.
-                     configFile: "../test/e2e/config.js", // Our Protractor config file.
-                     args: ["--baseUrl", "http://localhost:7001"] // Test local for now. Can be switched here if needed.
-                }))
-               .on("error", function(e) { throw e; });
+   return gulp.src(["../test/e2e/**/spec.*.js"]) // Pass in our spec files.
+              .pipe(protractor({
+                    seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar", // Local location of Selenium.
+                    configFile: "../test/e2e/config.js", // Our Protractor config file.
+                    args: ["--baseUrl", "http://localhost:7001"] // Test local for now. Can be switched here if needed.
+               }))
+              .on("error", function(e) { throw e; });
 });
 
 // Karma/Jasmine Unit tests
 gulp.task("unit-test", function() {
-    return gulp.src("./foobar") // ISSUE: https://github.com/lazd/gulp-karma/issues/9
-               .pipe(karma({
-                     configFile: "../test/unit/karma.conf.js",
-                     action: "run"
-               }))
-               .on("error", function(e) { throw e; });
+   return gulp.src("./foobar") // ISSUE: https://github.com/lazd/gulp-karma/issues/9
+              .pipe(karma({
+                    configFile: "../test/unit/karma.conf.js",
+                    action: "run"
+              }))
+              .on("error", function(e) { throw e; });
 });
 
 
@@ -176,7 +176,7 @@ gulp.task("debug-test-all", ["default", "e2e-test", "unit-test"]);
 
 // Deploy the application to our Elasticsearch plugin
 gulp.task("deploy-elastic", ["debug-app-js-elastic", "debug-libs-js", "debug-css"], function() {
-    return gulp
+   return gulp
       // Select all runtime files - concatenated CSS/JS/Libs and our html
       .src(["../web/dist/*", "../web/**/*.html", "../web/a**/*", "../web/sample**/*"])
 
