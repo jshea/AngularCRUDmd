@@ -12,7 +12,7 @@ CREATE TABLE XXX_angularcrud (
     state        char(2),
     zip          char(5),
     homePhone    char(10),
-    mobilePhone  char(10),
+    mobile       char(10),
     email        varchar2(255),
     website      varchar2(255)
 );

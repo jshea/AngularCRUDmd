@@ -11,12 +11,12 @@
       // Save a pointer to our current context
       var self = this;
 
-      // Get all data and show it in a list.
+      // Get all data and show it in a list
       httpFactory.getAll(
          // WS Success
          function (data) {
             self.people = data;
-            self.tableParams = new NgTableParams({}, { dataset: data});
+            self.tableParams = new NgTableParams({}, { dataset: self.people});
             console.log(self.tableParams);
          },
          // WS Failure

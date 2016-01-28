@@ -1,6 +1,10 @@
 <div class="well well-sm app-blue">
 
-   <table ng-table="vm.tableParams" class="table table-striped" show-filter="true">
+   <table id="listTable"
+          ng-table="vm.tableParams"
+          class="table table-condensed table-bordered table-hover table-striped"
+          show-filter="false"
+          >
 
       <!-- ng-table puts the data in $data -->
       <tr ng-repeat="person in $data">

@@ -51,7 +51,7 @@ public class PersonDAO {
             p.setAddress(new Address(rs.getString("street"),rs.getString("city"),rs.getString("state"),rs.getString("zip")));
 
             p.setHomePhone(rs.getString("homePhone"));
-				p.setMobilePhone(rs.getString("mobilePhone"));
+				p.setMobile(rs.getString("mobile"));
 				p.setEmail(rs.getString("email"));
 				p.setWebsite(rs.getString("website"));
 			}
@@ -105,7 +105,7 @@ public class PersonDAO {
             p.setAddress(new Address(rs.getString("street"),rs.getString("city"),rs.getString("state"),rs.getString("zip")));
 
 				p.setHomePhone(rs.getString("homePhone"));
-				p.setMobilePhone(rs.getString("mobilePhone"));
+				p.setMobile(rs.getString("mobile"));
 				p.setEmail(rs.getString("email"));
 				p.setWebsite(rs.getString("website"));
 
@@ -172,7 +172,7 @@ public class PersonDAO {
             p.setAddress(new Address(rs.getString("street"),rs.getString("city"),rs.getString("state"),rs.getString("zip")));
 
 				p.setHomePhone(rs.getString("homePhone"));
-				p.setMobilePhone(rs.getString("mobilePhone"));
+				p.setMobile(rs.getString("mobile"));
 				p.setEmail(rs.getString("email"));
 				p.setWebsite(rs.getString("website"));
 
@@ -219,12 +219,12 @@ public class PersonDAO {
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(
-					  "insert into " + YOUR_USER_NAME + "__angularcrud (" +
+					  "insert into " + YOUR_USER_NAME + "_angularcrud (" +
 					  "id, firstName, lastName, " +
 					  "street, city, state, zip, " +
-					  "homePhone, mobilePhone, " +
+					  "homePhone, mobile, " +
 					  "email, website) " +
-					  "values (" + YOUR_USER_NAME + "__angularcrud_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+					  "values (" + YOUR_USER_NAME + "_angularcrud_seq.nextval,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString( 1, p.getFirstName());
 			ps.setString( 2, p.getLastName());
@@ -235,9 +235,9 @@ public class PersonDAO {
 			ps.setString( 6, p.getAddress().getZip());
 
 			ps.setString( 7, p.getHomePhone());
-			ps.setString( 9, p.getMobilePhone());
-			ps.setString(10, p.getEmail());
-			ps.setString(11, p.getWebsite());
+			ps.setString( 8, p.getMobile());
+			ps.setString( 9, p.getEmail());
+			ps.setString(10, p.getWebsite());
 
 			int rowCount = ps.executeUpdate();
 
@@ -329,7 +329,7 @@ public class PersonDAO {
 					  "state=?, " +
 					  "zip=?, " +
 					  "homePhone=?, " +
-					  "mobilePhone=?, " +
+					  "mobile=?, " +
 					  "email=?, " +
 					  "website=? " +
 					  "where id=?");
@@ -341,7 +341,7 @@ public class PersonDAO {
 			ps.setString( 5, p.getAddress().getState());
 			ps.setString( 6, p.getAddress().getZip());
 			ps.setString( 7, p.getHomePhone());
-			ps.setString( 8, p.getMobilePhone());
+			ps.setString( 8, p.getMobile());
 			ps.setString( 9, p.getEmail());
 			ps.setString(10, p.getWebsite());
 			ps.setLong(  11, p.getId());
@@ -517,9 +517,9 @@ public class PersonDAO {
 			sb.append("homePhone like '%").append(searchCriteria.getHomePhone()).append("%'");
 		}
 
-		if (searchCriteria.getMobilePhone() != null && !searchCriteria.getMobilePhone().isEmpty()) {
+		if (searchCriteria.getMobile() != null && !searchCriteria.getMobile().isEmpty()) {
 			if (sb.length() != 0) { sb.append(" and "); }
-			sb.append("mobilePhone like '%").append(searchCriteria.getMobilePhone()).append("%'");
+			sb.append("mobile like '%").append(searchCriteria.getMobile()).append("%'");
 		}
 
 		if (searchCriteria.getEmail() != null && !searchCriteria.getEmail().isEmpty()) {

@@ -17,14 +17,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id			 = null;
-	private String  firstName   = "";
-	private String  lastName    = "";
-   private Address address     = new Address();
-	private String  homePhone	 = "";
-	private String  mobilePhone = "";
-	private String  email		 = "";
-	private String  website		 = "";
+	private Integer id			= null;
+	private String  firstName  = "";
+	private String  lastName   = "";
+   private Address address    = new Address();
+	private String  homePhone  = "";
+	private String  mobile     = "";
+	private String  email		= "";
+	private String  website		= "";
 
 
 	/**
@@ -38,7 +38,7 @@ public class Person implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.homePhone = hPhone;
-		this.mobilePhone = mPhone;
+		this.mobile = mPhone;
 		this.email = email;
 		this.website = website;
 	}
@@ -47,7 +47,7 @@ public class Person implements Serializable {
 		this.firstName = p.getFirstName();
 		this.lastName = p.getLastName();
 		this.homePhone = p.getHomePhone();
-		this.mobilePhone = p.getMobilePhone();
+		this.mobile = p.getMobile();
 		this.email = p.getEmail();
 		this.website = p.getWebsite();
 	}
@@ -97,14 +97,14 @@ public class Person implements Serializable {
 	}
 
 	// Mobile phone number
-	public String getMobilePhone() {
-		return mobilePhone;
+	public String getMobile() {
+		return mobile;
 	}
 	public String getMobilePhoneFormatted() {
-		return Util.formatPhoneNumber(mobilePhone);
+		return Util.formatPhoneNumber(mobile);
 	}
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = Util.stripPhoneNumber(mobilePhone);
+	public void setMobile(String mobile) {
+		this.mobile = Util.stripPhoneNumber(mobile);
 	}
 
 	// Email
@@ -148,7 +148,7 @@ public class Person implements Serializable {
 		sb.append("lastName:").append(lastName).append(", ");
 		sb.append("address:").append(address.toString()).append(", ");
 		sb.append("homePhone:").append(homePhone).append(", ");
-		sb.append("mobilePhone:").append(mobilePhone).append(", ");
+		sb.append("mobile:").append(mobile).append(", ");
 		sb.append("email:").append(email).append(", ");
 		sb.append("website:").append(website);
 

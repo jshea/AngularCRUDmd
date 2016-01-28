@@ -219,6 +219,7 @@ POST angularcrud/person/_search
                );
          }
       };
+
       return httpFactory;
    };
 
