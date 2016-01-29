@@ -2,6 +2,7 @@ package com.mydomain.person.model;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Data object representing an individual.
@@ -77,12 +78,13 @@ public class Address implements Serializable {
    }
 
 
+   @XmlTransient
    public String getFullAddress() {
       // TODO this needs to be validated with all variations of fields addr, city,
       // state, zip being filled in & blank, to ensure formatting is correct
       return getStreet() + "\n " +
              getCity() +
-             (getCity().equals("") || (getState() + getZip()).equals("") ? " " : ", ") +
+             (getCity().isEmpty() || (getState() + getZip()).isEmpty() ? " " : ", ") +
              getState() + " " +
              getZip();
    }

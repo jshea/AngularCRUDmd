@@ -23,19 +23,31 @@
        * methods that we're making available.
        */
       var httpFactory = {
+      /*
+       The response object has these properties:
+         data – {string|Object} – The response body transformed with the transform functions.
+         status – {number} – HTTP status code of the response.
+         headers – {function([headerName])} – Header getter function.
+         config – {Object} – The configuration object that was used to generate the request.
+         statusText – {string} – HTTP status text of the response.
 
+         A response status code between 200 and 299 is considered a success status and will
+         result in the success callback being called. Note that if the response is a redirect,
+         XMLHttpRequest will transparently follow it, meaning that the error callback will not
+         be called for such responses.
+       */
          getAll: function (successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.get(WS_URL)
                   .then(
                      // Success
-                     function (data, status, headers, config) {
-                        successCallback(data);
+                     function (response) {
+                        successCallback(response.data);
                      },
                      // Failure
-                     function (data, status, headers, config) {
-                        console.log("httpFactory.writeLog() Error: " + data);
-                        failureCallback(config.url);
+                     function (response) {
+                        console.log("httpFactory.writeLog() Error: ", response);
+                        failureCallback(response.config.url);
                      }
                   );
          },
@@ -45,13 +57,13 @@
                $http.get(WS_URL + id)
                   .then(
                      // Success
-                     function (data, status, headers, config) {
-                        successCallback(data);
+                     function (response) {
+                        successCallback(response.data);
                      },
                      // Failure
-                     function (data, status, headers, config) {
-                        console.log("httpFactory.writeLog() Error: " + data);
-                        failureCallback(config.url);
+                     function (response) {
+                        console.log("httpFactory.writeLog() Error: ", response);
+                        failureCallback(response.config.url);
                      }
                   );
          },
@@ -61,49 +73,45 @@
                $http.delete(WS_URL + id)
                   .then(
                      // Success
-                     function (data, status, headers, config) {
+                     function (response) {
                         successCallback;
                      },
                      // Failure
-                     function (data, status, headers, config) {
-                        console.log("httpFactory.writeLog() Error: " + data);
-                        failureCallback(config.url);
+                     function (response) {
+                        console.log("httpFactory.writeLog() Error: ", response);
+                        failureCallback(response.config.url);
                      }
                   );
          },
 
-         update: function (id, first, last, successCallback, failureCallback) {
+         update: function (person, successCallback, failureCallback) {
             $rootScope.myPromise =
-               $http({
-                     url: WS_URL,
-                     data: {"id": id, "firstName":first, "lastName":last},
-                     method: "PUT"
-                  })
+               $http.put(WS_URL, person)
                   .then(
                      // Success
-                     function (data, status, headers, config) {
-                        successCallback(data);
+                     function (response) {
+                        successCallback(response.data);
                      },
                      // Failure
-                     function (data, status, headers, config) {
-                        console.log("httpFactory.writeLog() Error: " + data);
-                        failureCallback(config.url);
+                     function (response) {
+                        console.log("httpFactory.writeLog() Error: ", response);
+                        failureCallback(response.config.url);
                      }
                   );
          },
 
-         add: function (first, last, successCallback, failureCallback) {
+         add: function (person, successCallback, failureCallback) {
             $rootScope.myPromise =
-               $http.post(WS_URL, {firstName:first, lastName:last})
+               $http.post(WS_URL, person)
                   .then(
                      // Success
-                     function (data, status, headers, config) {
-                        successCallback(data);
+                     function (response) {
+                        successCallback(response.data);
                      },
                      // Failure
-                     function (data, status, headers, config) {
-                        console.log("httpFactory.writeLog() Error: " + data);
-                        failureCallback(config.url);
+                     function (response) {
+                        console.log("httpFactory.writeLog() Error: ", response);
+                        failureCallback(response.config.url);
                      }
                   );
          },
@@ -117,12 +125,12 @@
                   .then(
                      // Success
                      function(response) {
-                        console.dir("updateAll - 1 - Got json data", response.data);
+                        console.log("updateAll - 1 - Got json data", response);
                         sampleData = response.data;
                      },
                      // Failure
                      function (response) {
-                        console.log("httpFactory.getAll() Error: " + response.data);
+                        console.log("httpFactory.getAll() Error: ", response);
                      }
                   )
                   // Now we have the sample data, delete the old data and load the sample data
@@ -130,17 +138,26 @@
                      $http.delete(WS_URL + "deleteall")
                         .then(
                            // Success
-                           function () {
+                           function (response) {
                               for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-//                               $http.post(WS_URL, {firstName:sampleData[i].firstName, sampleData:data[i].lastName});
-                                 $http.post(WS_URL, sampleData[i]);
+                                 $http.post(WS_URL, sampleData[i])
+                                    .then(
+                                       // Success
+                                       function(response) {
+                                          console.log("bulk load success", response);
+                                       },
+                                       // Failure
+                                       function (response) {
+                                          console.log("Bulk load Error: ", response);
+                                       }
+                                 );
                               }
-                              successCallback;
+                              successCallback(response);
                            },
                            // Failure
-                           function (data, status, headers, config) {
-                              console.log("httpFactory.writeLog() Error: " + data);
-                              failureCallback(config.url);
+                           function (response) {
+                              console.log("httpFactory.writeLog() Error: ", response);
+                              failureCallback(response.config.url);
                            }
                         )
                   );

@@ -3,6 +3,7 @@ package com.mydomain.person.model;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /*
  * This is a full person/contact DTO. This is for reference as AngularCRUD only uses the first and last name.
@@ -89,6 +90,7 @@ public class Person implements Serializable {
 	public String getHomePhone() {
 		return homePhone;
 	}
+   @XmlTransient
 	public String getHomePhoneFormatted() {
 		return Util.formatPhoneNumber(homePhone);
 	}
@@ -100,6 +102,7 @@ public class Person implements Serializable {
 	public String getMobile() {
 		return mobile;
 	}
+   @XmlTransient
 	public String getMobilePhoneFormatted() {
 		return Util.formatPhoneNumber(mobile);
 	}
@@ -119,9 +122,6 @@ public class Person implements Serializable {
 	public String getWebsite() {
 		return website;
 	}
-	public String getWorkPhoneFormatted() {
-		return Util.formatPhoneNumber(website);
-	}
 	public void setWebsite(String website) {
 		this.website = Util.stripPhoneNumber(website);
 	}
@@ -129,9 +129,11 @@ public class Person implements Serializable {
 
 	/* Utility methods */
 
+   @XmlTransient
 	public String getName() {
 		return Util.getProperCase(firstName+" "+lastName);
 	}
+   @XmlTransient
 	public String getFullName() {
 		return getName();
 	}

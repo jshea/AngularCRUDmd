@@ -4,9 +4,9 @@
 
 (function() {
 
-   "use strict";
+   'use strict';
 
-   function LoadController($location, httpFactory, toaster) {
+   function LoadController($rootScope, $location, httpFactory, toaster) {
 
       // Save a pointer to our current context
       var self = this;
@@ -15,16 +15,17 @@
       httpFactory.updateAll(
          // WS Success
          function (data) {
-            $location.path("/");
+            $location.path('/');
+            $rootScope.$apply();
          },
          // WS Failure
          function (url) {
-            toaster.pop("error", "Web Service call failed", "getAll " + url + " failed.");
+            toaster.pop('error', 'Web Service call failed', 'getAll ' + url + ' failed.');
          }
       );
    };
 
    // Register our controller
-   angular.module("angularcrud")
-   .controller("LoadController", ["$location", "httpFactory", "toaster", LoadController]);
+   angular.module('angularcrud')
+   .controller('LoadController', ['$rootScope', '$location', 'httpFactory', 'toaster', LoadController]);
 })();
