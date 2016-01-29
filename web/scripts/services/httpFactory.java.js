@@ -35,6 +35,9 @@
          result in the success callback being called. Note that if the response is a redirect,
          XMLHttpRequest will transparently follow it, meaning that the error callback will not
          be called for such responses.
+
+         It looks like the callbacks must be passed the response, even if they don't use it? They
+         don't seem to be called if the response isn't passed as a param.
        */
          getAll: function (successCallback, failureCallback) {
             $rootScope.myPromise =
@@ -47,7 +50,7 @@
                      // Failure
                      function (response) {
                         console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response.config.url);
+                        failureCallback(response);
                      }
                   );
          },
@@ -63,7 +66,7 @@
                      // Failure
                      function (response) {
                         console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response.config.url);
+                        failureCallback(response);
                      }
                   );
          },
@@ -74,12 +77,12 @@
                   .then(
                      // Success
                      function (response) {
-                        successCallback;
+                        successCallback(response);
                      },
                      // Failure
                      function (response) {
                         console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response.config.url);
+                        failureCallback(response);
                      }
                   );
          },
@@ -95,7 +98,7 @@
                      // Failure
                      function (response) {
                         console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response.config.url);
+                        failureCallback(response);
                      }
                   );
          },
@@ -111,12 +114,12 @@
                      // Failure
                      function (response) {
                         console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response.config.url);
+                        failureCallback(response);
                      }
                   );
          },
 
-         updateAll: function (data, successCallback, failureCallback) {
+         updateAll: function (successCallback, failureCallback) {
             var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
 
             $rootScope.myPromise =
@@ -127,7 +130,7 @@
                   // Get the sample data
                   return $http.get(sampleDataUrl);
                })
-               .then(function(result) {
+               .then(function (result) {
                   for (var i = 0; i < result.data.length; i++) {      // Iterate through local data saving to server
                      $http.post(WS_URL, result.data[i])
                         .then(
@@ -144,7 +147,8 @@
 
                   // But the post requests aren't necessarily finished!
                   return "I'm all done?";
-               });
+               })
+               .finally(successCallback, failureCallback);
          }
 
 
@@ -193,7 +197,7 @@
 //                           // Failure
 //                           function (response) {
 //                              console.log("httpFactory.writeLog() Error: ", response);
-//                              failureCallback(response.config.url);
+//                              failureCallback(response);
 //                           }
 //                        )
 //                  );

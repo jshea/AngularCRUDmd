@@ -4,7 +4,7 @@
 
 (function() {
 
-   "use strict";
+   'use strict';
 
    function NewController($location, httpFactory, toaster) {
 
@@ -16,19 +16,19 @@
       self.save = function () {
          httpFactory.add(self.person,
             // WS Success
-            function(id) {
-               toaster.pop("success", "Changes saved", "Your data has been saved", 2000);
-               $location.path("/view/" + id);
+            function(person) {
+               toaster.pop('success', 'Changes saved', 'Your data has been saved', 2000);
+               $location.path('/view/' + person.id);
             },
             // WS Failure
-            function (url) {
-               toaster.pop("error", "Web Service call failed", "save " + url + " failed.");
+            function (response) {
+               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
             }
          );
       };
    };
 
    // Register our controller
-   angular.module("angularcrud")
-   .controller("NewController", ["$location", "httpFactory", "toaster", NewController]);
+   angular.module('angularcrud')
+   .controller('NewController', ['$location', 'httpFactory', 'toaster', NewController]);
 })();

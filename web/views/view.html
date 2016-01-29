@@ -1,18 +1,28 @@
 <div class="well well-sm app-blue">
-   <h3>{{vm.person.firstName}} {{vm.person.lastName}}</h3>
+   <h3><span id="firstName">{{vm.person.firstName}}</span>
+       <span id="lastName">{{vm.person.lastName}}</span>
+   </h3>
 
    <h4>Address</h4>
-   {{vm.person.address.street}}<br>
-   {{vm.person.address.city}} {{vm.person.address.state}} {{vm.person.address.zip}}<br>
+   <span id="street">{{vm.person.address.street}}</span>
+   <br>
+   <span id="city">{{vm.person.address.city}}</span>
+   <span id="state">{{vm.person.address.state}}</span>
+   <span id="zip">{{vm.person.address.zip}}</span>
+   <br>
 
    <h4>Phone</h4>
-   Home {{vm.person.homePhone}}<br>
-   Mobile {{vm.person.mobile}}<br>
+   <b>Home</b> <span id="homePhone">{{vm.person.homePhone}}</span><br>
+   <b>Mobile</b> <span id="mobile">{{vm.person.mobile}}</span><br>
 
    <h4>Electronic</h4>
-   eMail {{vm.person.email}}<br>
-   Website {{vm.person.website}}<br>
+   <b>eMail</b> <span id="email">{{vm.person.email}}</span><br>
+   <b>Website</b> <span id="website">{{vm.person.website}}</span><br>
 
-    <button type="button" id="btnEdit"   ng-click="vm.edit()"   class="btn btn-primary">Edit</button>
-    <button type="button" id="btnDelete" ng-click="vm.remove()" class="btn btn-danger">Delete</button>
+   <button type="button" id="btnEdit"   ng-click="vm.edit()"   class="btn btn-primary">
+      Edit
+   </button>
+   <button type="button" id="btnDelete" ng-click="vm.delete()" class="btn btn-danger">
+      Delete
+   </button>
 </div>

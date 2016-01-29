@@ -121,7 +121,7 @@
             <div class="form-group">
                <label for="mobilePhone" class="control-label col-lg-3">Mobile Phone:</label>
                <div class="col-lg-4">
-                  <input type="text" id="mobilePhone" name="mobilePhone" ng-model="vm.person.mobile"
+                  <input type="text" id="mobile" name="mobile" ng-model="vm.person.mobile"
                          class="form-control" placeholder="Mobile Phone">
                </div>
             </div>
@@ -160,6 +160,7 @@
       </div>
 
       <div class="row">
+         <p>
       </div>
 
       <!-- Buttons -->
@@ -187,7 +188,7 @@
             <!-- Show this button when id is blank. This happens when adding. -->
             <button type="button" id="btnDelete"
                     class="btn btn-danger"
-                    ng-click="vm.remove()"
+                    ng-click="vm.delete()"
                     ng-show="vm.person.id">
                Delete
             </button>

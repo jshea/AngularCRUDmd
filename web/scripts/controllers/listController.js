@@ -17,12 +17,10 @@
          function (data) {
             self.people = data;
             self.tableParams = new NgTableParams({}, { dataset: self.people});
-            console.log('data', self.people);
-            console.log('tableParams', self.tableParams);
          },
          // WS Failure
-         function (url) {
-            toaster.pop('error', 'Web Service call failed', 'getAll ' + url + ' failed.');
+         function (response) {
+            toaster.pop('error', 'Web Service call failed', 'getAll ' + response.config.url + ' failed.');
          }
       );
    };

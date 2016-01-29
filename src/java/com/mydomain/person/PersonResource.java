@@ -144,7 +144,6 @@ public class PersonResource {
     * @return
     * @throws PersonException
     */
-
    @DELETE
    @Path("/{id}")
    @Consumes(MediaType.APPLICATION_JSON)

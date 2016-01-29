@@ -8,7 +8,7 @@
 
    'use strict';
 
-   function EditController($routeParams, $scope, $location, httpFactory, toaster) {
+   function EditController($routeParams, $location, httpFactory, toaster) {
 
       // Save a pointer to our current context
       var self = this;
@@ -26,17 +26,16 @@
       );
 
       // Delete button handler - Delete document and return to main scren
-      self.remove = function () {
+      self.delete = function () {
          httpFactory.delete(self.person.id,
          // WS Success
-            function() {
+            function(response) {
                toaster.pop('success', 'Changes saved', 'Item deleted', 2000);
                $location.path('/');
-               $scope.$apply();
             },
             // WS Failure
-            function (url) {
-               toaster.pop('error', 'Web Service call failed', 'save ' + url + ' failed.');
+            function (response) {
+               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
             }
          );
       };
@@ -48,11 +47,10 @@
             function(data) {
                toaster.pop('success', 'Changes saved', 'Your review changes have been saved', 2000);
                $location.path('/view/' + data.id);
-               $scope.$apply();
             },
             // WS Failure
-            function (url) {
-               toaster.pop('error', 'Web Service call failed', 'save ' + url + ' failed.');
+            function (response) {
+               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
             }
          );
       };
@@ -60,5 +58,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('EditController', ['$routeParams', '$scope', '$location', 'httpFactory', 'toaster', EditController]);
+   .controller('EditController', ['$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
 })();
