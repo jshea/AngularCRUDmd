@@ -17,7 +17,8 @@ module.exports = function(config) {
 //      './../../web/dist/AngularCrudLibs.debug.js',
 //      './lib/angular-mocks.js',
 //      './../../web/dist/AngularCrudApp.debug.js',
-//      './**/spec.*.js'
+//      './**/spec.*.js',
+      './../../web/scripts/jtsutil.js',
       'spec.*.js'
     ],
 

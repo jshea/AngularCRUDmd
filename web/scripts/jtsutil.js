@@ -38,7 +38,7 @@ JTS.formatPhoneNumber = function (phoneNumber) {
    else if (phoneNumber.length === 11) {
       return phoneNumber.substr(0, 1) + ' (' +
          phoneNumber.substr(1, 3) + ') ' +
-         phoneNumber.substr(4, 3) +
+         phoneNumber.substr(4, 3) + '-' +
          phoneNumber.substr(7, 4);
    }
    else if (phoneNumber.length === 10) {
@@ -48,7 +48,7 @@ JTS.formatPhoneNumber = function (phoneNumber) {
          phoneNumber.substr(6, 4);
    }
    else if (phoneNumber.length === 7) {
-      return phoneNumber.substr(0, 3) + phoneNumber.substr(3, 4);
+      return phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 4);
    }
    else {
       return phoneNumber;

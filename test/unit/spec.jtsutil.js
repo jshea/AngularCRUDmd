@@ -3,6 +3,10 @@
 'use strict';
 
 describe('jtsUtilSpec', function() {
+   it ('JTS should be defined', function() {
+      expect(JTS).toBeDefined();
+   });
+
    it ('toProperCase', function() {
       expect(JTS.toProperCase('hello, world')).toBe('Hello, World');
    });
@@ -17,10 +21,15 @@ describe('jtsUtilSpec', function() {
    });
 
    it ('getRandomInt', function() {
-      expect(JTS.getRandomInt(1, 5)).toBeWithinRange(1, 5);
-      expect(JTS.getRandomInt(5, 1)).toBeWithinRange(1, 5);
-      expect(JTS.getRandomInt()).toThrowError('?');
-      expect(JTS.getRandomInt(1)).toThrowError('?');
-   });
+      var randomInt = JTS.getRandomInt(1, 5);
+      expect(randomInt).toBeGreaterThan(0);
+      expect(randomInt).toBeLessThan(6);
 
+      randomInt = JTS.getRandomInt(1, 5);
+      expect(randomInt).toBeGreaterThan(0);
+      expect(randomInt).toBeLessThan(6);
+
+      expect(JTS.getRandomInt()).toEqual(NaN);
+      expect(JTS.getRandomInt(1)).toEqual(NaN);
+   });
 });
