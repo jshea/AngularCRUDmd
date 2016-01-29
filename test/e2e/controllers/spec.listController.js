@@ -38,9 +38,6 @@ describe("Review Controller", function() {
 
 
    it ("should have a list view with the correct 5 elements", function() {
-      // Elements
-      var listTable = element(by.id("listTable"));
-
       // Count the number of rows in the table
       var rows = element.all(by.repeater("person in $data"));
 
@@ -69,7 +66,7 @@ describe("Review Controller", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).click();
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
 
       // View screen elements
       var firstName = element(by.id("firstName"));
@@ -81,7 +78,7 @@ describe("Review Controller", function() {
       var homePhone = element(by.id("homePhone"));
       var mobile = element(by.id("mobile"));
       var email = element(by.id("email"));
-      var website = element(by.id("mobile"));
+      var website = element(by.id("website"));
       var btnEdit = element(by.id("btnEdit"));
       var btnDelete = element(by.id("btnDelete"));
 
@@ -113,6 +110,7 @@ describe("Review Controller", function() {
       expect(website.getText()).toBe("http://bentonjohnbjrcom");
       expect(btnEdit.getText()).toBe("Edit");
       expect(btnDelete.getText()).toBe("Delete");
+
    });
 
 
@@ -125,7 +123,7 @@ describe("Review Controller", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).click();
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
 
       // Click the edit button to load the edit screen
       element(by.id("btnEdit")).click();
@@ -140,8 +138,8 @@ describe("Review Controller", function() {
       var homePhone = element(by.id("homePhone"));
       var mobile = element(by.id("mobile"));
       var email = element(by.id("email"));
-      var website = element(by.id("mobile"));
-      var btnEdit = element(by.id("btnEdit"));
+      var website = element(by.id("website"));
+      var btnSave = element(by.id("btnSave"));
       var btnDelete = element(by.id("btnDelete"));
 
       // Verify they are all present
@@ -155,22 +153,23 @@ describe("Review Controller", function() {
       expect(mobile.isPresent()).toBe(true);
       expect(email.isPresent()).toBe(true);
       expect(website.isPresent()).toBe(true);
-      expect(btnEdit.isPresent()).toBe(true);
+      expect(btnSave.isPresent()).toBe(true);
       expect(btnDelete.isPresent()).toBe(true);
 
       // Verify they all have the correct value - note
       // the values are dependent on the test data.
-      expect(firstName.getText()).toBe("James");
-      expect(lastName.getText()).toBe("Butt");
-      expect(street.getText()).toBe("6649 N Blue Gum St");
-      expect(city.getText()).toBe("New Orleans");
-      expect(state.getText()).toBe("LA");
-      expect(zip.getText()).toBe("70116");
-      expect(homePhone.getText()).toBe("5046218927");
-      expect(mobile.getText()).toBe("5048451427");
-      expect(email.getText()).toBe("jbutt@gmail.com");
-      expect(website.getText()).toBe("http://bentonjohnbjrcom");
-      expect(btnEdit.getText()).toBe("Edit");
+      // NOTE: https://github.com/angular/protractor/blob/master/docs/faq.md#the-result-of-gettext-from-an-input-element-is-always-empty
+      expect(firstName.getAttribute('value')).toBe("James");
+      expect(lastName.getAttribute('value')).toBe("Butt");
+      expect(street.getAttribute('value')).toBe("6649 N Blue Gum St");
+      expect(city.getAttribute('value')).toBe("New Orleans");
+      expect(state.getAttribute('value')).toBe("LA");
+      expect(zip.getAttribute('value')).toBe("70116");
+      expect(homePhone.getAttribute('value')).toBe("5046218927");
+      expect(mobile.getAttribute('value')).toBe("5048451427");
+      expect(email.getAttribute('value')).toBe("jbutt@gmail.com");
+      expect(website.getAttribute('value')).toBe("http://bentonjohnbjrcom");
+      expect(btnSave.getText()).toBe("Save");
       expect(btnDelete.getText()).toBe("Delete");
    });
 
@@ -183,7 +182,7 @@ describe("Review Controller", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).click();
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
 
       // Click the edit button to load the edit screen
       element(by.id("btnEdit")).click();
@@ -198,42 +197,118 @@ describe("Review Controller", function() {
       element(by.id("homePhone")).clear().sendKeys("8183547751");
       element(by.id("mobile")).clear().sendKeys("8185551212");
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://ebis.jpl.nasa.gov");
+      element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
+
+      // Save.
       element(by.id("btnSave")).click();
 
-      // TODO - Validate we're on the view screen
+      // Validate we're on the view screen
+      expect(browser.getCurrentUrl()).toContain('#/view/');
 
-      // TODO - Validate the expected values are present
+      // View screen elements
+      var firstName = element(by.id("firstName"));
+      var lastName = element(by.id("lastName"));
+      var street = element(by.id("street"));
+      var city = element(by.id("city"));
+      var state = element(by.id("state"));
+      var zip = element(by.id("zip"));
+      var homePhone = element(by.id("homePhone"));
+      var mobile = element(by.id("mobile"));
+      var email = element(by.id("email"));
+      var website = element(by.id("website"));
+      var btnEdit = element(by.id("btnEdit"));
+      var btnDelete = element(by.id("btnDelete"));
+
+      // Validate the expected values are present
+      expect(firstName.getText()).toBe("Jim");
+      expect(lastName.getText()).toBe("Shea");
+      expect(street.getText()).toBe("4800 Oak Grove Dr");
+      expect(city.getText()).toBe("Pasadena");
+      expect(state.getText()).toBe("CA");
+      expect(zip.getText()).toBe("91109");
+      expect(homePhone.getText()).toBe("8183547751");
+      expect(mobile.getText()).toBe("8185551212");
+      expect(email.getText()).toBe("jshea@jpl.nasa.gov");
+      expect(website.getText()).toBe("http://wwwebiscom");
+      expect(btnEdit.getText()).toBe("Edit");
+      expect(btnDelete.getText()).toBe("Delete");
    });
 
    it ("should delete a contact from the view screen", function() {
 
-      // TODO - Call the view screen
+      // Rows will contain the dynamically created table rows
+      var rows = element.all(by.repeater("person in $data"));
 
-      // TODO - Verify we're back to the list
+      // Grab the first contacts last name, and load view screen for them.
+      var lastName;
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).getText().then(function(text) {
+         lastName = text;
+      });
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
 
-      // TODO - Verify the contact isn't in the list
+      // Make sure delete button is present.
+      var btnDelete = element(by.id("btnDelete"));
+      expect(btnDelete.isPresent()).toBe(true);
 
+      // Click Delete.
+      element(by.id("btnDelete")).click();
+
+      // Verify we're back to the list.
+      expect(browser.getCurrentUrl()).toContain('#/list');
+
+      // Verify the contact isn't in the list.
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
+      expect(rows.getText()).not.toContain(lastName);
    });
 
    it ("should delete a contact from the edit screen", function() {
 
-      // TODO - Call the edit screen
+      var rows = element.all(by.repeater("person in $data"));
 
-      // TODO - Verify we're back to the list
+      // Grab the first contacts last name, and load view screen for them.
+      var lastName;
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).getText().then(function(text) {
+         lastName = text;
+      });
+      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
 
-      // TODO - Verify the contact isn't in the list
+      // Click the Edit button to load the edit screen
+      element(by.id("btnEdit")).click();
 
+      // Click Delete.
+      element(by.id("btnDelete")).click();
+
+      // Verify we're back to the list
+      expect(browser.getCurrentUrl()).toContain('#/list');
+
+      // Verify the contact isn't in the list
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
+      expect(rows.getText()).not.toContain(lastName);
    });
 
    it ("should add a new contact", function() {
 
-      // TODO - Click the New Contact link
+      // Click the New Contact link
+      browser.get("angularcrud/#/new");
 
-      // TODO - Fill in the form and click add
+      // Fill in the form and click add
+      element(by.id("firstName")).clear().sendKeys("Jim");
+      element(by.id("lastName")).clear().sendKeys("Shea");
+      element(by.id("street")).clear().sendKeys("4800 Oak Grove Dr");
+      element(by.id("city")).clear().sendKeys("Pasadena");
+      element(by.id("state")).clear().sendKeys("CA");
+      element(by.id("zip")).clear().sendKeys("91109");
+      element(by.id("homePhone")).clear().sendKeys("8183547751");
+      element(by.id("mobile")).clear().sendKeys("8185551212");
+      element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
+      element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
 
-      // TODO - Verify the contact is in the list
+      // Click Add.
+      element(by.id("btnAdd")).click();
 
+      // Verify the contact is in the list
+      browser.get("angularcrud/#/list");
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
+      expect(rows.getText()).toContain("Shea");
    });
-
 });
