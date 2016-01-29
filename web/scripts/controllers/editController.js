@@ -8,7 +8,7 @@
 
    'use strict';
 
-   function EditController($routeParams, $rootScope, $location, httpFactory, toaster) {
+   function EditController($routeParams, $scope, $location, httpFactory, toaster) {
 
       // Save a pointer to our current context
       var self = this;
@@ -32,7 +32,7 @@
             function() {
                toaster.pop('success', 'Changes saved', 'Item deleted', 2000);
                $location.path('/');
-               $rootScope.$apply();
+               $scope.$apply();
             },
             // WS Failure
             function (url) {
@@ -48,7 +48,7 @@
             function(data) {
                toaster.pop('success', 'Changes saved', 'Your review changes have been saved', 2000);
                $location.path('/view/' + data.id);
-               $rootScope.$apply();
+               $scope.$apply();
             },
             // WS Failure
             function (url) {
@@ -60,5 +60,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('EditController', ['$routeParams', '$rootScope', '$location', 'httpFactory', 'toaster', EditController]);
+   .controller('EditController', ['$routeParams', '$scope', '$location', 'httpFactory', 'toaster', EditController]);
 })();
