@@ -17,7 +17,8 @@
          function (data) {
             self.people = data;
             self.tableParams = new NgTableParams({}, { dataset: self.people});
-            console.log(self.tableParams);
+            console.log("data", self.people);
+            console.log("tableParams", self.tableParams);
          },
          // WS Failure
          function (url) {
