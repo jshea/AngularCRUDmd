@@ -2,16 +2,32 @@
 
 describe("Review Controller", function() {
 
-   // Setup - runs before each test
+   /*
+    * These run before and after this test suite
+    */
+   // beforeAll(function() {});
+   // afterAll(function() {});
+
+   /*
+    *  Setup - this runs before each test (each it()). This calls
+    *  the load url so each test starts at the same place with the
+    *  same initial data.
+    */
    beforeEach(function() {
       // Our URL is prefixed with baseUrl from config.js.
       browser.get("angularcrud/#/load");
    });
 
-   // Tear-down - runs after each test
+   /*
+    *  Tear-down - runs after each test
+    */
    afterEach(function() {});
 
 
+   /*
+    * Check that we are starting at the list screen and we have
+    * the expected initial test data.
+    */
    it ("should load the list view", function() {
       // Elements
       var listTable = element(by.id("listTable"));
@@ -43,6 +59,11 @@ describe("Review Controller", function() {
       expect(rows.get(4).element(by.id("cellFirstName")).getText()).toBe("Art");
    });
 
+
+   /*
+    * From the initial list screen test that we can click on a person
+    * and load their data in the view screen.
+    */
    it ("should view a contact", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
@@ -94,6 +115,11 @@ describe("Review Controller", function() {
       expect(btnDelete.getText()).toBe("Delete");
    });
 
+
+   /*
+    * Test that the view screen edit button takes us to the edit
+    * screen, the edit screen has the correct initial values.
+    */
    it ("should show a edit screen", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
@@ -148,6 +174,10 @@ describe("Review Controller", function() {
       expect(btnDelete.getText()).toBe("Delete");
    });
 
+
+   /*
+    * Change the values for the person
+    */
    it ("should edit a contact", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
@@ -170,17 +200,39 @@ describe("Review Controller", function() {
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
       element(by.id("website")).clear().sendKeys("http://ebis.jpl.nasa.gov");
       element(by.id("btnSave")).click();
+
+      // TODO - Validate we're on the view screen
+
+      // TODO - Validate the expected values are present
    });
 
    it ("should delete a contact from the view screen", function() {
+
+      // TODO - Call the view screen
+
+      // TODO - Verify we're back to the list
+
+      // TODO - Verify the contact isn't in the list
 
    });
 
    it ("should delete a contact from the edit screen", function() {
 
+      // TODO - Call the edit screen
+
+      // TODO - Verify we're back to the list
+
+      // TODO - Verify the contact isn't in the list
+
    });
 
    it ("should add a new contact", function() {
+
+      // TODO - Click the New Contact link
+
+      // TODO - Fill in the form and click add
+
+      // TODO - Verify the contact is in the list
 
    });
 
