@@ -49,11 +49,8 @@ var jsLibFiles = [
    "../web/lib/angular-route.js",
    "../web/lib/moment.js",
    "../web/lib/ng-table.js",
-   "../web/lib/pdfmake.js",
    "../web/lib/toaster.js",
-   "../web/lib/ui-bootstrap-tpls.js",
-   "../web/lib/ui-grid.js",
-   "../web/lib/vfs_fonts.js"
+   "../web/lib/ui-bootstrap-tpls.js"
 ];
 
 /* All of our .css files (includes Bootstrap extensions). Note in increasing order of importance as css will
@@ -64,8 +61,7 @@ var cssFiles = [
     "../web/css/app.css",           // However we may do some overrides
     "../web/css/angular-busy.css",
     "../web/css/ng-table.css",
-    "../web/css/toaster.css",
-    "../web/css/ui-grid.css"
+    "../web/css/toaster.css"
 ];
 
 
