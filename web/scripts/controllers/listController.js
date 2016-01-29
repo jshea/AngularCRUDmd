@@ -4,7 +4,7 @@
 
 (function() {
 
-   "use strict";
+   'use strict';
 
    function ListController(httpFactory, toaster, NgTableParams) {
 
@@ -17,17 +17,17 @@
          function (data) {
             self.people = data;
             self.tableParams = new NgTableParams({}, { dataset: self.people});
-            console.log("data", self.people);
-            console.log("tableParams", self.tableParams);
+            console.log('data', self.people);
+            console.log('tableParams', self.tableParams);
          },
          // WS Failure
          function (url) {
-            toaster.pop("error", "Web Service call failed", "getAll " + url + " failed.");
+            toaster.pop('error', 'Web Service call failed', 'getAll ' + url + ' failed.');
          }
       );
    };
 
    // Register our controller
-   angular.module("angularcrud")
-   .controller("ListController", ["httpFactory", "toaster", "NgTableParams", ListController]);
+   angular.module('angularcrud')
+   .controller('ListController', ['httpFactory', 'toaster', 'NgTableParams', ListController]);
 })();
