@@ -12,16 +12,12 @@ public class Util {
 	public static String stripPhoneNumber(String phoneNumber) {
 		String tmpPhone = phoneNumber;
 
-		if (tmpPhone==null || tmpPhone.isEmpty()) { return ""; }
-		tmpPhone = tmpPhone.replace(" ", "");
-		tmpPhone = tmpPhone.replace("-", "");
-		tmpPhone = tmpPhone.replace(".", "");
-		tmpPhone = tmpPhone.replace("(", "");
-		tmpPhone = tmpPhone.replace(")", "");
-
-      // or use a regex
-		// phoneNumber.replaceAll("[\s-\.()]", "");
-
+		if (tmpPhone==null || tmpPhone.isEmpty()) {
+         return "";
+      }
+      else {
+         tmpPhone = tmpPhone.replaceAll("[^\\d]", "");
+      }
       return tmpPhone;
 	}
 

@@ -14,11 +14,7 @@ var JTS = JTS || {};            // Establish JTS namespace if it doesn't already
 JTS.stripPhoneNumber = function (str) {
    // string has a non empty value, it's not '', undefined or null
    if (str) {
-      str.replace(/\s/g, '');
-      str.replace(/-/g,  '');
-      str.replace(/\./g, '');
-      str.replace(/\(/g, '');
-      str.replace(/\)/g, '');
+      str = str.replace(/\D/g, '');
       return str;
    }
    else {

@@ -8,7 +8,6 @@ describe('jtsUtilSpec', function() {
    });
 
    it ('stripPhoneNumber', function() {
-      expect(JTS.stripPhoneNumber('hello, world')).toBe('Hello, World');
       var expResult = '1234567890';
       expect(JTS.stripPhoneNumber('1234567890')).toBe(expResult);
       expect(JTS.stripPhoneNumber(' 12 345 678 90 ')).toBe(expResult);
