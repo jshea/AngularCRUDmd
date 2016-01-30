@@ -10,11 +10,11 @@
       <tr ng-repeat="person in $data">
 
          <td id="cellLastName" title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
-            <a href="#/view/{{person.id}}">{{person.lastName}}</a>
+            <a id="cellLastNameLink" href="#/view/{{person.id}}">{{person.lastName}}</a>
          </td>
 
          <td id="cellFirstName" title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
-            <a href="#/view/{{person.id}}">{{person.firstName}}</a>
+            <a id="cellFirstNameLink" href="#/view/{{person.id}}">{{person.firstName}}</a>
          </td>
 
       </tr>

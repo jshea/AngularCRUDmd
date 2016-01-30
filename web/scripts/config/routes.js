@@ -20,7 +20,7 @@
       $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
 
       $routeProvider
-         .when('/', {
+         .when('/list', {
             controller: 'ListController',
             controllerAs: 'vm',
             templateUrl: './views/list.html'
@@ -57,7 +57,7 @@
          })
 
          .otherwise({
-            redirectTo: '/'
+            redirectTo: '/list'
          });
    }
 
