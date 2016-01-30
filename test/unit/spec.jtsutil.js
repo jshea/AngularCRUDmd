@@ -7,6 +7,18 @@ describe('jtsUtilSpec', function() {
       expect(JTS).toBeDefined();
    });
 
+   it ('stripPhoneNumber', function() {
+      expect(JTS.stripPhoneNumber('hello, world')).toBe('Hello, World');
+      var expResult = '1234567890';
+      expect(JTS.stripPhoneNumber('1234567890')).toBe(expResult);
+      expect(JTS.stripPhoneNumber(' 12 345 678 90 ')).toBe(expResult);
+      expect(JTS.stripPhoneNumber('-123-456-789-0-')).toBe(expResult);
+      expect(JTS.stripPhoneNumber('.123.45678.90.')).toBe(expResult);
+      expect(JTS.stripPhoneNumber('(123(4567890(')).toBe(expResult);
+      expect(JTS.stripPhoneNumber(')12345)67)890)')).toBe(expResult);
+      expect(JTS.stripPhoneNumber(' 1-2.3(4)5)6(7.8-9 0 ')).toBe(expResult);
+   });
+
    it ('toProperCase', function() {
       expect(JTS.toProperCase('hello, world')).toBe('Hello, World');
    });

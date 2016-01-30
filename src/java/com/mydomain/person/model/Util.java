@@ -1,5 +1,8 @@
 package com.mydomain.person.model;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * This is a collection of string manipulation utilities.
  * @author jshea
@@ -23,18 +26,6 @@ public class Util {
 	}
 
 
-	public static String formatPhoneNumber(String phoneNumber) {
-		if (phoneNumber==null || phoneNumber.isEmpty()) {
-			return phoneNumber;
-		}
-		else if (phoneNumber.length()==7) {
-			return phoneNumber.substring(0, 3 )+ "-" + phoneNumber.substring(3, 7);
-		}
-
-      return "(" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
-	}
-
-
 	/**
 	 * Capitalize first letter of every word.
 	 * @param str
@@ -45,7 +36,7 @@ public class Util {
 		String retVal;
 
 	   if (str==null || str.isEmpty()) {
-	   	retVal = str;
+	   	retVal = "";
 	   }
 	   else {
 	   	str = str.trim().toLowerCase();
@@ -68,5 +59,45 @@ public class Util {
 
       return retVal;
 	}
+
+
+	public static String formatPhoneNumber(String phoneNumber) {
+		if (phoneNumber==null || phoneNumber.isEmpty()) {
+			return phoneNumber;
+		}
+		else if (phoneNumber.length()==7) {
+			return phoneNumber.substring(0, 3 )+ "-" + phoneNumber.substring(3, 7);
+		}
+      else if  (phoneNumber.length()==10) {
+         return "(" + phoneNumber.substring(0, 3) + ") " +
+                phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
+      }
+      else if  (phoneNumber.length()==11) {
+         return phoneNumber.substring(0, 1) +
+                " (" + phoneNumber.substring(1, 4) + ") " +
+                 phoneNumber.substring(4, 7) + "-" + phoneNumber.substring(7, 11);
+      }
+      else {
+         return phoneNumber;
+      }
+	}
+
+
+   /**
+    * Get a random number within the bounds of min and max.
+    * http://stackoverflow.com/questions/363681/generating-random-integers-in-a-specific-range
+    *
+    * @param min
+    * @param max
+    * @return
+    */
+   public static int getRandomNumber(int min, int max) {
+      // nextInt is normally exclusive of the top value,
+      // so add 1 to make it inclusive
+      if (min > max) {
+         throw new IllegalArgumentException("min must be smaller or equal to max");
+      }
+      return ThreadLocalRandom.current().nextInt(min, max + 1);
+   }
 
 }

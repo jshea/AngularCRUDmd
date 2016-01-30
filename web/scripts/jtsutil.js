@@ -11,6 +11,26 @@ var JTS = JTS || {};            // Establish JTS namespace if it doesn't already
  * Convert a string to initial cap. Returns an empty string for
  * null or undefined values.
  */
+JTS.stripPhoneNumber = function (str) {
+   // string has a non empty value, it's not '', undefined or null
+   if (str) {
+      str.replace(/\s/g, '');
+      str.replace(/-/g,  '');
+      str.replace(/\./g, '');
+      str.replace(/\(/g, '');
+      str.replace(/\)/g, '');
+      return str;
+   }
+   else {
+      return '';
+   }
+};
+
+
+/*
+ * Convert a string to initial cap. Returns an empty string for
+ * null or undefined values.
+ */
 JTS.toProperCase = function (string) {
    // string has a non empty value, it's not '', undefined or null
    if (string) {
