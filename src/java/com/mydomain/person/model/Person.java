@@ -123,7 +123,7 @@ public class Person implements Serializable {
 		return website;
 	}
 	public void setWebsite(String website) {
-		this.website = Util.stripPhoneNumber(website);
+		this.website = website;
 	}
 
 
@@ -139,6 +139,10 @@ public class Person implements Serializable {
 	}
 
 
+   /*
+   * Override toString() to be a JSONish output. Facilitates debugging
+   * and unit test comparison.
+   */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

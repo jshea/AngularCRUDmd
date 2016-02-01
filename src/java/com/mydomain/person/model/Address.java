@@ -27,18 +27,18 @@ public class Address implements Serializable {
 
 
    public Address(String street, String city, String state, String zip) {
-      this.street = street;
-      this.city = city;
-      this.state = state;
-      this.zip = zip;
+      setStreet(street);
+      setCity(city);
+      setState(state);
+      setZip(zip);
    }
 
 
    public Address(Address p) {
-      this.street = p.getStreet();
-      this.city = p.getCity();
-      this.state = p.getState();
-      this.zip = p.getZip();
+      setStreet(p.getStreet());
+      setCity(p.getCity());
+      setState(p.getState());
+      setZip(p.getZip());
    }
 
 
@@ -90,6 +90,10 @@ public class Address implements Serializable {
    }
 
 
+   /*
+   * Override toString() to be a JSONish output. Facilitates debugging
+   * and unit test comparison.
+   */
    @Override
    public String toString() {
 		StringBuilder sb = new StringBuilder();
