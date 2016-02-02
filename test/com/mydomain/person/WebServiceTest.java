@@ -1,5 +1,7 @@
-package com.mydomain.person.model;
+package com.mydomain.person;
 
+import com.mydomain.person.model.Person;
+import com.sun.jersey.api.client.ClientResponse;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,48 +14,54 @@ import org.junit.Test;
  *
  * @author jshea
  */
-public class PersonDAOTest {
-   // To support (future) carrying data over from one test to another,
-   // make these class level variables.
-   List<Person> personList;
-   Person before, after;
+public class WebServiceTest {
+	private static WebServiceUtil wsUtil = null;
 
-   public PersonDAOTest() { }
+    public WebServiceTest() {}
 
 
-   @BeforeClass
-   public static void setUpClass() { }
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		wsUtil = new WebServiceUtil();
+	}
 
-   @AfterClass
-   public static void tearDownClass() { }
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+//		Do any global data cleanup
+	}
+
+	@Before
+	public void setUp() {
+      // Do setup prior to each test
+   }
+
+	@After
+	public void tearDown() { }
 
 
-   @Before
-   public void setUp() { }
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testWebServices() {
+      List<Person> personList;
+      Person before, after;
 
-   @After
-   public void tearDown() { }
+      // assertTrue(after.toString().equals(before.toString()));
 
-
-   /**
-    * Test getAll (and by implication, deleteAll if there was data before we started)
-    *
-    * @throws java.lang.Exception
-    */
-   @Test
-   public void testGetAll() throws Exception {
       /*
        * Test getAll (and by implication, deleteAll if there was data before we started)
        */
 
       // Delete all data
-      PersonDAO.deleteAll();
+		ClientResponse cr = wsUtil.runDelete("/deleteall");
+		assertEquals(200, cr.getStatus());
 
       // Get the full list of everybody in our db
-      personList = PersonDAO.getAll();
-
-      // List size should be 0 because everybody was deleted
-      assertEquals("Everybody was deleted", 0, personList.size());
+		cr = wsUtil.runGet("/");
+      // There should be no response body because all data was deleted
+		assertEquals(204, cr.getStatus());
 
       /*
        * Test adding a person
@@ -72,7 +80,11 @@ public class PersonDAOTest {
       before.setWebsite("http://jpl.nasa.gov");
 
       // Note add returns the saved values. This is from a select from the table.
-      after = PersonDAO.add(before);
+		cr = wsUtil.runPost("/", before);
+      // Should be HTTP 201 - Created
+		assertEquals(201, cr.getStatus());
+      after = WebServiceUtil.jsonToPerson(cr.getEntity(String.class));
+
       /*
        * After will have its unique id set so we set before's id to after's id. This
        * is a cheat so we can compare their toString() values.
@@ -82,10 +94,10 @@ public class PersonDAOTest {
       assertTrue("Added person was... well, added!", after.toString().equals(before.toString()));
 
       // Get the full list of everybody in our db
-      personList = PersonDAO.getAll();
+//      personList = PersonDAO.getAll();
 
       // List size should be 1 because we added one person object
-      assertEquals("Should have just one person", 1, personList.size());
+//      assertEquals("Should have just one person", 1, personList.size());
 
       /*
        * Test updating and retrieving one person.
@@ -103,31 +115,31 @@ public class PersonDAOTest {
       before.setWebsite("http://fred.org");
 
       // Note update doesn't return the saved values.
-      PersonDAO.update(before);
+//      PersonDAO.update(before);
 
       // Get our person again
-      after = PersonDAO.getPerson(before.getId());
+//      after = PersonDAO.getPerson(before.getId());
 
       // Did the update stick?
-      assertTrue("Updated person was... wait for it, updated!", after.toString().equals(before.toString()));
+//      assertTrue("Updated person was... wait for it, updated!", after.toString().equals(before.toString()));
 
       // Get the full list of everybody in our db
-      personList = PersonDAO.getAll();
+//      personList = PersonDAO.getAll();
 
       // Did anybody sneak into our table? List size should be 1 because we added/updated one person object
-      assertEquals("Should have just one person", 1, personList.size());
+//      assertEquals("Should have just one person", 1, personList.size());
 
       /*
        * Test deleting one person.
        */
 
-      PersonDAO.delete(before.getId());
+//      PersonDAO.delete(before.getId());
 
       // Get the full list of everybody in our db
-      personList = PersonDAO.getAll();
+//      personList = PersonDAO.getAll();
 
       // Should be zero because we deleted our only person
-      assertEquals("Should be empty", 0, personList.size());
+//      assertEquals("Should be empty", 0, personList.size());
    }
 
 }

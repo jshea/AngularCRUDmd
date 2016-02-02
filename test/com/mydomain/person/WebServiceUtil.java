@@ -1,8 +1,9 @@
-package com.mydomain.person.model;
+package com.mydomain.person;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mydomain.person.model.Person;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -13,14 +14,14 @@ import javax.ws.rs.core.MediaType;
  *
  * @author jshea
  */
-public class UnitTestUtil {
+public class WebServiceUtil {
 	private final Gson gson = new Gson();
 	private Client client;
 
-	private final String BASE_URI = "https://localhost:7001/angularcrud/ws/person/";                      // LocalHost
+	private final String BASE_URI = "http://localhost:7001/angularcrud/ws/person/";                      // LocalHost
 
 
-	public UnitTestUtil() {
+	public WebServiceUtil() {
 		init();
 	}
 
@@ -68,7 +69,7 @@ public class UnitTestUtil {
 				  .type(MediaType.APPLICATION_JSON)
 				  .post(ClientResponse.class, gson.toJson(payload));
 
-         //System.out.println("UnitTestUtil.runPost: ", gson.toJson(payload));
+         //System.out.println("WebServiceUtil.runPost: ", gson.toJson(payload));
 		return cr;
 
 	}
@@ -97,7 +98,7 @@ public class UnitTestUtil {
 	 * @param json
 	 * @return
 	 */
-	public static Person jsonToPunchesPayload(String json) {
+	public static Person jsonToPerson(String json) {
 		Gson gson = new Gson();
 
 		// Since we have complex types, we need to manually parse them

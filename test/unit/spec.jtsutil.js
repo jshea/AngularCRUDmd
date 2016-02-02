@@ -18,10 +18,6 @@ describe('jtsUtilSpec', function() {
       expect(JTS.stripPhoneNumber(' 1-2.3(4)5)6(7.8-9 0 ')).toBe(expResult);
    });
 
-   it ('toProperCase', function() {
-      expect(JTS.toProperCase('hello, world')).toBe('Hello, World');
-   });
-
    it ('formatPhoneNumber', function() {
       expect(JTS.formatPhoneNumber('')).toBe('');
       expect(JTS.formatPhoneNumber('354')).toBe('354');
@@ -29,6 +25,10 @@ describe('jtsUtilSpec', function() {
       expect(JTS.formatPhoneNumber('3547751')).toBe('354-7751');
       expect(JTS.formatPhoneNumber('8183547751')).toBe('(818) 354-7751');
       expect(JTS.formatPhoneNumber('18183547751')).toBe('1 (818) 354-7751');
+   });
+
+   it ('toProperCase', function() {
+      expect(JTS.toProperCase('hello, world')).toBe('Hello, World');
    });
 
    it ('getRandomInt', function() {

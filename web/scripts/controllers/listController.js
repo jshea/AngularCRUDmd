@@ -16,7 +16,7 @@
          // WS Success
          function (data) {
             self.people = data;
-            self.tableParams = new NgTableParams({}, { dataset: self.people});
+            self.tableParams = new NgTableParams({count: self.people.length}, { dataset: self.people, counts: []});
          },
          // WS Failure
          function (response) {

@@ -9,6 +9,12 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Util {
 
+   /**
+    * Remove non-digits from the phone number
+    *
+    * @param phoneNumber
+    * @return
+    */
 	public static String stripPhoneNumber(String phoneNumber) {
 		String tmpPhone = phoneNumber;
 
@@ -57,12 +63,17 @@ public class Util {
 	}
 
 
+   /**
+    * Format a phone number into the traditional US formats if 7, 10 or 11 characters long.
+    * @param phoneNumber
+    * @return
+    */
 	public static String formatPhoneNumber(String phoneNumber) {
 		if (phoneNumber==null || phoneNumber.isEmpty()) {
 			return phoneNumber;
 		}
 		else if (phoneNumber.length()==7) {
-			return phoneNumber.substring(0, 3 )+ "-" + phoneNumber.substring(3, 7);
+			return phoneNumber.substring(0, 3)+ "-" + phoneNumber.substring(3, 7);
 		}
       else if  (phoneNumber.length()==10) {
          return "(" + phoneNumber.substring(0, 3) + ") " +

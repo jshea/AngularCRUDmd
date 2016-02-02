@@ -169,6 +169,8 @@ public class PersonResource {
    @Consumes(MediaType.APPLICATION_JSON)
    public Response deleteAll() throws PersonException {
       PersonDAO.deleteAll();
+      // ok returns 200 if there's a body and 204 if no body
+      // Why does this return 200?
       return Response.ok().build();
    }
 
