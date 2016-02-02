@@ -27,7 +27,7 @@ public class WebServiceTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-//		Do any global data cleanup
+      // Do any global data cleanup
 	}
 
 	@Before

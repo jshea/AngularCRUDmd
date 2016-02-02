@@ -1,6 +1,5 @@
 package com.mydomain.person.model;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
