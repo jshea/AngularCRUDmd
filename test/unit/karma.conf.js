@@ -14,10 +14,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-//      './../../web/dist/AngularCrudLibs.debug.js',
-//      './lib/angular-mocks.js',
-//      './../../web/dist/AngularCrudApp.debug.js',
-//      './**/spec.*.js',
       './../../web/scripts/jtsutil.js',
       'spec.*.js'
     ],

@@ -131,7 +131,14 @@
                   return $http.get(sampleDataUrl);
                })
                .then(function (result) {
+                  /*
+                   * TODO - Add middle tier API for PersonDAO.add(List<Person> personList) and
+                   *        pass the result.data array. This will do the looping in PersonDAO.
+                   */
                   for (var i = 0; i < result.data.length; i++) {      // Iterate through local data saving to server
+                     /*
+                      * TODO - Push each promise to an array and then return $q.all([promiseArray])?
+                      */
                      $http.post(WS_URL, result.data[i])
                         .then(
                            // Success
