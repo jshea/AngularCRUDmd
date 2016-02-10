@@ -42,6 +42,23 @@
          }
       );
 
+      // Save button was clicked - Save person and view their new detail
+      self.$on('personSaved',
+         function (event, person) {
+            httpFactory.add(person,
+               // WS Success
+               function(data) {
+                  toaster.pop('success', 'Changes saved', 'Your changes have been saved', 2000);
+                  $location.path('/view/' + data.id);
+               },
+               // WS Failure
+               function (response) {
+                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+               }
+            );
+         }
+      );
+
       // Delete button clicked - Delete person and return to main scren
       self.$on('personDeleted',
          function (event, person) {

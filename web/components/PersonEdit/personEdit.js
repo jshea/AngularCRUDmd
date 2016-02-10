@@ -16,15 +16,15 @@
          var ctrl = this;
 
          ctrl.onAdd = function () {
-            ctrl.$emit('personAdded', this.person);
+            ctrl.$emit('personAdded', ctrl.person);
          };
 
          this.onSave = function () {
-            ctrl.$emit('personSaved', this.person);
+            ctrl.$emit('personSaved', ctrl.person);
          };
 
          this.onDelete = function () {
-            ctrl.$emit('personDeleted', this.person);
+            ctrl.$emit('personDeleted', ctrl.person);
          };
 
       }

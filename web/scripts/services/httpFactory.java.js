@@ -158,58 +158,6 @@
                .finally(successCallback, failureCallback);
          }
 
-
-
-         // This is the original before the promise chaining.
-
-//         updateAll: function (data, successCallback, failureCallback) {
-//            var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
-//            var sampleData = "";
-//
-//            $rootScope.myPromise =
-//               // Get the sample data
-//               $http.get(sampleDataUrl)
-//                  .then(
-//                     // Success
-//                     function(response) {
-//                        console.log("updateAll - 1 - Got json data", response);
-//                        sampleData = response.data;
-//                     },
-//                     // Failure
-//                     function (response) {
-//                        console.log("httpFactory.getAll() Error: ", response);
-//                     }
-//                  )
-//                  // Delete the old data and load the sample data
-//                  .then(
-//                     $http.delete(WS_URL + "deleteall")
-//                        .then(
-//                           // Success
-//                           function (response) {
-//                              for (var i = 0; i < sampleData.length; i++) {      // Iterate through local data saving to server
-//                                 $http.post(WS_URL, sampleData[i])
-//                                    .then(
-//                                       // Success
-//                                       function(response) {
-//                                          console.log("bulk load success", response);
-//                                       },
-//                                       // Failure
-//                                       function (response) {
-//                                          console.log("Bulk load Error: ", response);
-//                                       }
-//                                 );
-//                              }
-//                              successCallback(response);
-//                           },
-//                           // Failure
-//                           function (response) {
-//                              console.log("httpFactory.writeLog() Error: ", response);
-//                              failureCallback(response);
-//                           }
-//                        )
-//                  );
-//         }
-
       };
 
       return httpFactory;
