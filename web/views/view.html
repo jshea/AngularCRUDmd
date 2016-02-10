@@ -1,4 +1,5 @@
 <div class="well well-sm app-blue">
+   <!--
    <h3><span id="firstName">{{vm.person.firstName}}</span>
        <span id="lastName">{{vm.person.lastName}}</span>
    </h3>
@@ -18,11 +19,16 @@
    <h4>Electronic</h4>
    <b>eMail</b> <span id="email">{{vm.person.email}}</span><br>
    <b>Website</b> <span id="website">{{vm.person.website}}</span><br>
+   -->
+
+   <person-view-component person="vm.person"></person-view-component>
 
    <button type="button" id="btnEdit"   ng-click="vm.edit()"   class="btn btn-primary">
       Edit
    </button>
+
    <button type="button" id="btnDelete" ng-click="vm.delete()" class="btn btn-danger">
       Delete
    </button>
+   
 </div>
