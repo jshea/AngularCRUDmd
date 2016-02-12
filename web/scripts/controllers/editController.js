@@ -1,14 +1,15 @@
 
-/* global toaster */
-
 /*
  * Controller for the edit page.
+ *
+ *    One must inject $scope to use $emit/$on
+ *    http://stackoverflow.com/questions/28497208/angular-js-controller-as-scope-on
  */
 (function() {
 
    'use strict';
 
-   function EditController($routeParams, $location, httpFactory, toaster) {
+   function EditController($scope, $routeParams, $location, httpFactory, toaster) {
 
       // Save a pointer to our current context
       var self = this;
@@ -25,38 +26,62 @@
          }
       );
 
-      // Delete button handler - Delete document and return to main scren
-      self.delete = function () {
-         httpFactory.delete(self.person.id,
-         // WS Success
-            function(response) {
-               toaster.pop('success', 'Changes saved', 'Item deleted', 2000);
-               $location.path('/');
-            },
-            // WS Failure
-            function (response) {
-               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
-            }
-         );
-      };
+      // Listen for events emitted from our Person Edit component
 
-      // Save button handler - Save changes and switch to view screen for this document
-      self.save = function () {
-         httpFactory.update(self.person,
+      // Add button was clicked - Save person and view their new detail
+      $scope.$on('personAdded',
+         function (event, person) {
+            httpFactory.update(person,
+               // WS Success
+               function(data) {
+                  toaster.pop('success', 'Person added', 'Your changes have been saved', 2000);
+                  $location.path('/view/' + data.id);
+               },
+               // WS Failure
+               function (response) {
+                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+               }
+            );
+         }
+      );
+
+      // Save button was clicked - Save person and view their new detail
+      $scope.$on('personSaved',
+         function (event, person) {
+            httpFactory.add(person,
+               // WS Success
+               function(data) {
+                  toaster.pop('success', 'Changes saved', 'Your changes have been saved', 2000);
+                  $location.path('/view/' + data.id);
+               },
+               // WS Failure
+               function (response) {
+                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+               }
+            );
+         }
+      );
+
+      // Delete button clicked - Delete person and return to main scren
+      $scope.$on('personDeleted',
+         function (event, person) {
+            httpFactory.delete(self.person.id,
             // WS Success
-            function(data) {
-               toaster.pop('success', 'Changes saved', 'Your review changes have been saved', 2000);
-               $location.path('/view/' + data.id);
-            },
-            // WS Failure
-            function (response) {
-               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
-            }
-         );
-      };
+               function(response) {
+                  toaster.pop('success', 'Changes saved', 'Person deleted', 2000);
+                  $location.path('/');
+               },
+               // WS Failure
+               function (response) {
+                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+               }
+            );
+         }
+      );
+
    };
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('EditController', ['$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
+   .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
 })();
