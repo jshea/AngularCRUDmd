@@ -1,12 +1,15 @@
 
 /*
  * Controller for the edit page.
+ *
+ *    One must inject $scope to use $emit/$on
+ *    http://stackoverflow.com/questions/28497208/angular-js-controller-as-scope-on
  */
 (function() {
 
    'use strict';
 
-   function EditController($routeParams, $location, httpFactory, toaster) {
+   function EditController($scope, $routeParams, $location, httpFactory, toaster) {
 
       // Save a pointer to our current context
       var self = this;
@@ -26,7 +29,7 @@
       // Listen for events emitted from our Person Edit component
 
       // Save button was clicked - Save person and view their new detail
-      self.$on('personSaved',
+      $scope.$on('personSaved',
          function (event, person) {
             httpFactory.update(person,
                // WS Success
@@ -43,7 +46,7 @@
       );
 
       // Save button was clicked - Save person and view their new detail
-      self.$on('personSaved',
+      $scope.$on('personSaved',
          function (event, person) {
             httpFactory.add(person,
                // WS Success
@@ -60,7 +63,7 @@
       );
 
       // Delete button clicked - Delete person and return to main scren
-      self.$on('personDeleted',
+      $scope.$on('personDeleted',
          function (event, person) {
             httpFactory.delete(self.person.id,
             // WS Success
@@ -80,5 +83,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('EditController', ['$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
+   .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
 })();

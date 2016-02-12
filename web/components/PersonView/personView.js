@@ -11,7 +11,7 @@
    // Note: No controller so we have to use $ctrl
    var PersonViewComponent = {
      bindings: {
-       person: '='
+       person: '<'   // One way binding - Read Only
      },
      template: [
       '<div>',
@@ -39,6 +39,6 @@
    };
 
    angular
-     .module('angularcrud', [])
+     .module('angularcrud')
      .component('personViewComponent', PersonViewComponent);
 })();

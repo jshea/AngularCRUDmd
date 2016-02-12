@@ -2,6 +2,9 @@
  * Edit component for editing the detail for a Person (or adding a new person)
  *
  *    usage: <person-edit-component person="myPersonData"></person-edit-component>
+ *
+ *    One must inject $scope to use $emit/$on
+ *    http://stackoverflow.com/questions/28497208/angular-js-controller-as-scope-on
  */
 (function() {
 
@@ -9,28 +12,28 @@
 
    var PersonEditComponent = {
       bindings: {
-        person: '='
+        person: '='  // Bidirectional binding
       },
       templateUrl: './components/PersonEdit/personEdit.html',
       controller: function ($scope, $element, $attrs) {
          var ctrl = this;
 
          ctrl.onAdd = function () {
-            ctrl.$emit('personAdded', ctrl.person);
+            $scope.$emit('personAdded', ctrl.person);
          };
 
          this.onSave = function () {
-            ctrl.$emit('personSaved', ctrl.person);
+            $scope.$emit('personSaved', ctrl.person);
          };
 
          this.onDelete = function () {
-            ctrl.$emit('personDeleted', ctrl.person);
+            $scope.$emit('personDeleted', ctrl.person);
          };
 
       }
    };
 
    angular
-     .module('angularcrud', [])
+     .module('angularcrud')
      .component('personEditComponent', PersonEditComponent);
 })();
