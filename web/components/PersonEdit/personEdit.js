@@ -17,16 +17,19 @@
       templateUrl: './components/PersonEdit/personEdit.html',
       controller: function ($scope, $element, $attrs) {
          var ctrl = this;
+         // TODO - How to create a local copy of person to use in the form? And then
+         //        pass back to the following functions.
+         // var localPerson = $scope.$ctrl.person;
 
          ctrl.onAdd = function () {
             $scope.$emit('personAdded', ctrl.person);
          };
 
-         this.onSave = function () {
+         ctrl.onSave = function () {
             $scope.$emit('personSaved', ctrl.person);
          };
 
-         this.onDelete = function () {
+         ctrl.onDelete = function () {
             $scope.$emit('personDeleted', ctrl.person);
          };
 

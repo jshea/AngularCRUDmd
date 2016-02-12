@@ -28,13 +28,13 @@
 
       // Listen for events emitted from our Person Edit component
 
-      // Save button was clicked - Save person and view their new detail
-      $scope.$on('personSaved',
+      // Add button was clicked - Save person and view their new detail
+      $scope.$on('personAdded',
          function (event, person) {
             httpFactory.update(person,
                // WS Success
                function(data) {
-                  toaster.pop('success', 'Changes saved', 'Your changes have been saved', 2000);
+                  toaster.pop('success', 'Person added', 'Your changes have been saved', 2000);
                   $location.path('/view/' + data.id);
                },
                // WS Failure
