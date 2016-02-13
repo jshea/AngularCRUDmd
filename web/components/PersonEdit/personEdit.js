@@ -16,21 +16,28 @@
       },
       templateUrl: './components/PersonEdit/personEdit.html',
       controller: function ($scope, $element, $attrs) {
-         var ctrl = this;
-         // TODO - How to create a local copy of person to use in the form? And then
-         //        pass back to the following functions.
-         // var localPerson = $scope.$ctrl.person;
+         var self = this;
 
-         ctrl.onAdd = function () {
-            $scope.$emit('personAdded', ctrl.person);
+         /*
+          * Trying to get a local copy of person for use in our form. At
+          * this point both $scope.$ctrl.person and this.$ctrl.person are
+          * undefined. Thus this is a placeholder and not yet used. Our
+          * HTML template uses the bound person object.
+          */
+         self.$onInit = function() {
+           self.localPerson = $scope.$ctrl.person;
          };
 
-         ctrl.onSave = function () {
-            $scope.$emit('personSaved', ctrl.person);
+         self.onAdd = function () {
+            $scope.$emit('personAdded', self.person);
          };
 
-         ctrl.onDelete = function () {
-            $scope.$emit('personDeleted', ctrl.person);
+         self.onSave = function () {
+            $scope.$emit('personSaved', self.person);
+         };
+
+         self.onDelete = function () {
+            $scope.$emit('personDeleted', self.person);
          };
 
       }

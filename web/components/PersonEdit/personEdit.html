@@ -162,32 +162,36 @@
       <!-- Buttons -->
       <div class="row">
          <div class="col-xs-12">
-            <span ng-show="$ctrl.person.id">
-               <button type="button" id="btnSave"
-                       class="btn btn-primary"
-                       ng-disabled="personForm.$invalid"
-                       ng-click="$ctrl.onSave()" >
-                  Save
-               </button>
-            </span>
 
-            <!-- Show this button when $ctrl.person.id is blank. This happens when adding. -->
-            <span ng-hide="$ctrl.person.id">
-               <button type="button" id="btnAdd"
-                       class="btn btn-primary"
-                       ng-disabled="personForm.$invalid"
-                       ng-click="$ctrl.onAdd()">
-                  Add
-               </button>
-            </span>
+            <!-- Show this button when $ctrl.person.id is not blank. This means we're updating. -->
+            <button type="button" id="btnSave"
+                    class="btn btn-primary"
+                    ng-disabled="personForm.$invalid"
+                    ng-click="$ctrl.onSave()"
+                    ng-if="$ctrl.person.id"
+            >
+               Save
+            </button>
 
-            <!-- Show this button when id is blank. This happens when adding. -->
+            <!-- Show this button when $ctrl.person.id is blank. This means we're adding. -->
+            <button type="button" id="btnAdd"
+                    class="btn btn-primary"
+                    ng-disabled="personForm.$invalid"
+                    ng-click="$ctrl.onAdd()"
+                    ng-if="!$ctrl.person.id"
+            >
+               Add
+            </button>
+
+            <!-- Show this button when $ctrl.person.id is not blank. This means we're updating. -->
             <button type="button" id="btnDelete"
                     class="btn btn-danger"
                     ng-click="$ctrl.onDelete()"
-                    ng-if="$ctrl.person.id">
+                    ng-if="$ctrl.person.id"
+            >
                Delete
             </button>
+
          </div>
       </div>
 

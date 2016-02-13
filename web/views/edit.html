@@ -1,6 +1,6 @@
 <div class="well well-sm app-blue">
-   <h3 ng-show="vm.person.id">Update Contact</h3>
-   <h3 ng-show="!vm.person.id">New Contact</h3>
+   <h3 ng-if="vm.person.id">Update Contact</h3>
+   <h3 ng-if="!vm.person.id">New Contact</h3>
 
    <person-edit-component person="vm.person"></person-edit-component>
 

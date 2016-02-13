@@ -26,5 +26,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('LoadController', ['$location', 'httpFactory', 'toaster', LoadController]);
+      .controller('LoadController', ['$location', 'httpFactory', 'toaster', LoadController]);
 })();

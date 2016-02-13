@@ -46,5 +46,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('ViewController', ['$routeParams', '$location', 'httpFactory', 'toaster', ViewController]);
+      .controller('ViewController', ['$routeParams', '$location', 'httpFactory', 'toaster', ViewController]);
 })();

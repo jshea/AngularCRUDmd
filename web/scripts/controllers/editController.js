@@ -28,27 +28,10 @@
 
       // Listen for events emitted from our Person Edit component
 
-      // Add button was clicked - Save person and view their new detail
-      $scope.$on('personAdded',
-         function (event, person) {
-            httpFactory.update(person,
-               // WS Success
-               function(data) {
-                  toaster.pop('success', 'Person added', 'Your changes have been saved', 2000);
-                  $location.path('/view/' + data.id);
-               },
-               // WS Failure
-               function (response) {
-                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
-               }
-            );
-         }
-      );
-
       // Save button was clicked - Save person and view their new detail
       $scope.$on('personSaved',
          function (event, person) {
-            httpFactory.add(person,
+            httpFactory.update(person,
                // WS Success
                function(data) {
                   toaster.pop('success', 'Changes saved', 'Your changes have been saved', 2000);
@@ -83,5 +66,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
+      .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
 })();

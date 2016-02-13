@@ -27,5 +27,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('ListController', ['httpFactory', 'toaster', 'NgTableParams', ListController]);
+      .controller('ListController', ['httpFactory', 'toaster', 'NgTableParams', ListController]);
 })();

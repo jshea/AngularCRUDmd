@@ -45,5 +45,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-   .controller('SettingsController', ['$location', SettingsController]); // 'WS_URL',
+      .controller('SettingsController', ['$location', SettingsController]); // 'WS_URL',
 })();
