@@ -1,7 +1,7 @@
 ## Technology, tools and installation
 
 ### Overview
-This application is built using web technologies HTML, JavaScript and CSS. It's intended to run in any current browser. It's generally tested with the latest versions of Chrome, FireFox and Microsoft Edge. 
+This application is built using web technologies HTML, JavaScript and CSS and is intended to run in any current browser. It's generally tested with the latest versions of Chrome, FireFox and Microsoft Edge.
 
 This is an overview of the technologies and tools necessary to work with this project. More detailed howto/cheatsheets are available in the [doc/quickstartGuides](quickstartGuides) folder.
 
@@ -15,7 +15,7 @@ javaRdbms | Relational Database Management System scripts for creating data stru
 misc | A virtual rug for storing misc files.
 mongo | Files containing support for using [MongoDB](https://mongodb.com/) (with a [NodeJS](https://nodejs.org/) server) as a backend.
 offline | Information and files for performing offline storage. This will sense the browser losing/gaining a network connection and synchronizing offline data. [localForage](http://mozilla.github.io/localForage/) is used as the JavaScript/browser interface to offline data.
-quickstartGuides | Short quickstart guides for the frameworks and tools used in this application. They contain the subset of information on each subject to get one started. Links to the source documentation is included in each guide. 
+quickstartGuides | Short quickstart guides for the frameworks and tools used in this application. They contain the subset of information on each subject to get one started. Links to the source documentation is included in each guide.
 
 
 ### Tools and libraries
@@ -61,7 +61,7 @@ npm install -g protractor
 #### Client application libraries
 Client application libraries are included in the application by including their JavaScript, CSS and font files. These files are copied to the project (into a bower_components staging folder) with bower. We choose when to bring the updated versions into our application by copying them from the bower_components folder to our /web/lib folder.
 
-* [AngularJS](https://angularjs.org/) is the core framework for this Single Page Application (SPA). 
+* [AngularJS](https://angularjs.org/) is the core framework for this Single Page Application (SPA).
 This application is using version 1.4.x of AngularJS. Angular v2 is a significant update scheduled for release in 2016. This application will be updated to Angular v2 sometime after its release. For now we can ignore Angular v2.
 
 * [Bootstrap](http://getbootstrap.com/)  is the core UI framework for styling and widgets.

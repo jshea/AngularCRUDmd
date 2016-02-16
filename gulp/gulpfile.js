@@ -26,6 +26,8 @@ var jsAppFiles = [
    "../web/scripts/config/run.js",
    "../web/scripts/filters/phoneNumber.js",
    "../web/components/PersonEdit/personEdit.js",
+   "../web/components/PersonList/personList.js",
+   "../web/components/PersonList/personListService.js",
    "../web/components/PersonView/personView.js",
    "../web/scripts/controllers/editController.js",
    "../web/scripts/controllers/listController.js",
@@ -60,8 +62,9 @@ var jsLibFiles = [
  * override previous settings.
  */
 var cssFiles = [
-    "../web/css/bootstrap.css",     // Bootstrap is foundational
-    "../web/css/app.css",           // However we may do some overrides
+//  "../web/css/bootstrap.css",        // Bootstrap is foundational
+    "../web/css/bootstrap.paper.css",  // Paper/Material Design themed Bootstrap
+    "../web/css/app.css",              // However we may do some overrides
     "../web/css/angular-busy.css",
     "../web/css/ng-table.css",
     "../web/css/toaster.css"

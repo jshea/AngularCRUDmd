@@ -6,17 +6,17 @@
 
    'use strict';
 
-   function ListController(httpFactory, toaster, NgTableParams) {
+   function ListController(httpFactory, toaster, PersonListService) {
 
       // Save a pointer to our current context
       var self = this;
+      self.personListService = PersonListService;
 
       // Get all data and show it in a list
       httpFactory.getAll(
          // WS Success
          function (data) {
-            self.people = data;
-            self.tableParams = new NgTableParams({count: self.people.length}, { dataset: self.people, counts: []});
+            self.personListService.init(data);
          },
          // WS Failure
          function (response) {
@@ -27,5 +27,5 @@
 
    // Register our controller
    angular.module('angularcrud')
-      .controller('ListController', ['httpFactory', 'toaster', 'NgTableParams', ListController]);
+      .controller('ListController', ['httpFactory', 'toaster', 'PersonListService', ListController]);
 })();

@@ -1,4 +1,5 @@
 /* The starting CSS styles for the enter animation */
+
 tr.ng-enter {
   transition:0.5s ease all; /* ease instead of linear? */
   opacity:0;
@@ -28,27 +29,8 @@ tr.ng-hide {
    width: auto !important;
 }
 
-.app-blue {
-   background-color: #D1E4F6
-}
 
-.navbar-inner {
-   background-image: url(navbar-background.jpg);
-}
-
-.navbar-default .navbar-brand {
-   color: #FFFFFF;
-}
-
-.navbar .nav > li > a {
-   color: #FFFFFF;
-}
-
-/* If we don't specify a size, it will autosize */
-.myGrid {
-   width: 100%;
-   height: 200px;
-}
+/* Animation */
 
 .animate-if {
   background:white;

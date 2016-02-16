@@ -32,14 +32,14 @@
    We went Offline. We cannot operate until the network connection is restored.
 </div>
 
-<!-- Container for our popup messages -->
+<!-- Container for our popup messages using toaster library -->
 <toaster-container
    toaster-options="{'time-out': 3000,
                      'close-button': false,
                      'animation-class': 'toast-top-center'}">
 </toaster-container>
 
-<!-- Busy indicator for long background processes -->
+<!-- Busy indicator for long background processes using cg-busy library-->
 <div cg-busy="{promise: myPromise,
                delay: 500,
                message: 'Loading...'}"></div>

@@ -56,6 +56,14 @@
             templateUrl: './views/settings.html'
          })
 
+         .when('/instructions', {
+            templateUrl: './views/instructions.html'
+         })
+
+         .when('/faq', {
+            templateUrl: './views/faq.html'
+         })
+
          .otherwise({
             redirectTo: '/list'
          });

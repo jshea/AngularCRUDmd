@@ -1,12 +1,14 @@
-<div class="well well-sm app-blue">
+<div class="panel well well-sm">
 
+      <person-list-component service="vm.personListService"></person-list-component>
+<!--
    <table id="listTable"
           ng-table="vm.tableParams"
           class="table table-condensed table-bordered table-hover table-striped"
           show-filter="false"
           >
 
-      <!-- ng-table puts the data in $data -->
+       ng-table puts the data in $data
       <tr ng-repeat="person in $data">
 
          <td id="cellLastName" title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
@@ -20,5 +22,5 @@
       </tr>
 
    </table>
-
+-->
 </div>
