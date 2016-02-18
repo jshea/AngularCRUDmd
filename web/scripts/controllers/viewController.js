@@ -1,15 +1,13 @@
 /*
  * Controller for the view details page.
  */
-
 (function() {
 
    'use strict';
 
    function ViewController($routeParams, $location, httpFactory, toaster) {
 
-      // Save a pointer to our current context
-      var self = this;
+      var self = this;     // Save a pointer to our current context
 
       // Initialize our data based on id parameter
       httpFactory.getById($routeParams.id,
@@ -45,6 +43,7 @@
    };
 
    // Register our controller
-   angular.module('angularcrud')
+   angular
+      .module('angularcrud')
       .controller('ViewController', ['$routeParams', '$location', 'httpFactory', 'toaster', ViewController]);
 })();

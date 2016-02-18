@@ -1,12 +1,10 @@
-/* global angular */
-
 (function() {
 
    'use strict';
 
    // Define our application constants here
 
-   // Initial angularcrud data. Used by httpFactory to reload dummy/sample data.
+   // Initial angularcrud data. Could be used by httpFactory to reload dummy/sample data.
 /*
  * No longer used. We now use a .json file in the \sampledata folder.
  * It's now left here for demo purposes.

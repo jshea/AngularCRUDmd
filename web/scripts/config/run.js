@@ -1,5 +1,3 @@
-/* global angular */
-
 (function() {
 
    'use strict';
@@ -69,5 +67,8 @@
       */
    }
 
-   angular.module('angularcrud').run(['$window', '$rootScope', Run]);   // , 'WS_URL'
+   // Register this with our application module
+   angular
+      .module('angularcrud')
+      .run(['$window', '$rootScope', Run]);   // , 'WS_URL'
 })();

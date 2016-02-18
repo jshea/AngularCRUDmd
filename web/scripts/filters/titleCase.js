@@ -1,5 +1,6 @@
-/* global angular */
-
+/*
+ * Angular filter to convert text to title case.
+ */
 (function() {
 
    "use strict";
@@ -18,5 +19,7 @@
    }
 
    // Register our filter
-   angular.module("angularcrud").filter("titleCase", [TitleCase]);
+   angular
+      .module("angularcrud")
+      .filter("titleCase", [TitleCase]);
 })();

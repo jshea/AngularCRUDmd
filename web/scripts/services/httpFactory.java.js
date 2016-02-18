@@ -3,8 +3,6 @@
  *
  * Services to interact with our data storage via REST Web Services
  */
-
-/* global angular */
 (function() {
 
    "use strict";
@@ -15,7 +13,7 @@
     */
    function HttpFactory($http, $rootScope, $q) {
 
-      // This is the path to the Elasticsearch REST url
+      // This is the path to add to our source URL to get to the REST url's
       var WS_URL = "ws/person/";
 
       /*
@@ -42,81 +40,81 @@
          getAll: function (successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.get(WS_URL)
-                  .then(
-                     // Success
-                     function (response) {
-                        successCallback(response.data);
-                     },
-                     // Failure
-                     function (response) {
-                        console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response);
-                     }
-                  );
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response.data);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback(response);
+                  }
+               );
          },
 
          getById: function (id, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.get(WS_URL + id)
-                  .then(
-                     // Success
-                     function (response) {
-                        successCallback(response.data);
-                     },
-                     // Failure
-                     function (response) {
-                        console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response);
-                     }
-                  );
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response.data);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback(response);
+                  }
+               );
          },
 
          delete: function (id, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.delete(WS_URL + id)
-                  .then(
-                     // Success
-                     function (response) {
-                        successCallback(response);
-                     },
-                     // Failure
-                     function (response) {
-                        console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response);
-                     }
-                  );
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback(response);
+                  }
+               );
          },
 
          update: function (person, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.put(WS_URL, person)
-                  .then(
-                     // Success
-                     function (response) {
-                        successCallback(response.data);
-                     },
-                     // Failure
-                     function (response) {
-                        console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response);
-                     }
-                  );
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response.data);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback(response);
+                  }
+               );
          },
 
          add: function (person, successCallback, failureCallback) {
             $rootScope.myPromise =
                $http.post(WS_URL, person)
-                  .then(
-                     // Success
-                     function (response) {
-                        successCallback(response.data);
-                     },
-                     // Failure
-                     function (response) {
-                        console.log("httpFactory.writeLog() Error: ", response);
-                        failureCallback(response);
-                     }
-                  );
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response.data);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback(response);
+                  }
+               );
          },
 
          updateAll: function (successCallback, failureCallback) {
@@ -124,9 +122,8 @@
             var self = this;
 
             $rootScope.myPromise =
-
-            // Delete the old data and load the sample data
-            $http.delete(WS_URL + "deleteall")
+               // Delete the old data and load the sample data
+               $http.delete(WS_URL + "deleteall")
                .then(function() {
                   // Get the sample data
                   return $http.get(sampleDataUrl);
@@ -134,7 +131,8 @@
                .then(function (result) {
                   self.promises = [];
 
-                  for (var i = 0; i < result.data.length; i++) {      // Iterate through local data saving to server
+                  // Iterate through local data saving to server
+                  for (var i = 0; i < result.data.length; i++) {
                      // Push each promise to an array and then return $q.all([promiseArray])
                      self.promises.push($http.post(WS_URL, result.data[i]));
                   }
@@ -149,6 +147,7 @@
    };
 
    // Register our factory
-   angular.module("angularcrud")
-          .factory("httpFactory", ["$http", "$rootScope", '$q', HttpFactory]);
+   angular
+      .module("angularcrud")
+      .factory("httpFactory", ["$http", "$rootScope", '$q', HttpFactory]);
 })();

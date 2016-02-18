@@ -1,4 +1,3 @@
-
 /*
  * Controller for the edit page.
  *
@@ -64,7 +63,8 @@
 
    };
 
-   // Register our controller
-   angular.module('angularcrud')
+   // Register our controller with our application module
+   angular
+      .module('angularcrud')
       .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
 })();

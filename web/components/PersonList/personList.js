@@ -8,7 +8,6 @@
 
    'use strict';
 
-   // Note: No controller so we have to use $ctrl
    var PersonListComponent = {
      bindings: {
        personListData: '<'
@@ -33,6 +32,7 @@
       controller: function ($scope, NgTableParams) {
          var self = this;
 
+         // Initialize the table when data is loaded
          $scope.$watch('$ctrl.personListData', function() {
             if (self.personListData) {
                if (self.personListData.length < 25) {
@@ -45,8 +45,9 @@
          });
 
       }
-  };
+   };
 
+   // Register this component with our application module
    angular
      .module('angularcrud')
      .component('personListComponent', PersonListComponent);

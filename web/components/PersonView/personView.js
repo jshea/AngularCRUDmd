@@ -8,7 +8,7 @@
 
    'use strict';
 
-   // Note: No controller so we have to use $ctrl
+   // Note: No controller. We're read only with the passed in data.
    var PersonViewComponent = {
      bindings: {
        person: '<'   // One way binding - Read Only
@@ -38,6 +38,7 @@
      ].join('')
    };
 
+   // Register this component with our application module
    angular
      .module('angularcrud')
      .component('personViewComponent', PersonViewComponent);

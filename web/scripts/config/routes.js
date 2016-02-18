@@ -1,5 +1,3 @@
-/* global angular */
-
 (function() {
 
    'use strict';
@@ -69,6 +67,8 @@
          });
    }
 
-   // Register our routes
-   angular.module('angularcrud').config(['$routeProvider', '$httpProvider', Router]);
+   // Register our routes with our application module
+   angular
+      .module('angularcrud')
+      .config(['$routeProvider', '$httpProvider', Router]);
 })();

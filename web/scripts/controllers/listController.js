@@ -1,7 +1,6 @@
 /*
  * Controller for the listing page.
  */
-
 (function() {
 
    'use strict';
@@ -25,6 +24,7 @@
    };
 
    // Register our controller
-   angular.module('angularcrud')
+   angular
+      .module('angularcrud')
       .controller('ListController', ['httpFactory', 'toaster', ListController]);
 })();

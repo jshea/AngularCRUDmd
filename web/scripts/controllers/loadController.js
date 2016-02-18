@@ -1,7 +1,6 @@
 /*
  * Controller for reinitializing the database.
  */
-
 (function() {
 
    'use strict';
@@ -25,6 +24,7 @@
    };
 
    // Register our controller
-   angular.module('angularcrud')
+   angular
+      .module('angularcrud')
       .controller('LoadController', ['$location', 'httpFactory', 'toaster', LoadController]);
 })();

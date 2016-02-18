@@ -1,16 +1,16 @@
 /*
  * Controller for the settings page.
+ *
+ * Not currently used.
  */
-
 (function() {
 
    'use strict';
 
    function SettingsController($location) { // WS_URL, Here as an example
 
-      // Save a pointer to our current context
-      var self = this;
-      var WS_URL; // Have to have this as we're not using dependency injection
+      var self = this;  // Save a pointer to our current context
+      var WS_URL;       // Have to have this as we're not using dependency injection
 
       self.settings = {};
 
@@ -31,10 +31,10 @@
             self.settings.url += '/';
          }
 
-         localStorage.setItem('WS_URL', self.settings.url);  // Persist the URL to localStorage for future use
-         WS_URL = self.settings.url;                         // Set the app runtime URL variable
+         localStorage.setItem('WS_URL', self.settings.url); // Persist the URL to localStorage for future use
+         WS_URL = self.settings.url;                        // Set the app runtime URL variable
 
-         $location.path('/');    // Go to list screen which will load data from the server
+         $location.path('/');                               // Go to list screen which will load data from the server
       };
 
       // Cancel new settings and return to the data list
@@ -44,6 +44,7 @@
    };
 
    // Register our controller
-   angular.module('angularcrud')
+   angular
+      .module('angularcrud')
       .controller('SettingsController', ['$location', SettingsController]); // 'WS_URL',
 })();

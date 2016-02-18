@@ -1,4 +1,6 @@
-
+/*
+ * Angular filter to format telephone numbers in US format
+ */
 (function () {
 
    'use strict';
@@ -60,6 +62,7 @@
    }
 
    // Register our filter
-   angular.module("angularcrud")
+   angular
+      .module("angularcrud")
       .filter("phoneNumber", [FormatPhoneNumber]);
 })();

@@ -11,13 +11,22 @@
    'use strict';
 
    var PersonEditComponent = {
+      // Note - Our data binding is one way. We'll make a local copy for our
+      // form to work with. On save we'll send back the updated local copy
+      // of the data.
       bindings: {
-        person: '<' 
+        person: '<'
       },
+      // Because the template is rather large we have it as an external file
       templateUrl: './components/PersonEdit/personEdit.html',
       controller: function ($scope, $element, $attrs) {
          var self = this;
 
+         /*
+          * Because person is being loaded as we're transitioning to
+          * this page? Person is being loaded asynchronously and may
+          * not be loaded yet?
+          */
          $scope.$watch('$ctrl.person', function() {
             if (self.person) {
                self.localPerson = self.person;
@@ -39,6 +48,7 @@
       }
    };
 
+   // Register this component with our application module
    angular
      .module('angularcrud')
      .component('personEditComponent', PersonEditComponent);

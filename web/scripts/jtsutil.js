@@ -4,6 +4,7 @@
  * Time: 12:19 PM
  */
 'use strict';
+
 var JTS = JTS || {};            // Establish JTS namespace if it doesn't already exist
 
 

@@ -1,16 +1,15 @@
 /*
  * Controller for the new person page.
  */
-
 (function() {
 
    'use strict';
 
    function NewController($scope, $location, httpFactory, toaster) {
 
-      // Save a pointer to our current context
-      var self = this;
-      self.person = {};
+
+      var self = this;     // Save a pointer to our current context
+      self.person = {};    // Initialize the person object as an empty object
 
       // Add button was clicked - Save person and view their new detail
       $scope.$on('personAdded',
@@ -29,10 +28,10 @@
          }
       );
 
-
    };
 
    // Register our controller
-   angular.module('angularcrud')
+   angular
+      .module('angularcrud')
       .controller('NewController', ['$scope', '$location', 'httpFactory', 'toaster', NewController]);
 })();
