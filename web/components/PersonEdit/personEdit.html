@@ -13,7 +13,7 @@
                <label for="firstName" class="control-label col-lg-2">First Name:</label>
 
                <div class="col-lg-4">
-                  <input type="text" id="firstName" name="firstName" ng-model="$ctrl.person.firstName"
+                  <input type="text" id="firstName" name="firstName" ng-model="$ctrl.localPerson.firstName"
                          class="form-control" placeholder="First name" minlength="2" ng-maxlength="20" focus required>
 
                   <!-- Error messages using angular-messages. Field is required and length between 2 & 20 chars -->
@@ -30,7 +30,7 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.lastName.$invalid }">
                <label for="lastName" class="control-label col-lg-2">Last Name:</label>
                <div class="col-lg-4">
-                  <input type="text" id="lastName" name="lastName" ng-model="$ctrl.person.lastName"
+                  <input type="text" id="lastName" name="lastName" ng-model="$ctrl.localPerson.lastName"
                          class="form-control" placeholder="Last name" minlength="2" ng-maxlength="20" required>
 
                   <div ng-messages="personForm.lastName.$error" ng-if="personForm.lastName.$dirty" class="text-danger">
@@ -51,7 +51,7 @@
                <label for="street" class="control-label col-lg-3">Street:</label>
                <div class="col-lg-9">
                   <input type="text" id="street" name="street" class="form-control" placeholder="Street"
-                         ng-model="$ctrl.person.address.street">
+                         ng-model="$ctrl.localPerson.address.street">
                </div>
             </div>
          </div>
@@ -64,7 +64,7 @@
             <div class="form-group">
                <label for="city" class="control-label col-lg-1">City:</label>
                <div class="col-lg-3">
-                  <input type="text" id="city" name="city" ng-model="$ctrl.person.address.city"
+                  <input type="text" id="city" name="city" ng-model="$ctrl.localPerson.address.city"
                          class="form-control" placeholder="City">
                </div>
             </div>
@@ -73,7 +73,7 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.state.$invalid }">
                <label for="state" class="control-label col-lg-1">State:</label>
                <div class="col-lg-3">
-                  <input type="text" id="state" name="state" ng-model="$ctrl.person.address.state"
+                  <input type="text" id="state" name="state" ng-model="$ctrl.localPerson.address.state"
                          class="form-control" placeholder="State" minlength="2" ng-maxlength="2">
                </div>
 
@@ -87,7 +87,7 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.zip.$invalid }">
                <label for="zip" class="control-label col-lg-1">Zip:</label>
                <div class="col-lg-3">
-                  <input type="text" id="zip" name="zip" ng-model="$ctrl.person.address.zip"
+                  <input type="text" id="zip" name="zip" ng-model="$ctrl.localPerson.address.zip"
                          class="form-control" placeholder="Zip" minlength="5" ng-maxlength="5">
 
                   <div ng-messages="personForm.zip.$error" ng-if="personForm.zip.$dirty" class="text-danger">
@@ -108,7 +108,7 @@
             <div class="form-group">
                <label for="homePhone" class="control-label col-lg-2">Home Phone:</label>
                <div class="col-lg-4">
-                  <input type="text" id="homePhone" name="homePhone" ng-model="$ctrl.person.homePhone"
+                  <input type="text" id="homePhone" name="homePhone" ng-model="$ctrl.localPerson.homePhone"
                          class="form-control" placeholder="Home Phone">
                </div>
             </div>
@@ -117,7 +117,7 @@
             <div class="form-group">
                <label for="mobilePhone" class="control-label col-lg-3">Mobile Phone:</label>
                <div class="col-lg-4">
-                  <input type="text" id="mobile" name="mobile" ng-model="$ctrl.person.mobile"
+                  <input type="text" id="mobile" name="mobile" ng-model="$ctrl.localPerson.mobile"
                          class="form-control" placeholder="Mobile Phone">
                </div>
             </div>
@@ -132,7 +132,7 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.email.$invalid }">
                <label for="email" class="control-label col-lg-2">eMail:</label>
                <div class="col-lg-4">
-                  <input type="email" id="email" name="email" ng-model="$ctrl.person.email"
+                  <input type="email" id="email" name="email" ng-model="$ctrl.localPerson.email"
                          class="form-control" placeholder="eMail">
                   <div ng-messages="personForm.email.$error" ng-if="personForm.email.$dirty" class="text-danger">
                      <div ng-message="email">Your email address is invalid</div>
@@ -144,7 +144,7 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.website.$invalid }">
                <label for="website" class="control-label col-lg-2">Website:</label>
                <div class="col-lg-4">
-                  <input type="url" id="website" name="website" ng-model="$ctrl.person.website"
+                  <input type="url" id="website" name="website" ng-model="$ctrl.localPerson.website"
                          class="form-control" placeholder="Website">
                   <div ng-messages="personForm.website.$error" ng-if="personForm.website.$dirty" class="text-danger">
                      <div ng-message="url">Your website is invalid</div>
@@ -163,31 +163,31 @@
       <div class="row">
          <div class="col-xs-12">
 
-            <!-- Show this button when $ctrl.person.id is not blank. This means we're updating. -->
+            <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
             <button type="button" id="btnSave"
                     class="btn btn-primary"
                     ng-disabled="personForm.$invalid"
                     ng-click="$ctrl.onSave()"
-                    ng-if="$ctrl.person.id"
+                    ng-if="$ctrl.localPerson.id"
             >
                Save
             </button>
 
-            <!-- Show this button when $ctrl.person.id is blank. This means we're adding. -->
+            <!-- Show this button when $ctrl.localPerson.id is blank. This means we're adding. -->
             <button type="button" id="btnAdd"
                     class="btn btn-primary"
                     ng-disabled="personForm.$invalid"
                     ng-click="$ctrl.onAdd()"
-                    ng-if="!$ctrl.person.id"
+                    ng-if="!$ctrl.localPerson.id"
             >
                Add
             </button>
 
-            <!-- Show this button when $ctrl.person.id is not blank. This means we're updating. -->
+            <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
             <button type="button" id="btnDelete"
                     class="btn btn-danger"
                     ng-click="$ctrl.onDelete()"
-                    ng-if="$ctrl.person.id"
+                    ng-if="$ctrl.localPerson.id"
             >
                Delete
             </button>

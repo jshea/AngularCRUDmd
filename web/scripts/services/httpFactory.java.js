@@ -13,7 +13,7 @@
     * Our controllers interact with dataFactory which is a facade for server or local storage. If we have
     * a network connection, we use our rest service. Otherwise we use our local storage service.
     */
-   function HttpFactory($http, $rootScope) {
+   function HttpFactory($http, $rootScope, $q) {
 
       // This is the path to the Elasticsearch REST url
       var WS_URL = "ws/person/";
@@ -121,6 +121,7 @@
 
          updateAll: function (successCallback, failureCallback) {
             var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
+            var self = this;
 
             $rootScope.myPromise =
 
@@ -131,29 +132,13 @@
                   return $http.get(sampleDataUrl);
                })
                .then(function (result) {
-                  /*
-                   * TODO - Add middle tier API for PersonDAO.add(List<Person> personList) and
-                   *        pass the result.data array. This will do the looping in PersonDAO.
-                   */
-                  for (var i = 0; i < result.data.length; i++) {      // Iterate through local data saving to server
-                     /*
-                      * TODO - Push each promise to an array and then return $q.all([promiseArray])?
-                      */
-                     $http.post(WS_URL, result.data[i])
-                        .then(
-                           // Success
-                           function(response) {
-                              console.log("bulk load success", response);
-                           },
-                           // Failure
-                           function (response) {
-                              console.log("Bulk load Error: ", response);
-                           }
-                        );
-                  }
+                  self.promises = [];
 
-                  // But the post requests aren't necessarily finished!
-                  return "I'm all done?";
+                  for (var i = 0; i < result.data.length; i++) {      // Iterate through local data saving to server
+                     // Push each promise to an array and then return $q.all([promiseArray])
+                     self.promises.push($http.post(WS_URL, result.data[i]));
+                  }
+                  return $q.all(self.promises);
                })
                .finally(successCallback, failureCallback);
          }
@@ -165,5 +150,5 @@
 
    // Register our factory
    angular.module("angularcrud")
-          .factory("httpFactory", ["$http", "$rootScope", HttpFactory]);
+          .factory("httpFactory", ["$http", "$rootScope", '$q', HttpFactory]);
 })();

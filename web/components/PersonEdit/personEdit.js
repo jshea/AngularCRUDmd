@@ -12,32 +12,28 @@
 
    var PersonEditComponent = {
       bindings: {
-        person: '='  // Bidirectional binding
+        person: '<' 
       },
       templateUrl: './components/PersonEdit/personEdit.html',
       controller: function ($scope, $element, $attrs) {
          var self = this;
 
-         /*
-          * Trying to get a local copy of person for use in our form. At
-          * this point both $scope.$ctrl.person and this.$ctrl.person are
-          * undefined. Thus this is a placeholder and not yet used. Our
-          * HTML template uses the bound person object.
-          */
-         self.$onInit = function() {
-           self.localPerson = $scope.$ctrl.person;
-         };
+         $scope.$watch('$ctrl.person', function() {
+            if (self.person) {
+               self.localPerson = self.person;
+            }
+         });
 
          self.onAdd = function () {
-            $scope.$emit('personAdded', self.person);
+            $scope.$emit('personAdded', self.localPerson);
          };
 
          self.onSave = function () {
-            $scope.$emit('personSaved', self.person);
+            $scope.$emit('personSaved', self.localPerson);
          };
 
          self.onDelete = function () {
-            $scope.$emit('personDeleted', self.person);
+            $scope.$emit('personDeleted', self.localPerson);
          };
 
       }

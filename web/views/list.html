@@ -1,26 +1,3 @@
-<div class="panel well well-sm">
-
-      <person-list-component service="vm.personListService"></person-list-component>
-<!--
-   <table id="listTable"
-          ng-table="vm.tableParams"
-          class="table table-condensed table-bordered table-hover table-striped"
-          show-filter="false"
-          >
-
-       ng-table puts the data in $data
-      <tr ng-repeat="person in $data">
-
-         <td id="cellLastName" title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
-            <a id="cellLastNameLink" href="#/view/{{person.id}}">{{person.lastName}}</a>
-         </td>
-
-         <td id="cellFirstName" title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
-            <a id="cellFirstNameLink" href="#/view/{{person.id}}">{{person.firstName}}</a>
-         </td>
-
-      </tr>
-
-   </table>
--->
+<div class="panel">
+   <person-list-component person-list-data="vm.personListData"></person-list-component>
 </div>

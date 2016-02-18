@@ -25,7 +25,8 @@
     "angular-bootstrap": "latest",
     "jquery": "latest",
     "momentjs": "latest",
-    "ng-table": "latest"
+    "ng-table": "latest",
+    "angular-material": "^1.0.5"
   },
   "devDependencies": {}
 }

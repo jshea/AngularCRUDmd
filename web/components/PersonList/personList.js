@@ -11,27 +11,40 @@
    // Note: No controller so we have to use $ctrl
    var PersonListComponent = {
      bindings: {
-       service: '<'
+       personListData: '<'
      },
      template: [
-      '<div>',
          '<table id="listTable"',
-             'ng-table="$ctrl.service.table"',
+             'ng-table="$ctrl.table"',
              'class="table table-condensed table-bordered table-hover table-striped"',
-             'show-filter="false">',
+             'show-filter="true">',
 
             '<tr ng-repeat="person in $data">',
-               '<td id="cellName" title="\'Name\'">',
+               '<td id="cellName" title="\'Name\'" filter="{ lastName: \'text\'}" sortable="\'lastName\'">',
                   '<a id="cellNameLink" href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</a>',
                '</td>',
-               '<td id="cellPhone" title="\'Phone\'">',
+               '<td id="cellPhone" title="\'Phone\'" filter="{ mobile: \'text\'}" sortable="\'mobile\'">',
                   '{{person.mobile | phoneNumber}}',
                '</td>',
             '</tr>',
 
-         '</table>',
-      '</div>'
-     ].join('')
+         '</table>'
+      ].join(''),
+      controller: function ($scope, NgTableParams) {
+         var self = this;
+
+         $scope.$watch('$ctrl.personListData', function() {
+            if (self.personListData) {
+               if (self.personListData.length < 25) {
+                  self.table = new NgTableParams({count: self.personListData.length}, {dataset: self.personListData, counts: []});
+               }
+               else {
+                  self.table = new NgTableParams({}, {dataset: self.personListData});
+               }
+            }
+         });
+
+      }
   };
 
    angular
