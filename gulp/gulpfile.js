@@ -50,7 +50,6 @@ var jsLibFiles = [
    "../web/lib/angular-animate.js",
    "../web/lib/angular-busy.js",
    "../web/lib/angular-messages.js",
-   "../web/lib/angular-material.js",
    "../web/lib/angular-route.js",
    "../web/lib/moment.js",
    "../web/lib/ng-table.js",
@@ -66,7 +65,6 @@ var cssFiles = [
     "../web/css/bootstrap.paper.css",  // Paper/Material Design themed Bootstrap
     "../web/css/app.css",              // However we may do some overrides
     "../web/css/angular-busy.css",
-    "../web/css/angular-material.css",
     "../web/css/ng-table.css",
     "../web/css/toaster.css"
 ];
