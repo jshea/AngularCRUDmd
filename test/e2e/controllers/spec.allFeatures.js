@@ -19,8 +19,7 @@ describe("AngularCRUD", function() {
     *  same initial data.
     */
    beforeEach(function() {
-      // Our URL is prefixed with baseUrl from config.js
-      browser.get("angularcrud/#/load");
+      browser.get("http://localhost:7001/angularcrud/#/load");
    });
 
    /*
@@ -53,16 +52,16 @@ describe("AngularCRUD", function() {
       expect(rows.count()).toBe(5);
 
       // Check that the names are equal to our test data
-      expect(rows.get(0).element(by.id("cellLastName")) .getText()).toBe("Butt");
-      expect(rows.get(0).element(by.id("cellFirstName")).getText()).toBe("James");
-      expect(rows.get(1).element(by.id("cellLastName")) .getText()).toBe("Darakjy");
-      expect(rows.get(1).element(by.id("cellFirstName")).getText()).toBe("Josephine");
-      expect(rows.get(2).element(by.id("cellLastName")) .getText()).toBe("Foller");
-      expect(rows.get(2).element(by.id("cellFirstName")).getText()).toBe("Donette");
-      expect(rows.get(3).element(by.id("cellLastName")) .getText()).toBe("Paprocki");
-      expect(rows.get(3).element(by.id("cellFirstName")).getText()).toBe("Lenna");
-      expect(rows.get(4).element(by.id("cellLastName")) .getText()).toBe("Venere");
-      expect(rows.get(4).element(by.id("cellFirstName")).getText()).toBe("Art");
+      expect(rows.get(0).element(by.id("cellName")) .getText()).toBe("Butt, James");
+      expect(rows.get(0).element(by.id("cellPhone")).getText()).toBe("(504) 845-1427");
+      expect(rows.get(1).element(by.id("cellName")) .getText()).toBe("Darakjy, Josephine");
+      expect(rows.get(1).element(by.id("cellPhone")).getText()).toBe("(810) 374-9840");
+      expect(rows.get(2).element(by.id("cellName")) .getText()).toBe("Foller, Donette");
+      expect(rows.get(2).element(by.id("cellPhone")).getText()).toBe("(513) 549-4561");
+      expect(rows.get(3).element(by.id("cellName")) .getText()).toBe("Paprocki, Lenna");
+      expect(rows.get(3).element(by.id("cellPhone")).getText()).toBe("(907) 921-2010");
+      expect(rows.get(4).element(by.id("cellName")) .getText()).toBe("Venere, Art");
+      expect(rows.get(4).element(by.id("cellPhone")).getText()).toBe("(856) 264-4130");
    });
 
 
@@ -75,7 +74,7 @@ describe("AngularCRUD", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
       // View screen elements
       var firstName = element(by.id("firstName"));
@@ -115,12 +114,12 @@ describe("AngularCRUD", function() {
       expect(city.getText()).toBe("New Orleans");
       expect(state.getText()).toBe("LA");
       expect(zip.getText()).toBe("70116");
-      expect(homePhone.getText()).toBe("5046218927");
-      expect(mobile.getText()).toBe("5048451427");
+      expect(homePhone.getText()).toBe("(504) 621-8927");
+      expect(mobile.getText()).toBe("(504) 845-1427");
       expect(email.getText()).toBe("jbutt@gmail.com");
-      expect(website.getText()).toBe("http://bentonjohnbjrcom");
-      expect(btnEdit.getText()).toBe("Edit");
-      expect(btnDelete.getText()).toBe("Delete");
+      expect(website.getText()).toBe("http://bentonjohnbjr.com");
+      expect(btnEdit.getText()).toBe("EDIT");
+      expect(btnDelete.getText()).toBe("DELETE");
    });
 
 
@@ -133,7 +132,7 @@ describe("AngularCRUD", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
       // Click the edit button to load the edit screen
       element(by.id("btnEdit")).click();
@@ -178,9 +177,9 @@ describe("AngularCRUD", function() {
       expect(homePhone.getAttribute('value')).toBe("5046218927");
       expect(mobile.getAttribute('value')).toBe("5048451427");
       expect(email.getAttribute('value')).toBe("jbutt@gmail.com");
-      expect(website.getAttribute('value')).toBe("http://bentonjohnbjrcom");
-      expect(btnSave.getText()).toBe("Save");
-      expect(btnDelete.getText()).toBe("Delete");
+      expect(website.getAttribute('value')).toBe("http://bentonjohnbjr.com");
+      expect(btnSave.getText()).toBe("SAVE");
+      expect(btnDelete.getText()).toBe("DELETE");
    });
 
 
@@ -192,7 +191,7 @@ describe("AngularCRUD", function() {
       var rows = element.all(by.repeater("person in $data"));
 
       // Load view screen for our first contact
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
       // Click the edit button to load the edit screen
       element(by.id("btnEdit")).click();
@@ -207,7 +206,7 @@ describe("AngularCRUD", function() {
       element(by.id("homePhone")).clear().sendKeys("8183547751");
       element(by.id("mobile")).clear().sendKeys("8185551212");
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
+      element(by.id("website")).clear().sendKeys("http://ebis.com"); // DB saving with no .'s.
 
       // Save
       element(by.id("btnSave")).click();
@@ -236,12 +235,12 @@ describe("AngularCRUD", function() {
       expect(city.getText()).toBe("Pasadena");
       expect(state.getText()).toBe("CA");
       expect(zip.getText()).toBe("91109");
-      expect(homePhone.getText()).toBe("8183547751");
-      expect(mobile.getText()).toBe("8185551212");
+      expect(homePhone.getText()).toBe("(818) 354-7751");
+      expect(mobile.getText()).toBe("(818) 555-1212");
       expect(email.getText()).toBe("jshea@jpl.nasa.gov");
-      expect(website.getText()).toBe("http://wwwebiscom");
-      expect(btnEdit.getText()).toBe("Edit");
-      expect(btnDelete.getText()).toBe("Delete");
+      expect(website.getText()).toBe("http://ebis.com");
+      expect(btnEdit.getText()).toBe("EDIT");
+      expect(btnDelete.getText()).toBe("DELETE");
    });
 
 
@@ -255,10 +254,10 @@ describe("AngularCRUD", function() {
 
       // Grab the first contacts last name, and load view screen for them.
       var lastName;
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).getText().then(function(text) {
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).getText().then(function(text) {
          lastName = text;
       });
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
       // Make sure delete button is present.
       var btnDelete = element(by.id("btnDelete"));
@@ -271,7 +270,7 @@ describe("AngularCRUD", function() {
       expect(browser.getCurrentUrl()).toContain('#/list');
 
       // Verify the contact isn't in the list.
-      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellName"));
       expect(rows.getText()).not.toContain(lastName);
    });
 
@@ -285,10 +284,10 @@ describe("AngularCRUD", function() {
 
       // Grab the first contacts last name, and load view screen for them.
       var lastName;
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).getText().then(function(text) {
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).getText().then(function(text) {
          lastName = text;
       });
-      rows.first().element(by.id("cellLastName")).element(by.id("cellLastNameLink")).click();
+      rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
       // Click the Edit button to load the edit screen
       element(by.id("btnEdit")).click();
@@ -300,7 +299,7 @@ describe("AngularCRUD", function() {
       expect(browser.getCurrentUrl()).toContain('#/list');
 
       // Verify the contact isn't in the list
-      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellName"));
       expect(rows.getText()).not.toContain(lastName);
    });
 
@@ -311,7 +310,7 @@ describe("AngularCRUD", function() {
    it ("should add a new contact", function() {
 
       // Click the New Contact link
-      browser.get("angularcrud/#/new");
+      element(by.linkText('New Contact')).click();
 
       // Fill in the form
       element(by.id("firstName")).clear().sendKeys("Jim");
@@ -323,14 +322,15 @@ describe("AngularCRUD", function() {
       element(by.id("homePhone")).clear().sendKeys("8183547751");
       element(by.id("mobile")).clear().sendKeys("8185551212");
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
+      element(by.id("website")).clear().sendKeys("http://ebiscom"); // DB saving with no .'s.
 
       // Click add
       element(by.id("btnAdd")).click();
 
       // Verify the contact is in the list
-      browser.get("angularcrud/#/list");
-      rows = element.all(by.repeater("person in $data")).all(by.id("cellLastName"));
-      expect(rows.getText()).toContain("Shea");
+      browser.get("http://localhost:7001/angularcrud/#/list");
+
+      rows = element.all(by.repeater("person in $data")).all(by.id("cellName"));
+      expect(rows.getText()).toContain("Shea, Jim");
    });
 });

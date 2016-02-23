@@ -4,9 +4,9 @@
  * with the name gulpfile.full.js
  */
 
+// Load all the gulp and testing libraries we'll be using in this gulp file
 var gulp = require("gulp");
 var concat = require("gulp-concat");
-var cssmin = require("gulp-cssmin");
 var gulpFilter = require("gulp-filter");
 var concatCss = require("gulp-concat-css");
 var basename = require("gulp-css-url-basename");
@@ -64,22 +64,23 @@ var cssFiles = [
 ];
 
 
-/* Concatenate all of our application .js files */
+/*   Concatenate   */
+
+// application .js files
 gulp.task("debug-app-js-java", function() {
-   jsAppFiles[jsAppFiles.length] = javaHttpFactory;     // Add our java httpFactory to our .js file list.
    return gulp.src(jsAppFiles)                          // Add our custom .js files
               .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
-/* Concatenate all of our library .js files */
+// third party library .js files
 gulp.task("debug-libs-js", function() {
    return gulp.src(jsLibFiles)                          // Add our .js files
               .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
               .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
 });
 
-/* Concatenate all of our CSS files */
+// CSS files - ours and 3rd party
 gulp.task("debug-css", function () {
    return gulp.src(cssFiles)                            // Get our css files (by directory and/or file name)
               .pipe(gulpFilter("**/*.css"))             // Make sure we have just .css files (for directory globbing)
@@ -90,6 +91,16 @@ gulp.task("debug-css", function () {
 
 
 /* Run Tests */
+
+// Karma/Jasmine Unit tests
+gulp.task("unit-test", function() {
+   return gulp.src("./foobar") // ISSUE: https://github.com/lazd/gulp-karma/issues/9
+              .pipe(karma({
+                    configFile: "../test/unit/karma.conf.js",
+                    action: "run"
+              }))
+              .on("error", function(e) { throw e; });
+});
 
 // Protractor E2E tests
 gulp.task("e2e-test", function() {
@@ -102,16 +113,8 @@ gulp.task("e2e-test", function() {
               .on("error", function(e) { throw e; });
 });
 
-// Karma/Jasmine Unit tests
-gulp.task("unit-test", function() {
-   return gulp.src("./foobar") // ISSUE: https://github.com/lazd/gulp-karma/issues/9
-              .pipe(karma({
-                    configFile: "../test/unit/karma.conf.js",
-                    action: "run"
-              }))
-              .on("error", function(e) { throw e; });
-});
 
+/*   These are the "summary" tasks that are typically run at the command line   */
 
 // Debug build without tests (call "gulp" to run).
 gulp.task("default", ["debug-app-js-java", "debug-libs-js", "debug-css"]);
