@@ -117,6 +117,20 @@
                );
          },
 
+         /*
+          * Note - This uses $q.all to wait until all promises (run in parallel) complete. This could
+          *        overwhelm your REST service. Another strategy is to use $q.when to wait until all
+          *        promises run sequentially, complete.
+          *
+          *        https://daveceddia.com/waiting-for-promises-in-a-loop/
+          *
+          *        var chain = $q.when();
+          *        for(var i = 0; i < result.data.length; i++) {
+          *           chain = chain.then(function() {
+          *              return $http.post(WS_URL, result.data[i]);
+          *           });
+          *        }
+          */
          updateAll: function (successCallback, failureCallback) {
             var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
             var self = this;
