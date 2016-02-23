@@ -1,9 +1,14 @@
-/* global browser, expect, by, element, protractor */
+/*
+ * Test the UI for the AngularCRUD application
+ */
 
-describe("Review Controller", function() {
+/* global browser, by, element, expect */
+
+describe("AngularCRUD", function() {
 
    /*
-    * These run before and after this test suite
+    * These optional functions run before and after this test suite. Use then to setup
+    * (initialize data) and teardown (clean up after ourselves) for this full test suite.
     */
    // beforeAll(function() {});
    // afterAll(function() {});
@@ -14,7 +19,7 @@ describe("Review Controller", function() {
     *  same initial data.
     */
    beforeEach(function() {
-      // Our URL is prefixed with baseUrl from config.js.
+      // Our URL is prefixed with baseUrl from config.js
       browser.get("angularcrud/#/load");
    });
 
@@ -37,6 +42,9 @@ describe("Review Controller", function() {
    });
 
 
+   /*
+    * Confirm the initial list screen is loading properly.
+    */
    it ("should have a list view with the correct 5 elements", function() {
       // Count the number of rows in the table
       var rows = element.all(by.repeater("person in $data"));
@@ -44,6 +52,7 @@ describe("Review Controller", function() {
       // The table should have 5 data rows
       expect(rows.count()).toBe(5);
 
+      // Check that the names are equal to our test data
       expect(rows.get(0).element(by.id("cellLastName")) .getText()).toBe("Butt");
       expect(rows.get(0).element(by.id("cellFirstName")).getText()).toBe("James");
       expect(rows.get(1).element(by.id("cellLastName")) .getText()).toBe("Darakjy");
@@ -96,8 +105,10 @@ describe("Review Controller", function() {
       expect(btnEdit.isPresent()).toBe(true);
       expect(btnDelete.isPresent()).toBe(true);
 
-      // Verify they all have the correct value - note
-      // the values are dependent on the test data.
+      /*
+       * Verify they all have the correct value - note
+       * the values are dependent on the test data.
+       */
       expect(firstName.getText()).toBe("James");
       expect(lastName.getText()).toBe("Butt");
       expect(street.getText()).toBe("6649 N Blue Gum St");
@@ -110,7 +121,6 @@ describe("Review Controller", function() {
       expect(website.getText()).toBe("http://bentonjohnbjrcom");
       expect(btnEdit.getText()).toBe("Edit");
       expect(btnDelete.getText()).toBe("Delete");
-
    });
 
 
@@ -128,7 +138,7 @@ describe("Review Controller", function() {
       // Click the edit button to load the edit screen
       element(by.id("btnEdit")).click();
 
-      // Edit screen elements
+      // Get a handle to the edit screen elements
       var firstName = element(by.id("firstName"));
       var lastName = element(by.id("lastName"));
       var street = element(by.id("street"));
@@ -175,7 +185,7 @@ describe("Review Controller", function() {
 
 
    /*
-    * Change the values for the person
+    * Change the values for a person
     */
    it ("should edit a contact", function() {
       // Rows will contain the dynamically created table rows
@@ -199,7 +209,7 @@ describe("Review Controller", function() {
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
       element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
 
-      // Save.
+      // Save
       element(by.id("btnSave")).click();
 
       // Validate we're on the view screen
@@ -234,6 +244,10 @@ describe("Review Controller", function() {
       expect(btnDelete.getText()).toBe("Delete");
    });
 
+
+   /*
+    * Delete a person - From the view screen
+    */
    it ("should delete a contact from the view screen", function() {
 
       // Rows will contain the dynamically created table rows
@@ -261,6 +275,10 @@ describe("Review Controller", function() {
       expect(rows.getText()).not.toContain(lastName);
    });
 
+
+   /*
+    * Delete a person - From the edit screen
+    */
    it ("should delete a contact from the edit screen", function() {
 
       var rows = element.all(by.repeater("person in $data"));
@@ -275,7 +293,7 @@ describe("Review Controller", function() {
       // Click the Edit button to load the edit screen
       element(by.id("btnEdit")).click();
 
-      // Click Delete.
+      // Click Delete
       element(by.id("btnDelete")).click();
 
       // Verify we're back to the list
@@ -286,12 +304,16 @@ describe("Review Controller", function() {
       expect(rows.getText()).not.toContain(lastName);
    });
 
+
+   /*
+    * Add a person
+    */
    it ("should add a new contact", function() {
 
       // Click the New Contact link
       browser.get("angularcrud/#/new");
 
-      // Fill in the form and click add
+      // Fill in the form
       element(by.id("firstName")).clear().sendKeys("Jim");
       element(by.id("lastName")).clear().sendKeys("Shea");
       element(by.id("street")).clear().sendKeys("4800 Oak Grove Dr");
@@ -303,7 +325,7 @@ describe("Review Controller", function() {
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
       element(by.id("website")).clear().sendKeys("http://wwwebiscom"); // DB saving with no .'s.
 
-      // Click Add.
+      // Click add
       element(by.id("btnAdd")).click();
 
       // Verify the contact is in the list
