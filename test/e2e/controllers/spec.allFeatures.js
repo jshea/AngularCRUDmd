@@ -1,5 +1,6 @@
 /*
- * Test the UI for the AngularCRUD application
+ * Test the UI for the AngularCRUD application. These are the "Happy Paths", everything
+ * working correctly. No data validation errors.
  */
 
 /* global browser, by, element, expect */
