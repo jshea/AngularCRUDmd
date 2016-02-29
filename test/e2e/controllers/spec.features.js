@@ -8,11 +8,12 @@
 describe("AngularCRUD", function() {
 
    /*
-    * These optional functions run before and after this test suite. Use then to setup
-    * (initialize data) and teardown (clean up after ourselves) for this full test suite.
+    * These optional functions run before and after this test suite. Use
+    * them to setup (initialize data) and teardown (clean up after ourselves)
+    * for this full test suite.
     */
-   // beforeAll(function() {});
-   // afterAll(function() {});
+   beforeAll(function() {});
+   afterAll(function() {});
 
    /*
     *  Setup - this runs before each test (each it()). This calls
@@ -33,7 +34,7 @@ describe("AngularCRUD", function() {
     * Check that we are starting at the list screen and we have
     * the expected initial test data.
     */
-   it ("should load the list view", function() {
+   it ("Load the list view", function() {
       // Elements
       var listTable = element(by.id("listTable"));
 
@@ -45,7 +46,7 @@ describe("AngularCRUD", function() {
    /*
     * Confirm the initial list screen is loading properly.
     */
-   it ("should have a list view with the correct 5 elements", function() {
+   it ("List view has our 5 seeded test people", function() {
       // Count the number of rows in the table
       var rows = element.all(by.repeater("person in $data"));
 
@@ -70,7 +71,7 @@ describe("AngularCRUD", function() {
     * From the initial list screen test that we can click on a person
     * and load their data in the view screen.
     */
-   it ("should view a contact", function() {
+   it ("View a contact", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
 
@@ -128,7 +129,7 @@ describe("AngularCRUD", function() {
     * Test that the view screen edit button takes us to the edit
     * screen, the edit screen has the correct initial values.
     */
-   it ("should show a edit screen", function() {
+   it ("Edit screen displays properly", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
 
@@ -187,7 +188,7 @@ describe("AngularCRUD", function() {
    /*
     * Change the values for a person
     */
-   it ("should edit a contact", function() {
+   it ("Edit a contact", function() {
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
 
@@ -207,7 +208,7 @@ describe("AngularCRUD", function() {
       element(by.id("homePhone")).clear().sendKeys("8183547751");
       element(by.id("mobile")).clear().sendKeys("8185551212");
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://ebis.com"); // DB saving with no .'s.
+      element(by.id("website")).clear().sendKeys("http://ebis.com");
 
       // Save
       element(by.id("btnSave")).click();
@@ -248,12 +249,12 @@ describe("AngularCRUD", function() {
    /*
     * Delete a person - From the view screen
     */
-   it ("should delete a contact from the view screen", function() {
+   it ("Delete a contact from the view screen", function() {
 
       // Rows will contain the dynamically created table rows
       var rows = element.all(by.repeater("person in $data"));
 
-      // Grab the first contacts last name, and load view screen for them.
+      // Grab the last name of the first contact and load view screen for them.
       var lastName;
       rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).getText().then(function(text) {
          lastName = text;
@@ -279,7 +280,7 @@ describe("AngularCRUD", function() {
    /*
     * Delete a person - From the edit screen
     */
-   it ("should delete a contact from the edit screen", function() {
+   it ("Delete a contact from the edit screen", function() {
 
       var rows = element.all(by.repeater("person in $data"));
 
@@ -308,14 +309,23 @@ describe("AngularCRUD", function() {
    /*
     * Add a person
     */
-   it ("should add a new contact", function() {
+   it ("Add a new contact", function() {
 
       // Click the New Contact link
       element(by.linkText('New Contact')).click();
 
-      // Fill in the form
+      // Add button is present and disabled (blank contact is missing required fields)
+      expect(element(by.id("btnAdd")).isPresent()).toBe(true);
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
+
+      // Fill in the form's required fields
       element(by.id("firstName")).clear().sendKeys("Jim");
       element(by.id("lastName")).clear().sendKeys("Shea");
+
+      // Add button is enabled - required fields are populated
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
+
+      // Fill in the rest of the fields
       element(by.id("street")).clear().sendKeys("4800 Oak Grove Dr");
       element(by.id("city")).clear().sendKeys("Pasadena");
       element(by.id("state")).clear().sendKeys("CA");
@@ -323,7 +333,7 @@ describe("AngularCRUD", function() {
       element(by.id("homePhone")).clear().sendKeys("8183547751");
       element(by.id("mobile")).clear().sendKeys("8185551212");
       element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://ebiscom"); // DB saving with no .'s.
+      element(by.id("website")).clear().sendKeys("http://ebis.com");
 
       // Click add
       element(by.id("btnAdd")).click();
@@ -334,4 +344,5 @@ describe("AngularCRUD", function() {
       rows = element.all(by.repeater("person in $data")).all(by.id("cellName"));
       expect(rows.getText()).toContain("Shea, Jim");
    });
+
 });
