@@ -1,5 +1,7 @@
 /*
- * Test the UI for the AngularCRUD application
+ * Test the UI for the AngularCRUD application. This tests the Add/Edit
+ * screen elements that have special validations. They either are required,
+ * have a min and/or max length, use html5 special text inputs (email, url)...
  */
 
 /* global browser, by, element, expect, protractor */
@@ -44,13 +46,6 @@ describe("AngularCRUD", function() {
       // Verify the field is present
       expect(firstName.isPresent()).toBe(true);
 
-      // Check error class assignments. Note, Angular's class assignments
-      // are an enigma to me. This is the best I can do for now, the real
-      // test is the next section which is checking the displayed error message.
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-required');
-      expect(firstName.getAttribute('class')).not.toContain('ng-invalid-minlength');
-      expect(firstName.getAttribute('class')).not.toContain('ng-invalid-maxlength');
-
       // Check presence of error messages
       expect(element(by.id("firstNameErrorRequired")).isPresent()).toBe(false);
       expect(element(by.id("firstNameErrorMinLength")).isPresent()).toBe(false);
@@ -63,46 +58,31 @@ describe("AngularCRUD", function() {
 
       firstName.clear().sendKeys("1");
 //      browser.pause();
-//      browser.sleep();
-
-      // Check error class assignments
-      expect(firstName.getAttribute('class')).not.toContain('ng-invalid-required');
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(firstName.getAttribute('class')).not.toContain('ng-invalid-maxlength');
+//      browser.sleep(1000);
 
       // Check presence of error messages
       expect(element(by.id("firstNameErrorRequired")).isPresent()).toBe(false);
       expect(element(by.id("firstNameErrorMinLength")).isPresent()).toBe(true);
       expect(element(by.id("firstNameErrorMaxLength")).isPresent()).toBe(false);
 
-      // Add button is disabled as this is a blank contact
+      // Add button is disabled as this is an invalid contact
       expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
 
       /*   Fill in a value that is too long   */
 
       firstName.clear().sendKeys("1234567890123456789012345");
 
-      // Check error class assignments
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-required');
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-maxlength');
-
       // Check presence of error messages
       expect(element(by.id("firstNameErrorRequired")).isPresent()).toBe(false);
       expect(element(by.id("firstNameErrorMinLength")).isPresent()).toBe(false);
       expect(element(by.id("firstNameErrorMaxLength")).isPresent()).toBe(true);
 
-      // Add button is disabled as this is a blank contact
+      // Add button is disabled as this is an invalid contact
       expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
 
       /*   Blank value and dirty, field should have the "required" message   */
 
       firstName.clear().sendKeys("");
-
-      // Check error class assignments
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-required');
-      expect(firstName.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(firstName.getAttribute('class')).not.toContain('ng-invalid-maxlength');
 
       // Check presence of error messages
       expect(element(by.id("firstNameErrorRequired")).isPresent()).toBe(true);
@@ -118,133 +98,203 @@ describe("AngularCRUD", function() {
    /*
     * Test the lastName field validations
     */
-   xit ("lastName validations", function() {
+   it ("lastName validations", function() {
       // Get a handle to the edit screen elements
       var lastName = element(by.id("lastName"));
+
+      /*   Validate initial state   */
 
       // Verify the field is present
       expect(lastName.isPresent()).toBe(true);
 
-      // Check error class assignments
-      expect(lastName.getAttribute('class')).toContain('ng-invalid-required');
-      expect(lastName.getAttribute('class')).not.toContain('ng-invalid-minlength');
-      expect(lastName.getAttribute('class')).not.toContain('ng-invalid-maxlength');
+      // Check presence of error messages
+      expect(element(by.id("lastNameErrorRequired")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMinLength")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMaxLength")).isPresent()).toBe(false);
 
-      // Fill in a value that is too short
+      // Add button is disabled as this is a blank contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
+
+      /*   Fill in a value that is too short   */
+
       lastName.clear().sendKeys("1");
-      browser.sleep(1000);
-      expect(lastName.getAttribute('class')).not.toContain('ng-invalid-required');
-      expect(lastName.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(lastName.getAttribute('class')).not.toContain('ng-invalid-maxlength');
 
-      // Fill in a value that is too long
+      // Check presence of error messages
+      expect(element(by.id("lastNameErrorRequired")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMinLength")).isPresent()).toBe(true);
+      expect(element(by.id("lastNameErrorMaxLength")).isPresent()).toBe(false);
+
+      // Add button is disabled as this is an invalid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
+
+      /*   Fill in a value that is too long   */
+
       lastName.clear().sendKeys("1234567890123456789012345");
-      browser.sleep(1000);
-      expect(lastName.getAttribute('class')).not.toContain('ng-invalid-required');
-      expect(lastName.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(lastName.getAttribute('class')).toContain('ng-invalid-maxlength');
+
+      // Check presence of error messages
+      expect(element(by.id("lastNameErrorRequired")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMinLength")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMaxLength")).isPresent()).toBe(true);
+
+      // Add button is disabled as this is an invalid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
+
+      /*   Blank value and dirty, field should have the "required" message   */
+
+      lastName.clear().sendKeys("");
+
+      // Check presence of error messages
+      expect(element(by.id("lastNameErrorRequired")).isPresent()).toBe(true);
+      expect(element(by.id("lastNameErrorMinLength")).isPresent()).toBe(false);
+      expect(element(by.id("lastNameErrorMaxLength")).isPresent()).toBe(false);
+
+      // Add button is disabled as this is a blank contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
    });
+
 
 
    /*
     * Test the state field validations
     */
-   xit ("state validations", function() {
+   it ("state validations", function() {
+      // Initialize this contact with the required fields
+      element(by.id("firstName")).sendKeys("Test");
+      element(by.id("lastName")).sendKeys("User");
+
+      // Add button is enabled as this is a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
+
       // Get a handle to the edit screen elements
       var state = element(by.id("state"));
 
       // Verify the field is present
       expect(state.isPresent()).toBe(true);
 
-      // Check error class assignments
-      expect(state.getAttribute('class')).not.toContain('ng-invalid-minlength');
-      expect(state.getAttribute('class')).not.toContain('ng-invalid-maxlength');
-
       // Fill in a value that is too short
       state.clear().sendKeys("1");
+      browser.sleep(500);
+      expect(element(by.id("stateErrorMinLength")).isPresent()).toBe(true);
+      expect(element(by.id("stateErrorMaxLength")).isPresent()).toBe(false);
 
-      expect(state.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(state.getAttribute('class')).not.toContain('ng-invalid-maxlength');
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
 
       // Fill in a value that is too long
       state.clear().sendKeys("12345");
+      browser.sleep(500);     // Some tests seem to run faster than the error message processing
+      expect(element(by.id("stateErrorMinLength")).isPresent()).toBe(false);
+      expect(element(by.id("stateErrorMaxLength")).isPresent()).toBe(true);
 
-      expect(state.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(state.getAttribute('class')).toContain('ng-invalid-maxlength');
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
    });
 
 
    /*
     * Test the state field validations
     */
-   xit ("zip validations", function() {
+   it ("zip validations", function() {
+      // Initialize this contact with the required fields
+      element(by.id("firstName")).sendKeys("Test");
+      element(by.id("lastName")).sendKeys("User");
+
+      // Add button is enabled as this is a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
+
       // Get a handle to the edit screen elements
       var zip = element(by.id("zip"));
 
       // Verify the field is present
       expect(zip.isPresent()).toBe(true);
 
-      // Check error class assignments
-      expect(zip.getAttribute('class')).not.toContain('ng-invalid-minlength');
-      expect(zip.getAttribute('class')).not.toContain('ng-invalid-maxlength');
-
       // Fill in a value that is too short
       zip.clear().sendKeys("1");
-      browser.sleep(1000);
-      expect(zip.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(zip.getAttribute('class')).not.toContain('ng-invalid-maxlength');
+      browser.sleep(500);
+      expect(element(by.id("zipErrorMinLength")).isPresent()).toBe(true);
+      expect(element(by.id("zipErrorMaxLength")).isPresent()).toBe(false);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
 
       // Fill in a value that is too long
       zip.clear().sendKeys("123456");
-      browser.sleep(1000);
-      expect(zip.getAttribute('class')).toContain('ng-invalid-minlength');
-      expect(zip.getAttribute('class')).toContain('ng-invalid-maxlength');
+      browser.sleep(500);
+      expect(element(by.id("zipErrorMinLength")).isPresent()).toBe(false);
+      expect(element(by.id("zipErrorMaxLength")).isPresent()).toBe(true);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
    });
 
 
    /*
     * Test the email field validations
     */
-   xit ("email validations", function() {
+   it ("email validations", function() {
+      // Initialize this contact with the required fields
+      element(by.id("firstName")).sendKeys("Test");
+      element(by.id("lastName")).sendKeys("User");
+
+      // Add button is enabled as this is a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
+
       // Get a handle to the edit screen elements
       var email = element(by.id("email"));
 
       // Verify the field is present
       expect(email.isPresent()).toBe(true);
 
-      // Check error class assignments
-      expect(email.getAttribute('class')).not.toContain('ng-invalid');
-
       // Fill in a value that is valid
-      email.clear().sendKeys("fred@flintstone.com"+protractor.Key.ENTER);
-      expect(email.getAttribute('class')).not.toContain('ng-invalid-email');
+      email.clear().sendKeys("fred@flintstone.com");
+      browser.sleep(500);
+      expect(element(by.id("emailError")).isPresent()).toBe(false);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
 
       // Fill in a value that is invalid
       email.clear().sendKeys("fredflintstone.com");
-      expect(email.getAttribute('class')).toContain('ng-invalid-email');
+      browser.sleep(500);
+      expect(element(by.id("emailError")).isPresent()).toBe(true);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
    });
 
 
    /*
     * Test the email field validations
     */
-   xit ("website validations", function() {
+   it ("website validations", function() {
+      // Initialize this contact with the required fields
+      element(by.id("firstName")).sendKeys("Test");
+      element(by.id("lastName")).sendKeys("User");
+
+      // Add button is enabled as this is a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
+
       // Get a handle to the edit screen elements
       var website = element(by.id("website"));
 
       // Verify the field is present
       expect(website.isPresent()).toBe(true);
 
-      // Check error class assignments
-      expect(website.getAttribute('class')).not.toContain('ng-invalid');
-
       // Fill in a value that is valid
-      website.clear().sendKeys("http://flintstone.com"+protractor.Key.ENTER);
-      expect(website.getAttribute('class')).not.toContain('ng-invalid');
+      website.clear().sendKeys("http://flintstone.com");
+      browser.sleep(500);
+      expect(element(by.id("websiteError")).isPresent()).toBe(false);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(true);
 
       // Fill in a value that is invalid
       website.clear().sendKeys("flintstonecom");
-      expect(website.getAttribute('class')).toContain('ng-invalid');
+      browser.sleep(500);
+      expect(element(by.id("websiteError")).isPresent()).toBe(true);
+
+      // Add button is disabled as this is not a valid contact
+      expect(element(by.id("btnAdd")).isEnabled()).toBe(false);
    });
 
 });

@@ -195,27 +195,6 @@ describe("AngularCRUD", function() {
       // Load view screen for our first contact
       rows.first().element(by.id("cellName")).element(by.id("cellNameLink")).click();
 
-      // Click the edit button to load the edit screen
-      element(by.id("btnEdit")).click();
-
-      // Change the form values
-      element(by.id("firstName")).clear().sendKeys("Jim");
-      element(by.id("lastName")).clear().sendKeys("Shea");
-      element(by.id("street")).clear().sendKeys("4800 Oak Grove Dr");
-      element(by.id("city")).clear().sendKeys("Pasadena");
-      element(by.id("state")).clear().sendKeys("CA");
-      element(by.id("zip")).clear().sendKeys("91109");
-      element(by.id("homePhone")).clear().sendKeys("8183547751");
-      element(by.id("mobile")).clear().sendKeys("8185551212");
-      element(by.id("email")).clear().sendKeys("jshea@jpl.nasa.gov");
-      element(by.id("website")).clear().sendKeys("http://ebis.com");
-
-      // Save
-      element(by.id("btnSave")).click();
-
-      // Validate we're on the view screen
-      expect(browser.getCurrentUrl()).toContain('#/view/');
-
       // View screen elements
       var firstName = element(by.id("firstName"));
       var lastName = element(by.id("lastName"));
@@ -229,6 +208,27 @@ describe("AngularCRUD", function() {
       var website = element(by.id("website"));
       var btnEdit = element(by.id("btnEdit"));
       var btnDelete = element(by.id("btnDelete"));
+
+      // Click the edit button to load the edit screen
+      btnEdit.click();
+
+      // Change the form values
+      firstName.clear().sendKeys("Jim");
+      lastName.clear().sendKeys("Shea");
+      street.clear().sendKeys("4800 Oak Grove Dr");
+      city.clear().sendKeys("Pasadena");
+      state.clear().sendKeys("CA");
+      zip.clear().sendKeys("91109");
+      homePhone.clear().sendKeys("8183547751");
+      mobile.clear().sendKeys("8185551212");
+      email.clear().sendKeys("jshea@jpl.nasa.gov");
+      website.clear().sendKeys("http://ebis.com");
+
+      // Save
+      element(by.id("btnSave")).click();
+
+      // Validate we're on the view screen
+      expect(browser.getCurrentUrl()).toContain('#/view/');
 
       // Validate the expected values are present
       expect(firstName.getText()).toBe("Jim");

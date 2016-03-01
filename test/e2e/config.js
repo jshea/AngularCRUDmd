@@ -3,7 +3,7 @@
 exports.config = {
 
    framework: "jasmine2",        // Default is Jasmine 1.3, This will use jasmine 2.x
-   specs: ["controllers/spec.features.add.js"],
+   specs: ["controllers/spec.*.js"],
    multiCapabilities: [
 //    { browserName: "firefox"},
       { browserName: "chrome" }
