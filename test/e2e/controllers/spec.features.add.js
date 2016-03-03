@@ -5,7 +5,7 @@
 
 /* global browser, by, element, expect */
 
-describe("AngularCRUD", function() {
+describe("AngularCRUD adding users from a data file", function() {
 
    var testContacts = require('./spec.features.add.json');
 

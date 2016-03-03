@@ -17,9 +17,11 @@
       bindings: {
         person: '<'
       },
+
       // Because the template is rather large we have it as an external file
       templateUrl: './components/PersonEdit/personEdit.html',
-      controller: function ($scope, $element, $attrs) {
+
+      controller: function ($scope, UtilityService) {
          var self = this;
 
          /*
@@ -45,7 +47,10 @@
             $scope.$emit('personDeleted', self.localPerson);
          };
 
+         self.states = UtilityService.states;
+
       }
+
    };
 
    // Register this component with our application module

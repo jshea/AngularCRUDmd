@@ -7,9 +7,12 @@
     *
     * @param {type} $window     Base DOM object for checking networking connectivity
     * @param {type} $rootScope  Root of AngularJS data where we'll set online/offline status
+    * @param {type} httpFactory
+    * @param {type} UtilityService
+    * @param {type} toaster
     * @returns {undefined}
     */
-   function Run($window, $rootScope) { // , WS_URL
+   function Run($window, $rootScope, httpFactory, UtilityService, toaster) { // , WS_URL
 
       /*
        * Sets a global variable ($rootScope.online) to true when we gain network availability.
@@ -46,6 +49,20 @@
       $window.addEventListener('offline', onOffline, false);
       $window.addEventListener('online',  onOnline,  false);
 
+      /*
+       * Load our states
+       */
+      httpFactory.getStates(
+         // WS Success
+         function (data) {
+            UtilityService.setStates(data);
+         },
+         // WS Failure
+         function () {
+            toaster.pop("error", "Web Service call failed", "getStates failed.");
+         }
+      );
+
 
       /* This is an example of saving user variables in the browsers localStorage.
        *
@@ -57,8 +74,8 @@
        */
 //      WS_URL = localStorage.getItem('WS_URL');
 
-      // This is how we could automatically set the URL at startup. By using this with localstorage we could have
-      // a default data url that the user could override.
+      // This is how we could automatically set the URL at startup. By using this with localstorage
+      // we could have a default data url that the user could override.
       /*
       if ($rootScope.RESTURL === null) {
          $rootScope.RESTURL = '/angularcrudperson/';
@@ -70,5 +87,5 @@
    // Register this with our application module
    angular
       .module('angularcrud')
-      .run(['$window', '$rootScope', Run]);   // , 'WS_URL'
+      .run(['$window', '$rootScope', 'httpFactory', 'UtilityService', 'toaster', Run]);   // , 'WS_URL'
 })();

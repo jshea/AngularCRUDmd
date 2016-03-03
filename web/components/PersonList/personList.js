@@ -43,8 +43,8 @@
                }
             }
          });
-
       }
+
    };
 
    // Register this component with our application module

@@ -6,7 +6,7 @@
 
 /* global browser, by, element, expect, protractor */
 
-describe("AngularCRUD", function() {
+describe("AngularCRUD form validation", function() {
 
    /*
     * These optional functions run before and after this test suite. Use then to setup

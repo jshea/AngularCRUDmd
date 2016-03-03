@@ -5,7 +5,7 @@
 
 /* global browser, by, element, expect */
 
-describe("AngularCRUD", function() {
+describe("AngularCRUD Happy Path", function() {
 
    /*
     * These optional functions run before and after this test suite. Use

@@ -118,6 +118,27 @@
          },
 
          /*
+          * Get a list of states to build a picklist and could be used for validation.
+          */
+         getStates: function (successCallback, failureCallback) {
+            var dataUrl = "sampledata/states.json";   // URL for our state data
+
+            $rootScope.myPromise =
+               $http.get(dataUrl)
+               .then(
+                  // Success
+                  function (response) {
+                     successCallback(response.data);
+                  },
+                  // Failure
+                  function (response) {
+                     console.log("httpFactory.writeLog() Error: ", response);
+                     failureCallback();
+                  }
+               );
+         },
+
+         /*
           * Note - This uses $q.all to wait until all promises (run in parallel) complete. This could
           *        overwhelm your REST service. Another strategy is to use $q.when to wait until all
           *        promises run sequentially, complete.
