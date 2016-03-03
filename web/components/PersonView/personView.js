@@ -38,12 +38,13 @@
          '</div>'
       ].join(''),
 
-      controller: function (UtilityService) {
+      controller: ['UtilityService',
+                   function (UtilityService) {
          var self = this;
 
          self.states = UtilityService.states;
 
-      }
+      }]
 
    };
 

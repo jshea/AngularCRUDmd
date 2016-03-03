@@ -20,6 +20,6 @@
    }
 
    angular
-      .module('angularCRUD')
+      .module('angularcrud')
       .service('UtilityService', [UtilityService]);
 })();

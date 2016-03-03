@@ -78,7 +78,7 @@
                          class="form-control" placeholder="State" minlength="2" ng-maxlength="2">
                   -->
                   <select name="state" id="state"
-                     ng-options="item.name for item in $ctrl.states track by item.abbreviation"
+                     ng-options="item.abbreviation as item.name for item in $ctrl.states"
                      ng-model="$ctrl.localPerson.address.state">
                   </select>
                </div>

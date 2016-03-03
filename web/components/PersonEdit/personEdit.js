@@ -21,7 +21,9 @@
       // Because the template is rather large we have it as an external file
       templateUrl: './components/PersonEdit/personEdit.html',
 
-      controller: function ($scope, UtilityService) {
+      controller: ['$scope',
+                   'UtilityService',
+                   function ($scope, UtilityService) {
          var self = this;
 
          /*
@@ -49,7 +51,7 @@
 
          self.states = UtilityService.states;
 
-      }
+      }]
 
    };
 

@@ -31,7 +31,8 @@ var jsAppFiles = [
    "../web/scripts/controllers/settingsController.js",
    "../web/scripts/controllers/viewController.js",
    "../web/scripts/filters/titleCase.js",
-   "../web/scripts/services/httpFactory.java.js"
+   "../web/scripts/services/httpFactory.java.js",
+   "../web/scripts/services/UtilityService.js"
 ];
 
 /* All of our library .js files. Angular, jquery and bootstrap are first in case other libs have
