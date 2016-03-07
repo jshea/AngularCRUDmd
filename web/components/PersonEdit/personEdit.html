@@ -74,15 +74,15 @@
                <label for="state" class="control-label col-lg-1">State:</label>
                <div class="col-lg-3">
                   <select name="state" id="state"
-                     ng-options="item.abbreviation as item.name for item in $ctrl.states"
-                     ng-model="$ctrl.localPerson.address.state">
+                          ng-options="item.abbreviation as item.name for item in $ctrl.states"
+                          ng-model="$ctrl.localPerson.address.state">
                   </select>
                </div>
 
-                  <div ng-messages="personForm.state.$error" ng-if="personForm.state.$dirty" class="text-danger">
-                     <div id="stateErrorMinLength" ng-message="minlength">State is too short</div>
-                     <div id="stateErrorMaxLength" ng-message="maxlength">State is too long</div>
-                  </div>
+               <div ng-messages="personForm.state.$error" ng-if="personForm.state.$dirty" class="text-danger">
+                  <div id="stateErrorMinLength" ng-message="minlength">State is too short</div>
+                  <div id="stateErrorMaxLength" ng-message="maxlength">State is too long</div>
+               </div>
             </div>
 
             <!-- Zip TODO validation should be length = 0 or 5 -->
