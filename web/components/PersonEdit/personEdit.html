@@ -73,10 +73,6 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.state.$invalid }">
                <label for="state" class="control-label col-lg-1">State:</label>
                <div class="col-lg-3">
-                  <!--
-                  <input type="text" id="state" name="state" ng-model="$ctrl.localPerson.address.state"
-                         class="form-control" placeholder="State" minlength="2" ng-maxlength="2">
-                  -->
                   <select name="state" id="state"
                      ng-options="item.abbreviation as item.name for item in $ctrl.states"
                      ng-model="$ctrl.localPerson.address.state">
