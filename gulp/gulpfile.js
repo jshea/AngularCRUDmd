@@ -61,7 +61,7 @@ var cssFiles = [
 /*   Concatenate   */
 
 // application .js files
-gulp.task("app-js-java", function() {
+gulp.task("app-js", function() {
    return gulp.src(jsAppFiles)                              // Add our custom .js files
               .pipe(concat("AngularCRUDmdApp.debug.js"))    // Concatenate all .js files
               .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
@@ -87,7 +87,7 @@ gulp.task("css", function () {
 /* Run Tests */
 
 // Karma/Jasmine Unit tests
-gulp.task("unit-test", function() {
+gulp.task("unit", function() {
    return gulp.src("./foobar") // ISSUE: https://github.com/lazd/gulp-karma/issues/9
               .pipe(karma({
                     configFile: "../test/unit/karma.conf.js",
@@ -97,7 +97,7 @@ gulp.task("unit-test", function() {
 });
 
 // Protractor E2E tests
-gulp.task("e2e-test", function() {
+gulp.task("e2e", function() {
    return gulp.src(["../test/e2e/**/spec.*.js"])         // Pass in our spec files.
               .pipe(protractor({
                     seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar", // Local location of Selenium.
@@ -111,13 +111,13 @@ gulp.task("e2e-test", function() {
 /*   These are the "summary" tasks that are typically run at the command line   */
 
 // Build without tests
-gulp.task("default", ["app-js-java", "libs-js", "css"]);
+gulp.task("default", ["app-js", "libs-js", "css"]);
 
 // Build and run all tests
-gulp.task("test", ["default", "e2e-test", "unit-test"]);
+gulp.task("test", ["default", "e2e", "unit"]);
 
 // Build and run e2e tests
-gulp.task("test-e2e", ["default", "e2e-test"]);
+gulp.task("test-e2e", ["default", "e2e"]);
 
 // Build and run unit tests
-gulp.task("test-unit", ["default", "unit-test"]);
+gulp.task("test-unit", ["default", "unit"]);
