@@ -8,7 +8,7 @@
 
    'use strict';
 
-   function EditController($scope, $routeParams, $location, httpFactory, toaster) {
+   function EditController($scope, $routeParams, $location, httpFactory, UtilityService) {
 
       // Save a pointer to our current context
       var self = this;
@@ -21,7 +21,7 @@
          },
          // WS Failure
          function (url) {
-            toaster.pop('error', 'Web Service call failed', 'save ' + url + ' failed.');
+            UtilityService.showToastError('Web Service call failed - save ' + url + ' failed.');
          }
       );
 
@@ -33,12 +33,12 @@
             httpFactory.update(person,
                // WS Success
                function(data) {
-                  toaster.pop('success', 'Changes saved', 'Your changes have been saved', 2000);
+                  UtilityService.showToastSuccess('Changes saved - Your changes have been saved');
                   $location.path('/view/' + data.id);
                },
                // WS Failure
                function (response) {
-                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+                  UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
                }
             );
          }
@@ -50,12 +50,12 @@
             httpFactory.delete(self.person.id,
             // WS Success
                function(response) {
-                  toaster.pop('success', 'Changes saved', 'Person deleted', 2000);
+                  UtilityService.showToastSuccess('Changes saved - Person deleted');
                   $location.path('/');
                },
                // WS Failure
                function (response) {
-                  toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+                  UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
                }
             );
          }
@@ -66,5 +66,5 @@
    // Register our controller with our application module
    angular
       .module('angularcrud')
-      .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'toaster', EditController]);
+      .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'UtilityService', EditController]);
 })();

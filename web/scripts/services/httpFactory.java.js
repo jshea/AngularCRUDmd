@@ -44,13 +44,13 @@
                   // Success
                   function (response) {
                      successCallback(response.data);
-            $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
-            $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -62,13 +62,13 @@
                   // Success
                   function (response) {
                      successCallback(response.data);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -80,13 +80,13 @@
                   // Success
                   function (response) {
                      successCallback(response);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -98,13 +98,13 @@
                   // Success
                   function (response) {
                      successCallback(response.data);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -116,13 +116,13 @@
                   // Success
                   function (response) {
                      successCallback(response.data);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -139,13 +139,13 @@
                   // Success
                   function (response) {
                      successCallback(response.data);
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback();
-               $rootScope.isLoading = false;
+                     $rootScope.isLoading = false;
                   }
                );
          },
@@ -183,8 +183,8 @@
                      // Push each promise to an array and then return $q.all([promiseArray])
                      self.promises.push($http.post(WS_URL, result.data[i]));
                   }
+                  $rootScope.isLoading = false;
                   return $q.all(self.promises);
-               $rootScope.isLoading = false;
                })
                .finally(successCallback, failureCallback);
          }

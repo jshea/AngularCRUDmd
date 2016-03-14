@@ -5,7 +5,7 @@
 
    'use strict';
 
-   function ViewController($routeParams, $location, httpFactory, toaster) {
+   function ViewController($routeParams, $location, httpFactory, UtilityService) {
 
       var self = this;     // Save a pointer to our current context
 
@@ -17,7 +17,7 @@
          },
          // WS Failure
          function (response) {
-            toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+            UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
          }
       );
 
@@ -26,12 +26,12 @@
          httpFactory.delete(self.person.id,
             // WS Success
             function(response) {
-               toaster.pop('success', 'Changes saved', 'Item deleted', 2000);
+               UtilityService.showToastSuccess('Changes saved - Item deleted');
                $location.path('/');
             },
             // WS Failure
             function (response) {
-               toaster.pop('error', 'Web Service call failed', 'save ' + response.config.url + ' failed.');
+               UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
             }
          );
       };
@@ -45,5 +45,5 @@
    // Register our controller
    angular
       .module('angularcrud')
-      .controller('ViewController', ['$routeParams', '$location', 'httpFactory', 'toaster', ViewController]);
+      .controller('ViewController', ['$routeParams', '$location', 'httpFactory', 'UtilityService', ViewController]);
 })();

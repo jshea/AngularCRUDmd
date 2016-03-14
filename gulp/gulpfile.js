@@ -77,7 +77,7 @@ gulp.task("libs-js", function() {
 // CSS files - ours and 3rd party
 gulp.task("css", function () {
    return gulp.src(cssFiles)                                // Get our css files (by directory and/or file name)
-              .pipe(gulpFilter("**/*.css"))                 // Make sure we have just .css files (for directory globbing)
+//              .pipe(gulpFilter("**/*.css"))                 // Make sure we have just .css files (for directory globbing)
               .pipe(basename({prefix: "../assets"}))        // Add "../assets" base name to CSS URLs (all images and fonts must be here)
               .pipe(concatCss("AngularCRUDmd.debug.css"))   // Concatenate all .css files.
               .pipe(gulp.dest("../web/dist"));              // Put it with our other Bootstrap .css files.
@@ -108,7 +108,7 @@ gulp.task("e2e", function() {
 });
 
 
-/*   These are the "summary" tasks that are typically run at the command line   */
+/*   These are the "summary" tasks that are run at the command line   */
 
 // Build without tests
 gulp.task("default", ["app-js", "libs-js", "css"]);

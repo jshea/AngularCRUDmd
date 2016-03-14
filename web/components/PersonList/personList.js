@@ -15,7 +15,7 @@
      template: [
          '<table id="listTable">',
 
-            '<tr ng-repeat="person in $ctrl.table">',
+            '<tr ng-repeat="person in $ctrl.personListData">',
                '<td id="cellName>',
                   '<a id="cellNameLink" href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</a>',
                '</td>',
@@ -26,20 +26,20 @@
 
          '</table>'
       ].join(''),
-      controller: function ($scope, NgTableParams) {
+      controller: function ($scope) {
          var self = this;
 
          // Initialize the table when data is loaded
-         $scope.$watch('$ctrl.personListData', function() {
-            if (self.personListData) {
-               if (self.personListData.length < 25) {
-                  self.table = new NgTableParams({count: self.personListData.length}, {dataset: self.personListData, counts: []});
-               }
-               else {
-                  self.table = new NgTableParams({}, {dataset: self.personListData});
-               }
-            }
-         });
+//         $scope.$watch('$ctrl.personListData', function() {
+//            if (self.personListData) {
+//               if (self.personListData.length < 25) {
+//                  self.table = new NgTableParams({count: self.personListData.length}, {dataset: self.personListData, counts: []});
+//               }
+//               else {
+//                  self.table = new NgTableParams({}, {dataset: self.personListData});
+//               }
+//            }
+//         });
       }
 
    };

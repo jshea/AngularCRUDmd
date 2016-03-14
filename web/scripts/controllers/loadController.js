@@ -5,7 +5,7 @@
 
    'use strict';
 
-   function LoadController($location, httpFactory, toaster) {
+   function LoadController($location, httpFactory, UtilityService) {
 
       // Save a pointer to our current context
       var self = this;
@@ -18,7 +18,7 @@
          },
          // WS Failure
          function (response) {
-            toaster.pop('error', 'Web Service call failed', 'getAll ' + response.config.url + ' failed.');
+            UtilityService.showToastError('Web Service call failed - getAll ' + response.config.url + ' failed.');
          }
       );
    };
@@ -26,5 +26,5 @@
    // Register our controller
    angular
       .module('angularcrud')
-      .controller('LoadController', ['$location', 'httpFactory', 'toaster', LoadController]);
+      .controller('LoadController', ['$location', 'httpFactory', 'UtilityService', LoadController]);
 })();
