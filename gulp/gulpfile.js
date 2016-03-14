@@ -1,7 +1,7 @@
 /*
  * This is the build and test running file for gulp. This is a streamlined version for demo purposes. A fuller
- * version supporting minification and multiple backends (oracle and elastic) should be in the same folder
- * with the name gulpfile.full.js
+ * version would support minification and multiple backends (wls/rdbms, firebase and elastic) will in the future,
+ * be in the same folder with the name gulpfile.full.js
  */
 
 // Load all the gulp and testing libraries we'll be using in this gulp file
@@ -35,21 +35,21 @@ var jsAppFiles = [
    "../web/scripts/services/UtilityService.js"
 ];
 
-/* All of our library .js files. Angular, jquery and bootstrap are first in case other libs have
+/* All of our library .js files. Angular and jquery are first in case other libs have
  * dependencies. The rest of the libs are in alphabetic order.
  */
 var jsLibFiles = [
    "../web/lib/angular.js",
+   "../web/lib/jquery.js",
    "../web/lib/angular-aria.js",
    "../web/lib/angular-animate.js",
    "../web/lib/angular-material.js",
    "../web/lib/angular-messages.js",
    "../web/lib/angular-route.js",
-   "../web/lib/jquery.js",
    "../web/lib/moment.js"
 ];
 
-/* All of our .css files (includes Bootstrap extensions). Note in increasing order of importance as css will
+/* All of our .css files. Note in increasing order of importance as css will
  * override previous settings.
  */
 var cssFiles = [
