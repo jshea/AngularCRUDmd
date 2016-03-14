@@ -13,19 +13,36 @@
    <title>AngularJS CRUD Example</title>
 </head>
 
-<!--
-   ng-cloak prevents the template from being briefly displayed in it's raw (uncompiled)
-   form while application is loading. AKA FOUC (Flash Of Unstyled Content).
--->
-<body ng-cloak>
+<body layout-fill>
 
-   <div ng-include src=" './views/navbar.html' "></div>
+   <md-toolbar>
+      <div class="md-toolbar-tools">
+         AngularCRUD - Now with Material Design
+         <span flex></span>
+         <md-icon>border_color</md-icon>
+         <md-button href="#/list">Contact List</md-button>
+         <md-button href="#/new">New Contact</md-button>
+         <md-button href="#/load">Initialize Data</md-button>
+         <md-button href="#/settings" flex>Settings</md-button>
 
-   <div class="container-fluid">
+         <md-button href="#/instructions">Instructions</md-button>
+         <md-button href="#/faq">FAQs</md-button>
+      </div>
+   </md-toolbar>
 
-      <div ng-view></div> <!-- This is where Angular will swap in our templates. -->
+   <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
 
-   </div>
+   <md-content flex>
+      <div ng-view></div> <!-- This is where the Angular Router will swap in our templates. -->
+   </md-content>
+
+   <md-toolbar>
+      <!-- Warning message for when we have lost our network connection -->
+      <div ng-if="!online">
+         We went Offline. We cannot operate until the network connection is restored.
+      </div>
+      <div class="md-toolbar-tools">Powered by Angular Material</div>
+   </md-toolbar>
 
    <!-- JS Libs - 3rd party libs we're using -->
    <script src="dist/AngularCRUDLibs.debug.js"></script>
@@ -34,4 +51,5 @@
    <script src="dist/AngularCRUDApp.debug.js"></script>
 
 </body>
+
 </html>

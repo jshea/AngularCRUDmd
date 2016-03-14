@@ -40,28 +40,21 @@ var jsAppFiles = [
  */
 var jsLibFiles = [
    "../web/lib/angular.js",
-   "../web/lib/jquery.js",
-   "../web/lib/bootstrap.js",
+   "../web/lib/angular-aria.js",
    "../web/lib/angular-animate.js",
-   "../web/lib/angular-busy.js",
+   "../web/lib/angular-material.js",
    "../web/lib/angular-messages.js",
    "../web/lib/angular-route.js",
-   "../web/lib/moment.js",
-   "../web/lib/ng-table.js",
-   "../web/lib/toaster.js",
-   "../web/lib/ui-bootstrap-tpls.js"
+   "../web/lib/jquery.js",
+   "../web/lib/moment.js"
 ];
 
 /* All of our .css files (includes Bootstrap extensions). Note in increasing order of importance as css will
  * override previous settings.
  */
 var cssFiles = [
-//  "../web/css/bootstrap.css",        // Bootstrap is foundational
-    "../web/css/bootstrap.paper.css",  // Paper/Material Design themed Bootstrap
-    "../web/css/app.css",              // However we may do some overrides
-    "../web/css/angular-busy.css",
-    "../web/css/ng-table.css",
-    "../web/css/toaster.css"
+   "../web/css/angular-material.css",
+   "../web/css/app.css"
 ];
 
 

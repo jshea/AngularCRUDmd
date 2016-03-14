@@ -6,155 +6,112 @@
    <form name="personForm" class="form-inline">
 
       <div class="row">
-         <div class="col-xs-12">
 
-            <!-- First Name -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.firstName.$invalid }">
-               <label for="firstName" class="control-label col-lg-2">First Name:</label>
+         <!-- First Name -->
+         <md-input-container>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" ng-model="$ctrl.localPerson.firstName"
+                   minlength="2" ng-maxlength="20" md-autofocus required>
 
-               <div class="col-lg-4">
-                  <input type="text" id="firstName" name="firstName" ng-model="$ctrl.localPerson.firstName"
-                         class="form-control" placeholder="First name" minlength="2" ng-maxlength="20" focus required>
-
-                  <!-- Error messages using angular-messages. Field is required and length between 2 & 20 chars -->
-                  <div ng-messages="personForm.firstName.$error" ng-if="personForm.firstName.$dirty" class="text-danger">
-                     <div id="firstNameErrorRequired"  ng-message="required">A first name is required</div>
-                     <div id="firstNameErrorMinLength" ng-message="minlength">First name is too short</div>
-                     <div id="firstNameErrorMaxLength" ng-message="maxlength">First name is too long</div>
-                  </div>
-
-               </div>
+            <!-- Error messages using angular-messages. Field is required and length between 2 & 20 chars -->
+            <div ng-messages="personForm.firstName.$error" ng-if="personForm.firstName.$dirty" class="text-danger">
+               <div id="firstNameErrorRequired"  ng-message="required">A first name is required</div>
+               <div id="firstNameErrorMinLength" ng-message="minlength">First name is too short</div>
+               <div id="firstNameErrorMaxLength" ng-message="maxlength">First name is too long</div>
             </div>
+         </md-input-container>
 
-            <!-- Last Name -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.lastName.$invalid }">
-               <label for="lastName" class="control-label col-lg-2">Last Name:</label>
-               <div class="col-lg-4">
-                  <input type="text" id="lastName" name="lastName" ng-model="$ctrl.localPerson.lastName"
-                         class="form-control" placeholder="Last name" minlength="2" ng-maxlength="20" required>
+         <!-- Last Name -->
+         <md-input-container>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" ng-model="$ctrl.localPerson.lastName"
+                   minlength="2" ng-maxlength="20" required>
 
-                  <div ng-messages="personForm.lastName.$error" ng-if="personForm.lastName.$dirty" class="text-danger">
-                     <div id="lastNameErrorRequired"  ng-message="required">A last name is required</div>
-                     <div id="lastNameErrorMinLength" ng-message="minlength">Last name is too short</div>
-                     <div id="lastNameErrorMaxLength" ng-message="maxlength">Last name is too long</div>
-                  </div>
-
-               </div>
+            <div ng-messages="personForm.lastName.$error" ng-if="personForm.lastName.$dirty" class="text-danger">
+               <div id="lastNameErrorRequired"  ng-message="required">A last name is required</div>
+               <div id="lastNameErrorMinLength" ng-message="minlength">Last name is too short</div>
+               <div id="lastNameErrorMaxLength" ng-message="maxlength">Last name is too long</div>
             </div>
-         </div>
+         </md-input-container>
       </div>
 
       <!-- Street -->
       <div class="row">
-         <div class="col-xs-12">
-            <div class="form-group">
-               <label for="street" class="control-label col-lg-3">Street:</label>
-               <div class="col-lg-9">
-                  <input type="text" id="street" name="street" class="form-control" placeholder="Street"
-                         ng-model="$ctrl.localPerson.address.street">
-               </div>
-            </div>
-         </div>
+         <md-input-container>
+            <label for="street" class="control-label col-lg-3">Street:</label>
+            <input type="text" id="street" name="street"
+                   ng-model="$ctrl.localPerson.address.street">
+         </md-input-container>
       </div>
 
       <div class="row">
-         <div class="col-xs-12">
+         <!-- City -->
+         <md-input-container>
+            <label for="city" class="control-label col-lg-1">City:</label>
+            <input type="text" id="city" name="city" ng-model="$ctrl.localPerson.address.city">
+         </md-input-container>
 
-            <!-- City -->
-            <div class="form-group">
-               <label for="city" class="control-label col-lg-1">City:</label>
-               <div class="col-lg-3">
-                  <input type="text" id="city" name="city" ng-model="$ctrl.localPerson.address.city"
-                         class="form-control" placeholder="City">
-               </div>
+         <!-- State -->
+         <md-input-container>
+            <label for="state" class="control-label col-lg-1">State:</label>
+            <select name="state" id="state"
+                    ng-options="item.abbreviation as item.name for item in $ctrl.states"
+                    ng-model="$ctrl.localPerson.address.state">
+            </select>
+
+            <div ng-messages="personForm.state.$error" ng-if="personForm.state.$dirty" class="text-danger">
+               <div id="stateErrorMinLength" ng-message="minlength">State is too short</div>
+               <div id="stateErrorMaxLength" ng-message="maxlength">State is too long</div>
             </div>
+         </md-input-container>
 
-            <!-- State -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.state.$invalid }">
-               <label for="state" class="control-label col-lg-1">State:</label>
-               <div class="col-lg-3">
-                  <select name="state" id="state"
-                          ng-options="item.abbreviation as item.name for item in $ctrl.states"
-                          ng-model="$ctrl.localPerson.address.state">
-                  </select>
-               </div>
+         <!-- Zip TODO validation should be length = 0 or 5 -->
+         <md-input-container>
+            <label for="zip" class="control-label col-lg-1">Zip:</label>
+            <input type="text" id="zip" name="zip" ng-model="$ctrl.localPerson.address.zip"
+                   minlength="5" ng-maxlength="5">
 
-               <div ng-messages="personForm.state.$error" ng-if="personForm.state.$dirty" class="text-danger">
-                  <div id="stateErrorMinLength" ng-message="minlength">State is too short</div>
-                  <div id="stateErrorMaxLength" ng-message="maxlength">State is too long</div>
-               </div>
+            <div ng-messages="personForm.zip.$error" ng-if="personForm.zip.$dirty" class="text-danger">
+               <div id="zipErrorMinLength" ng-message="minlength">Zip is too short</div>
+               <div id="zipErrorMaxLength" ng-message="maxlength">Zip is too long</div>
             </div>
-
-            <!-- Zip TODO validation should be length = 0 or 5 -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.zip.$invalid }">
-               <label for="zip" class="control-label col-lg-1">Zip:</label>
-               <div class="col-lg-3">
-                  <input type="text" id="zip" name="zip" ng-model="$ctrl.localPerson.address.zip"
-                         class="form-control" placeholder="Zip" minlength="5" ng-maxlength="5">
-
-                  <div ng-messages="personForm.zip.$error" ng-if="personForm.zip.$dirty" class="text-danger">
-                     <div id="zipErrorMinLength" ng-message="minlength">Zip is too short</div>
-                     <div id="zipErrorMaxLength" ng-message="maxlength">Zip is too long</div>
-                  </div>
-
-               </div>
-            </div>
-
-         </div>
+         </md-input-container>
       </div>
 
       <div class="row">
-         <div class="col-xs-12">
+         <!-- Home Phone -->
+         <md-input-container>
+            <label for="homePhone">Home Phone:</label>
+            <input type="text" id="homePhone" name="homePhone" ng-model="$ctrl.localPerson.homePhone">
+         </md-input-container>
 
-            <!-- Home Phone -->
-            <div class="form-group">
-               <label for="homePhone" class="control-label col-lg-2">Home Phone:</label>
-               <div class="col-lg-4">
-                  <input type="text" id="homePhone" name="homePhone" ng-model="$ctrl.localPerson.homePhone"
-                         class="form-control" placeholder="Home Phone">
-               </div>
-            </div>
-
-            <!-- Mobile Phone -->
-            <div class="form-group">
-               <label for="mobilePhone" class="control-label col-lg-3">Mobile Phone:</label>
-               <div class="col-lg-4">
-                  <input type="text" id="mobile" name="mobile" ng-model="$ctrl.localPerson.mobile"
-                         class="form-control" placeholder="Mobile Phone">
-               </div>
-            </div>
-
-         </div>
+         <!-- Mobile Phone -->
+         <md-input-container>
+            <label for="mobilePhone" class="control-label col-lg-3">Mobile Phone:</label>
+            <input type="text" id="mobile" name="mobile" ng-model="$ctrl.localPerson.mobile">
+         </md-input-container>
       </div>
 
       <div class="row">
-         <div class="col-xs-12">
+         <!-- email -->
+         <md-input-container>
+            <label for="email">eMail:</label>
+            <input type="email" id="email" name="email" ng-model="$ctrl.localPerson.email">
 
-            <!-- email -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.email.$invalid }">
-               <label for="email" class="control-label col-lg-2">eMail:</label>
-               <div class="col-lg-4">
-                  <input type="email" id="email" name="email" ng-model="$ctrl.localPerson.email"
-                         class="form-control" placeholder="eMail">
-                  <div ng-messages="personForm.email.$error" ng-if="personForm.email.$dirty" class="text-danger">
-                     <div id="emailError" ng-message="email">Your email address is invalid</div>
-                  </div>
-               </div>
+            <div ng-messages="personForm.email.$error" ng-if="personForm.email.$dirty" class="text-danger">
+               <div id="emailError" ng-message="email">Your email address is invalid</div>
             </div>
+         </md-input-container>
 
-            <!-- website -->
-            <div class="form-group" ng-class="{ 'has-error' : personForm.website.$invalid }">
-               <label for="website" class="control-label col-lg-2">Website:</label>
-               <div class="col-lg-4">
-                  <input type="url" id="website" name="website" ng-model="$ctrl.localPerson.website"
-                         class="form-control" placeholder="Website">
-                  <div ng-messages="personForm.website.$error" ng-if="personForm.website.$dirty" class="text-danger">
-                     <div id="websiteError" ng-message="url">Your website is invalid</div>
-                  </div>
-               </div>
+         <!-- website -->
+         <md-input-container>
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website" ng-model="$ctrl.localPerson.website">
+
+            <div ng-messages="personForm.website.$error" ng-if="personForm.website.$dirty" class="text-danger">
+               <div id="websiteError" ng-message="url">Your website is invalid</div>
             </div>
-
-         </div>
+         </md-input-container>
       </div>
 
       <div class="row">
@@ -163,38 +120,31 @@
 
       <!-- Buttons -->
       <div class="row">
-         <div class="col-xs-12">
 
-            <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
-            <button type="button" id="btnSave"
-                    class="btn btn-primary"
-                    ng-disabled="personForm.$invalid"
-                    ng-click="$ctrl.onSave()"
-                    ng-if="$ctrl.localPerson.id"
-            >
-               Save
-            </button>
+         <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
+         <button type="button" id="btnSave"
+                 class="btn btn-primary"
+                 ng-disabled="personForm.$invalid"
+                 ng-click="$ctrl.onSave()"
+                 ng-if="$ctrl.localPerson.id">
+            Save
+         </button>
 
-            <!-- Show this button when $ctrl.localPerson.id is blank. This means we're adding. -->
-            <button type="button" id="btnAdd"
-                    class="btn btn-primary"
-                    ng-disabled="personForm.$invalid"
-                    ng-click="$ctrl.onAdd()"
-                    ng-if="!$ctrl.localPerson.id"
-            >
-               Add
-            </button>
+         <!-- Show this button when $ctrl.localPerson.id is blank. This means we're adding. -->
+         <md-button id="btnAdd"
+                 ng-disabled="personForm.$invalid"
+                 ng-click="$ctrl.onAdd()"
+                 ng-if="!$ctrl.localPerson.id">
+            Add
+         </md-button>
 
-            <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
-            <button type="button" id="btnDelete"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.onDelete()"
-                    ng-if="$ctrl.localPerson.id"
-            >
-               Delete
-            </button>
+         <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
+         <md-button id="btnDelete"
+                 ng-click="$ctrl.onDelete()"
+                 ng-if="$ctrl.localPerson.id">
+            Delete
+         </md-button>
 
-         </div>
       </div>
 
    </form>

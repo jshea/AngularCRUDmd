@@ -13,16 +13,13 @@
        personListData: '<'
      },
      template: [
-         '<table id="listTable"',
-             'ng-table="$ctrl.table"',
-             'class="table table-condensed table-bordered table-hover table-striped"',
-             'show-filter="true">',
+         '<table id="listTable">',
 
-            '<tr ng-repeat="person in $data">',
-               '<td id="cellName" title="\'Name\'" filter="{ lastName: \'text\'}" sortable="\'lastName\'">',
+            '<tr ng-repeat="person in $ctrl.table">',
+               '<td id="cellName>',
                   '<a id="cellNameLink" href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</a>',
                '</td>',
-               '<td id="cellPhone" title="\'Phone\'" filter="{ mobile: \'text\'}" sortable="\'mobile\'">',
+               '<td id="cellPhone>',
                   '{{person.mobile | phoneNumber}}',
                '</td>',
             '</tr>',

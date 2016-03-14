@@ -38,81 +38,91 @@
          don't seem to be called if the response isn't passed as a param.
        */
          getAll: function (successCallback, failureCallback) {
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.get(WS_URL)
                .then(
                   // Success
                   function (response) {
                      successCallback(response.data);
+            $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
+            $rootScope.isLoading = false;
                   }
                );
          },
 
          getById: function (id, successCallback, failureCallback) {
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.get(WS_URL + id)
                .then(
                   // Success
                   function (response) {
                      successCallback(response.data);
+               $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
+               $rootScope.isLoading = false;
                   }
                );
          },
 
          delete: function (id, successCallback, failureCallback) {
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.delete(WS_URL + id)
                .then(
                   // Success
                   function (response) {
                      successCallback(response);
+               $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
+               $rootScope.isLoading = false;
                   }
                );
          },
 
          update: function (person, successCallback, failureCallback) {
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.put(WS_URL, person)
                .then(
                   // Success
                   function (response) {
                      successCallback(response.data);
+               $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
+               $rootScope.isLoading = false;
                   }
                );
          },
 
          add: function (person, successCallback, failureCallback) {
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.post(WS_URL, person)
                .then(
                   // Success
                   function (response) {
                      successCallback(response.data);
+               $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback(response);
+               $rootScope.isLoading = false;
                   }
                );
          },
@@ -123,17 +133,19 @@
          getStates: function (successCallback, failureCallback) {
             var dataUrl = "sampledata/states.json";   // URL for our state data
 
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                $http.get(dataUrl)
                .then(
                   // Success
                   function (response) {
                      successCallback(response.data);
+               $rootScope.isLoading = false;
                   },
                   // Failure
                   function (response) {
                      console.log("httpFactory.writeLog() Error: ", response);
                      failureCallback();
+               $rootScope.isLoading = false;
                   }
                );
          },
@@ -156,7 +168,7 @@
             var sampleDataUrl = "sampledata/sample.json";   // URL for our sample data
             var self = this;
 
-            $rootScope.myPromise =
+            $rootScope.isLoading = true;
                // Delete the old data and load the sample data
                $http.delete(WS_URL + "deleteall")
                .then(function() {
@@ -172,6 +184,7 @@
                      self.promises.push($http.post(WS_URL, result.data[i]));
                   }
                   return $q.all(self.promises);
+               $rootScope.isLoading = false;
                })
                .finally(successCallback, failureCallback);
          }
