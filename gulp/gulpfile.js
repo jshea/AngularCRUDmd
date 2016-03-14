@@ -61,26 +61,26 @@ var cssFiles = [
 /*   Concatenate   */
 
 // application .js files
-gulp.task("debug-app-js-java", function() {
-   return gulp.src(jsAppFiles)                          // Add our custom .js files
-              .pipe(concat("AngularCRUDApp.debug.js"))  // Concatenate all .js files
-              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+gulp.task("app-js-java", function() {
+   return gulp.src(jsAppFiles)                              // Add our custom .js files
+              .pipe(concat("AngularCRUDmdApp.debug.js"))    // Concatenate all .js files
+              .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
 });
 
 // third party library .js files
-gulp.task("debug-libs-js", function() {
-   return gulp.src(jsLibFiles)                          // Add our .js files
-              .pipe(concat("AngularCRUDLibs.debug.js")) // Concatenate all .js files
-              .pipe(gulp.dest("../web/dist"));          // Put it in our dist folder
+gulp.task("libs-js", function() {
+   return gulp.src(jsLibFiles)                              // Add our .js files
+              .pipe(concat("AngularCRUDmdLibs.debug.js"))   // Concatenate all .js files
+              .pipe(gulp.dest("../web/dist"));              // Put it in our dist folder
 });
 
 // CSS files - ours and 3rd party
-gulp.task("debug-css", function () {
-   return gulp.src(cssFiles)                            // Get our css files (by directory and/or file name)
-              .pipe(gulpFilter("**/*.css"))             // Make sure we have just .css files (for directory globbing)
-              .pipe(basename({prefix: "../assets"}))    // Add "../assets" base name to CSS URLs (all images and fonts must be here)
-              .pipe(concatCss("AngularCRUD.debug.css")) // Concatenate all .css files.
-              .pipe(gulp.dest("../web/dist"));          // Put it with our other Bootstrap .css files.
+gulp.task("css", function () {
+   return gulp.src(cssFiles)                                // Get our css files (by directory and/or file name)
+              .pipe(gulpFilter("**/*.css"))                 // Make sure we have just .css files (for directory globbing)
+              .pipe(basename({prefix: "../assets"}))        // Add "../assets" base name to CSS URLs (all images and fonts must be here)
+              .pipe(concatCss("AngularCRUDmd.debug.css"))   // Concatenate all .css files.
+              .pipe(gulp.dest("../web/dist"));              // Put it with our other Bootstrap .css files.
 });
 
 
@@ -110,14 +110,14 @@ gulp.task("e2e-test", function() {
 
 /*   These are the "summary" tasks that are typically run at the command line   */
 
-// Debug build without tests (call "gulp" to run).
-gulp.task("default", ["debug-app-js-java", "debug-libs-js", "debug-css"]);
+// Build without tests
+gulp.task("default", ["app-js-java", "libs-js", "css"]);
 
-// Debug build with all tests (call "gulp debug-test").
-gulp.task("debug-test-all", ["default", "e2e-test", "unit-test"]);
+// Build and run all tests
+gulp.task("test", ["default", "e2e-test", "unit-test"]);
 
-// Debug build with e2e tests only (call "gulp debug-test-e2e").
-gulp.task("debug-test-e2e", ["default", "e2e-test"]);
+// Build and run e2e tests
+gulp.task("test-e2e", ["default", "e2e-test"]);
 
-// Debug build with unit tests only (call "gulp debug-test-unit").
-gulp.task("debug-test-unit", ["default", "unit-test"]);
+// Build and run unit tests
+gulp.task("test-unit", ["default", "unit-test"]);
