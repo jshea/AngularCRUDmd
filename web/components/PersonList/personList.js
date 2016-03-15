@@ -16,10 +16,10 @@
          '<table id="listTable">',
 
             '<tr ng-repeat="person in $ctrl.personListData">',
-               '<td id="cellName>',
-                  '<a id="cellNameLink" href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</a>',
+               '<td>',
+                  '<md-button href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</md-button>',
                '</td>',
-               '<td id="cellPhone>',
+               '<td>',
                   '{{person.mobile | phoneNumber}}',
                '</td>',
             '</tr>',

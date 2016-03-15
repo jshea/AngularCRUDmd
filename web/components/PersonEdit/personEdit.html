@@ -54,10 +54,9 @@
          <!-- State -->
          <md-input-container>
             <label for="state" class="control-label col-lg-1">State:</label>
-            <select name="state" id="state"
-                    ng-options="item.abbreviation as item.name for item in $ctrl.states"
-                    ng-model="$ctrl.localPerson.address.state">
-            </select>
+            <md-select name="state" id="state" ng-model="$ctrl.localPerson.address.state">
+               <md-option ng-value="item.abbreviation" ng-repeat="item in $ctrl.states">{{item.name}}</md-option>
+            </md-select>
 
             <div ng-messages="personForm.state.$error" ng-if="personForm.state.$dirty" class="text-danger">
                <div id="stateErrorMinLength" ng-message="minlength">State is too short</div>
@@ -122,16 +121,17 @@
       <div class="row">
 
          <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
-         <button type="button" id="btnSave"
-                 class="btn btn-primary"
+         <md-button id="btnSave"
+                 class="md-raised md-primary"
                  ng-disabled="personForm.$invalid"
                  ng-click="$ctrl.onSave()"
                  ng-if="$ctrl.localPerson.id">
             Save
-         </button>
+         </md-button>
 
          <!-- Show this button when $ctrl.localPerson.id is blank. This means we're adding. -->
          <md-button id="btnAdd"
+                 class="md-raised md-primary"
                  ng-disabled="personForm.$invalid"
                  ng-click="$ctrl.onAdd()"
                  ng-if="!$ctrl.localPerson.id">
@@ -140,8 +140,9 @@
 
          <!-- Show this button when $ctrl.localPerson.id is not blank. This means we're updating. -->
          <md-button id="btnDelete"
-                 ng-click="$ctrl.onDelete()"
-                 ng-if="$ctrl.localPerson.id">
+                    class="md-raised md-warn"
+                    ng-click="$ctrl.onDelete()"
+                    ng-if="$ctrl.localPerson.id">
             Delete
          </md-button>
 
