@@ -12,20 +12,46 @@
      bindings: {
        personListData: '<'
      },
+
      template: [
-         '<table id="listTable">',
+//         '<table id="listTable">',
+//            '<tr ng-repeat="person in $ctrl.personListData">',
+//               '<td>',
+//                  '<md-button href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</md-button>',
+//               '</td>',
+//               '<td>',
+//                  '{{person.mobile | phoneNumber}}',
+//               '</td>',
+//            '</tr>',
+//         '</table>'
 
-            '<tr ng-repeat="person in $ctrl.personListData">',
-               '<td>',
-                  '<md-button href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</md-button>',
-               '</td>',
-               '<td>',
-                  '{{person.mobile | phoneNumber}}',
-               '</td>',
-            '</tr>',
+//         '<md-list id="contactList">',
+//
+//            '<md-list-item class="md-1-line" ng-repeat="person in $ctrl.personListData">',
+//               '<div class="md-list-item-text">',
+//                  '<md-button href="#/view/{{person.id}}">',
+//                     '{{person.lastName}}, {{person.firstName}} {{person.mobile | phoneNumber}}',
+//                  '</md-button>',
+//                  '<md-divider></md-divider>',
+//               '</div>',
+//            '</md-list-item>',
+//
+//         '</md-list>'
 
-         '</table>'
+         '<md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>',
+            '<div flex="33" ng-repeat="person in $ctrl.personListData" >',
+
+               '<md-card>',
+                  '<md-card-content>',
+                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
+                     '{{person.lastName}}, {{person.firstName}}<br>{{person.mobile | phoneNumber}}',
+                  '</md-card-content>',
+               '</md-card>',
+
+            '</div>',
+         '</md-content>'
       ].join(''),
+
       controller: function ($scope) {
          var self = this;
 

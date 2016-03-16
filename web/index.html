@@ -17,7 +17,7 @@
 
    <md-toolbar>
       <div class="md-toolbar-tools">
-         AngularCRUD - Material Design
+         AngularCRUD
          <span flex></span>
          <md-button href="#/list">Contact List</md-button>
          <md-button href="#/new">New Contact</md-button>
@@ -29,9 +29,9 @@
       </div>
    </md-toolbar>
 
-   <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
 
    <md-content flex>
+      <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
       <div ng-view></div> <!-- This is where the Angular Router will swap in our templates. -->
    </md-content>
 
