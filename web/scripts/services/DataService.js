@@ -20,6 +20,7 @@
 
       /*   Getting/Setting data   */
 
+      // Get one person by id
       self.personGet = function personGet(personId, successCallBack) {
          $rootScope.isLoading = true;
 
@@ -43,6 +44,7 @@
       };
 
 
+      // Get all people, no guarantee on sort order!
       self.personGetAll = function personGetAll(successCallBack) {
          $rootScope.isLoading = true;
 
@@ -66,6 +68,7 @@
       };
 
 
+      // Add a new person
       self.personAdd = function personAdd(person, successCallBack) {
          $rootScope.isLoading = true;
 
@@ -90,10 +93,11 @@
       };
 
 
+      // Update an existing person
       self.personUpdate = function personUpdate(person, successCallBack) {
          $rootScope.isLoading = true;
 
-         return ApiService.update(person)
+         ApiService.update(person)
          .then(
             function(response) {
                UtilityService.showToastSuccess('Changes saved - Your changes have been saved');
@@ -114,10 +118,11 @@
       };
 
 
+      // Delete a person
       self.personDelete = function personDelete(personId, successCallBack) {
          $rootScope.isLoading = true;
 
-         return ApiService.deleteObj(personId)
+         ApiService.deleteObj(personId)
          .then(
             function(response) {
                UtilityService.showToastSuccess('Changes saved - Item deleted');
@@ -139,6 +144,7 @@
 
    }
 
+   // Register the service
    angular
       .module('angularcrud')
       .service('DataService', ['ApiService', 'UtilityService', '$rootScope', DataService]);

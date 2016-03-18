@@ -1,7 +1,7 @@
 /*
  * Services to interact with our data storage via REST Web Services
  *
- *    Firebase version
+ *    Java/Jersey version
  */
 (function() {
 
@@ -11,42 +11,33 @@
       var self = this;
 
       // This is the path to add to our source URL to get to the REST url's
-//      var WS_URL = 'ws/person/';
-      var WS_URL = 'https://angularcrudmaterial.firebaseio.com/data/';
+      var WS_URL = 'ws/person/';
+
 
       self.getAll = function getAll() {
-         return $http.get(WS_URL + '.json');
+         return $http.get(WS_URL);
       };
 
       self.getById = function getById(id) {
-         return $http.get(WS_URL + id + '/.json');
+         return $http.get(WS_URL + id);
       };
 
-      // Note firebase returns the created id as "name"
       self.add = function add(person) {
-         $http.post(WS_URL + '.json', person)
-         .then(
-            function(response) {
-               // Take the Firebase created id (name) and add it to our object with an update
-               var id = response.data.name;
-               person.id = id;
-               return self.update(person);
-            }
-         );
+         return $http.post(WS_URL, person);
       };
 
       self.update = function update(person) {
-         return $http.put(WS_URL + person.id + '/.json', person);
+         return $http.put(WS_URL, person);
       };
 
       // Note delete is a JS reserved word, so we use deleteObj
       self.deleteObj = function deleteObj(id) {
-         return $http.delete(WS_URL + id + '/.json');
+         return $http.delete(WS_URL + id);
       };
 
-      /*
-       * Get a list of states to build a picklist and could be used for validation.
-       */
+         /*
+          * Get a list of states to build a picklist and could be used for validation.
+          */
       self.getStates = function getStates(successCallback, failureCallback) {
          var dataUrl = 'sampledata/states.json';   // URL for our state data
 
@@ -86,39 +77,29 @@
 
          $rootScope.isLoading = true;
 
-         // Delete the old data
-         $http.delete(WS_URL + '.json')
-         //  Get the sample data
-         .then(
-            function(response) {
-               return $http.get(sampleDataUrl);
-            }
-         )
-         // Load the sample/seed data
-         .then(
-            function (result) {
-               self.promises = [];
+         // Delete the old data and load the sample data
+         $http.delete(WS_URL + 'deleteall')
+         .then(function() {
+            // Get the sample data
+            return $http.get(sampleDataUrl);
+         })
+         .then(function (result) {
+            self.promises = [];
 
-               // Iterate through local data saving to server
-               for (var i = 0; i < result.data.length; i++) {
-                  // Push each promise to an array and then return $q.all([promiseArray])
-                  self.promises.push(self.add(result.data[i]));
-               }
-               $rootScope.isLoading = false;
-               return $q.all(self.promises);
+            // Iterate through local data saving to server
+            for (var i = 0; i < result.data.length; i++) {
+               // Push each promise to an array and then return $q.all([promiseArray])
+               self.promises.push($http.post(WS_URL, result.data[i]));
             }
-         )
-         .catch(
-            function (response) {
-               console.log("ApiService.loadSeedData() Error: ", response);
-            }
-         )
+            $rootScope.isLoading = false;
+            return $q.all(self.promises);
+         })
          .finally(successCallback, failureCallback);
       };
 
    }
 
-   // Register our service
+   // Register the service
    angular
       .module('angularcrud')
       .service('ApiService', ['$http', '$rootScope', '$q', ApiService]);
