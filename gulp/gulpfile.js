@@ -31,7 +31,8 @@ var jsAppFiles = [
    "../web/scripts/controllers/settingsController.js",
    "../web/scripts/controllers/viewController.js",
    "../web/scripts/filters/titleCase.js",
-   "../web/scripts/services/httpFactory.java.js",
+   "../web/scripts/services/ApiService.js",
+   "../web/scripts/services/DataService.js",
    "../web/scripts/services/UtilityService.js"
 ];
 

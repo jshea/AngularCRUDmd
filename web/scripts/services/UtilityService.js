@@ -4,18 +4,8 @@
    function UtilityService($mdToast) {
       var self = this;
 
-      // An array of state objects, abbreviation and name.
-      self.states = [];
 
-     /**
-      * Initialize/set the states value.
-      *
-      * @param {type} states
-      * @returns {undefined}
-      */
-      self.setStates = function setStates(states) {
-         self.states = states;
-      };
+      /*   Toasts   */
 
       self.showToastSuccess = function showToastSuccess(message) {
          $mdToast.show(
@@ -38,6 +28,8 @@
                .hideDelay(3000)
             );
       };
+
+
    }
 
    angular

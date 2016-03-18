@@ -43,9 +43,13 @@
 
                '<md-card>',
                   '<md-card-content>',
-                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
                      '{{person.lastName}}, {{person.firstName}}<br>{{person.mobile | phoneNumber}}',
                   '</md-card-content>',
+                  '<div class="md-actions" layout="row" layout-align="start center" style="padding-left:8px;">',
+                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
+//                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
+//                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
+                  '</div>',
                '</md-card>',
 
             '</div>',

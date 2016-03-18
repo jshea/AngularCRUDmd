@@ -8,54 +8,38 @@
 
    'use strict';
 
-   function EditController($scope, $routeParams, $location, httpFactory, UtilityService) {
+   function EditController($scope, $routeParams, $location, DataService) {
 
       // Save a pointer to our current context
       var self = this;
 
       // Initialize our data to the document with key of $routeParams.id
-      httpFactory.getById($routeParams.id,
-         // WS Success
+      DataService.personGet($routeParams.id,
          function (data) {
             self.person = data;
-         },
-         // WS Failure
-         function (url) {
-            UtilityService.showToastError('Web Service call failed - save ' + url + ' failed.');
          }
       );
 
-      // Listen for events emitted from our Person Edit component
+
+      /*   Listen for events emitted from our Person Edit component   */
 
       // Save button was clicked - Save person and view their new detail
-      $scope.$on('personSaved',
+      $scope.$on('personUpdate',
          function (event, person) {
-            httpFactory.update(person,
-               // WS Success
-               function(data) {
-                  UtilityService.showToastSuccess('Changes saved - Your changes have been saved');
-                  $location.path('/view/' + data.id);
-               },
-               // WS Failure
-               function (response) {
-                  UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
+            DataService.personUpdate(person,
+               function(person) {
+                  $location.path('/view/' + person.id);
                }
             );
          }
       );
 
-      // Delete button clicked - Delete person and return to main scren
-      $scope.$on('personDeleted',
+      // Delete button clicked - Delete person and return to main screen
+      $scope.$on('personDelete',
          function (event, person) {
-            httpFactory.delete(self.person.id,
-            // WS Success
-               function(response) {
-                  UtilityService.showToastSuccess('Changes saved - Person deleted');
+            DataService.personDelete(person.id,
+               function() {
                   $location.path('/');
-               },
-               // WS Failure
-               function (response) {
-                  UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
                }
             );
          }
@@ -66,5 +50,5 @@
    // Register our controller with our application module
    angular
       .module('angularcrud')
-      .controller('EditController', ['$scope', '$routeParams', '$location', 'httpFactory', 'UtilityService', EditController]);
+      .controller('EditController', ['$scope', '$routeParams', '$location', 'DataService', EditController]);
 })();

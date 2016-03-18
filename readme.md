@@ -7,7 +7,7 @@ This is a sample AngularJS client application supporting both a Java middle tier
 
 Platform specific notes and artifacts are contained in the doc folder.
 
-This example application demonstrates CRUD (Create, Report, Update and Delete) operations on a simple data model of a person (name, address, phone numbers...). It's a SPA (Single Page Application) built with the AngularJS  1.x framework and Bootstrap 3.x. AngularJS is the Single Page Application framework and Bootstrap provides UI formatting and components.
+This example application demonstrates CRUD (Create, Report, Update and Delete) operations on a simple data model of a person (name, address, phone numbers...). It's a SPA (Single Page Application) built with the AngularJS 1.x framework and Material Design. AngularJS is the Single Page Application framework and Material Design provides UI formatting and components.
 
 This is setup as a [NetBeans](https://netbeans.org/) project. While any IDE or text editor can be used to work with the source of this application, it's setup with the Netbeans default folder structure.
 
@@ -17,8 +17,8 @@ The doc folder contains documentation on the overall application, tools and tech
 ### Technology and Tools
 #### AngularJS
 [AngularJS](http://angularjs.org) is a web application framework for building what's commonly called SPA's ([Single Page Applications](https://en.wikipedia.org/wiki/Single-page_application)). It is an Open Source project managed by the [Mountain View Chocolate Factory](http://google.com) .
-#### Bootstrap
-[Bootstrap](http://getbootstrap.com) is a web development framework for making applications responsive and enhancing UI functionality.
+#### Material Design
+[Material Design](https://material.angularjs.org/) "For developers using AngularJS, Angular Material is the reference implementation of Google's Material Design Specification. This project provides a set of reusable, well-tested, and accessible UI components based on Material Design.".
 #### NetBeans
 [NetBeans](https://netbeans.org/) is an Open Source IDE that has good Java and SPA support. The latest versions has built in support for AngularJS, Cordova and many other Web application development technologies, frameworks and libraries.
 
