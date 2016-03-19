@@ -24,7 +24,7 @@
 
       // Note firebase returns the created id as "name"
       self.add = function add(person) {
-         $http.post(WS_URL + '.json', person)
+         return $http.post(WS_URL + '.json', person)
          .then(
             function(response) {
                // Take the Firebase created id (name) and add it to our object with an update
