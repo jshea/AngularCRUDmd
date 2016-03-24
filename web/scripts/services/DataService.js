@@ -26,8 +26,8 @@
 
          ApiService.getById(personId)
          .then(
-            function (response) {
-               successCallBack(response.data);
+            function (data) {
+               successCallBack(data);
             }
          )
          .catch(
@@ -50,8 +50,8 @@
 
          ApiService.getAll()
          .then(
-            function (response) {
-               successCallBack(response.data);
+            function (data) {
+               successCallBack(data);
             }
          )
          .catch(
@@ -74,9 +74,9 @@
 
          ApiService.add(person)
          .then(
-            function(response) {
+            function(data) {
                UtilityService.showToastSuccess('Person added - Your changes have been saved');
-               successCallBack(response.data);
+               successCallBack(data);
             }
          )
          .catch(
@@ -99,9 +99,9 @@
 
          ApiService.update(person)
          .then(
-            function(response) {
+            function(data) {
                UtilityService.showToastSuccess('Changes saved - Your changes have been saved');
-               successCallBack(response.data);
+               successCallBack(data);
             }
          )
          .catch(
@@ -124,7 +124,7 @@
 
          ApiService.deleteObj(personId)
          .then(
-            function(response) {
+            function() {
                UtilityService.showToastSuccess('Changes saved - Item deleted');
                successCallBack();
             }

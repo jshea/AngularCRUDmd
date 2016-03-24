@@ -7,7 +7,6 @@
 
    function NewController($scope, $location, DataService) {
 
-
       var self = this;     // Save a pointer to our current context
       self.person = {};    // Initialize the person object as an empty object
 

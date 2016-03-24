@@ -51,6 +51,7 @@
 
       /*
        * Load our states
+       * TODO - Move to DataService
        */
       ApiService.getStates(
          // WS Success

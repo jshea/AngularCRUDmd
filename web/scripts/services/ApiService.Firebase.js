@@ -15,11 +15,21 @@
       var WS_URL = 'https://angularcrudmaterial.firebaseio.com/data/';
 
       self.getAll = function getAll() {
-         return $http.get(WS_URL + '.json');
+         return $http.get(WS_URL + '.json')
+         .then(
+            function (response) {
+               return response.data;
+            }
+         );
       };
 
       self.getById = function getById(id) {
-         return $http.get(WS_URL + id + '/.json');
+         return $http.get(WS_URL + id + '/.json')
+         .then(
+            function (response) {
+               return response.data;
+            }
+         );
       };
 
       // Note firebase returns the created id as "name"
@@ -36,12 +46,22 @@
       };
 
       self.update = function update(person) {
-         return $http.put(WS_URL + person.id + '/.json', person);
+         return $http.put(WS_URL + person.id + '/.json', person)
+         .then(
+            function (response) {
+               return response.data;
+            }
+         );
       };
 
       // Note delete is a JS reserved word, so we use deleteObj
       self.deleteObj = function deleteObj(id) {
-         return $http.delete(WS_URL + id + '/.json');
+         return $http.delete(WS_URL + id + '/.json')
+         .then(
+            function (response) {
+               return response.data;
+            }
+         );
       };
 
       /*

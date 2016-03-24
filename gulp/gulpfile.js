@@ -20,7 +20,6 @@ var jsAppFiles = [
    "../web/scripts/config/routes.js",
    "../web/scripts/config/constants.js",            // This is before run.js as this may reset default constant values
    "../web/scripts/config/run.js",
-   "../web/scripts/filters/phoneNumber.js",
    "../web/components/PersonEdit/personEdit.js",
    "../web/components/PersonList/personList.js",
    "../web/components/PersonView/personView.js",
@@ -30,8 +29,10 @@ var jsAppFiles = [
    "../web/scripts/controllers/newController.js",
    "../web/scripts/controllers/settingsController.js",
    "../web/scripts/controllers/viewController.js",
+   "../web/scripts/filters/phoneNumber.js",
    "../web/scripts/filters/titleCase.js",
-   "../web/scripts/services/ApiService.js",
+   "../web/scripts/services/ApiService.Firebase.js",
+//   "../web/scripts/services/ApiService.Java.js",
    "../web/scripts/services/DataService.js",
    "../web/scripts/services/UtilityService.js"
 ];

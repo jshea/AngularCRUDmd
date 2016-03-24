@@ -11,6 +11,7 @@
       var self = this;
 
       // Delete all existing data and reload our sample data
+      // TODO - Move this to a DataService call
       ApiService.loadSeedData(
          // WS Success
          function (response) {
