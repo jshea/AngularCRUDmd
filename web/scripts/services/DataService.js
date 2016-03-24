@@ -10,11 +10,28 @@
      /**
       * Initialize/set the states value.
       *
-      * @param {type} states
       * @returns {undefined}
       */
-      self.setStates = function setStates(states) {
-         self.states = states;
+      self.initStates = function initStates () {
+         $rootScope.isLoading = true;
+
+         ApiService.getStates()
+         .then(
+            function (data) {
+               self.states = data;
+            }
+         )
+         .catch(
+            function (response) {
+               console.log('httpFactory.writeLog() Error: ', response);
+               UtilityService.showToastError("Web Service call failed - getStates failed.");
+            }
+         )
+         .finally(
+            function() {
+               $rootScope.isLoading = false;
+            }
+         );
       };
 
 

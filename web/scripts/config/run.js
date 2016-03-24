@@ -53,16 +53,7 @@
        * Load our states
        * TODO - Move to DataService
        */
-      ApiService.getStates(
-         // WS Success
-         function (data) {
-            DataService.setStates(data);
-         },
-         // WS Failure
-         function () {
-            UtilityService.showToastError("Web Service call failed - getStates failed.");
-         }
-      );
+      DataService.initStates();
 
 
       /* This is an example of saving user variables in the browsers localStorage.

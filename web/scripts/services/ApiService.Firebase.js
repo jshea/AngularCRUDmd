@@ -13,6 +13,7 @@
       // This is the path to add to our source URL to get to the REST url's
       var WS_URL = 'https://YOUR-APP.firebaseio.com/data/';
 
+
       self.getAll = function getAll() {
          return $http.get(WS_URL + '.json')
          .then(
@@ -22,6 +23,7 @@
          );
       };
 
+
       self.getById = function getById(id) {
          return $http.get(WS_URL + id + '/.json')
          .then(
@@ -30,6 +32,7 @@
             }
          );
       };
+
 
       // Note firebase returns the created id as "name"
       self.add = function add(person) {
@@ -44,6 +47,7 @@
          );
       };
 
+
       self.update = function update(person) {
          return $http.put(WS_URL + person.id + '/.json', person)
          .then(
@@ -53,15 +57,17 @@
          );
       };
 
-      // Note delete is a JS reserved word, so we use deleteObj
+
+      /**
+       * Note delete is a JS reserved word, so we use deleteObj
+       *
+       * @param {type} id
+       * @returns {unresolved} Nothing
+       */
       self.deleteObj = function deleteObj(id) {
-         return $http.delete(WS_URL + id + '/.json')
-         .then(
-            function (response) {
-               return response.data;
-            }
-         );
+         return $http.delete(WS_URL + id + '/.json');
       };
+
 
       /*
        * Get a list of states to build a picklist and could be used for validation.
@@ -69,21 +75,14 @@
       self.getStates = function getStates(successCallback, failureCallback) {
          var dataUrl = 'sampledata/states.json';   // URL for our state data
 
-         $rootScope.isLoading = true;
-
-         $http.get(dataUrl)
+         return $http.get(dataUrl)
          .then(
             function (response) {
-               successCallback(response.data);
-               $rootScope.isLoading = false;
-            },
-            function (response) {
-               console.log('httpFactory.writeLog() Error: ', response);
-               failureCallback();
-               $rootScope.isLoading = false;
+               return response.data;
             }
          );
       };
+
 
       /*
        * Note - This uses $q.all to wait until all promises (run in parallel) complete. This could
