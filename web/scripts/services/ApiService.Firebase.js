@@ -105,7 +105,7 @@
          $rootScope.isLoading = true;
 
          // Delete the old data
-         $http.delete(WS_URL + '.json')
+         return $http.delete(WS_URL + '.json')
          //  Get the sample data
          .then(
             function(response) {
@@ -125,13 +125,7 @@
                $rootScope.isLoading = false;
                return $q.all(self.promises);
             }
-         )
-         .catch(
-            function (response) {
-               console.log("ApiService.loadSeedData() Error: ", response);
-            }
-         )
-         .finally(successCallback, failureCallback);
+         );
       };
 
    }

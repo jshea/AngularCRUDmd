@@ -23,8 +23,8 @@
          )
          .catch(
             function (response) {
-               console.log('httpFactory.writeLog() Error: ', response);
-               UtilityService.showToastError("Web Service call failed - getStates failed.");
+               console.log('ApiService.initStates() Error: ', response);
+               UtilityService.showToastError("Web Service call failed - initStates failed.");
             }
          )
          .finally(
@@ -150,6 +150,34 @@
             function (response) {
                console.log("ApiService.personDelete() Error: ", response);
                UtilityService.showToastError('Web Service call failed - save ' + response.config.url + ' failed.');
+            }
+         )
+         .finally(
+            function() {
+               $rootScope.isLoading = false;
+            }
+         );
+      };
+
+
+     /**
+      * Delete all existing data and reload our sample data
+      * @param {type} successCallBack
+      * @returns {undefined}
+      */
+      self.loadSeedData = function loadSeedData (successCallBack) {
+         $rootScope.isLoading = true;
+
+         ApiService.loadSeedData()
+         .then(
+            function () {
+               successCallBack();
+            }
+         )
+         .catch(
+            function (response) {
+               console.log('ApiService.loadSeedData() Error: ', response);
+               UtilityService.showToastError("Web Service call failed - loadSeedData failed.");
             }
          )
          .finally(

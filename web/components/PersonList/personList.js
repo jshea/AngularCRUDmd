@@ -39,20 +39,25 @@
 //         '</md-list>'
 
          '<md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>',
-            '<div flex="33" ng-repeat="person in $ctrl.personListData" >',
+
+//         '<md-virtual-repeat-container id="vertical-container">',
+//            '<div md-virtual-repeat="person in $ctrl.personListData" class="repeated-item" flex="33">',
+
+         '<div ng-repeat="person in $ctrl.personListData">',
 
                '<md-card>',
-                  '<md-card-content>',
+                  '<md-card-content layout="row" layout-align="center">',
                      '{{person.lastName}}, {{person.firstName}}<br>{{person.mobile | phoneNumber}}',
+                     '<md-card-actions layout="column">',
+                        '<md-button href="#/view/{{person.id}}"><md-icon>zoom_in</md-icon></md-button>',
+                        '<md-button href="#/edit/{{person.id}}"><md-icon>mode_edit</md-icon></md-button>',
+                     '</md-card-actions>',
                   '</md-card-content>',
-                  '<div class="md-actions" layout="row" layout-align="start center" style="padding-left:8px;">',
-                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
-//                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
-//                     '<md-button href="#/view/{{person.id}}"><md-icon>info</md-icon></md-button>',
-                  '</div>',
                '</md-card>',
-
             '</div>',
+
+//            '</div>',
+//          '</md-virtual-repeat-container>',
          '</md-content>'
       ].join(''),
 

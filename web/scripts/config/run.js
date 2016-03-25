@@ -7,12 +7,10 @@
     *
     * @param {type} $window     Base DOM object for checking networking connectivity
     * @param {type} $rootScope  Root of AngularJS data where we'll set online/offline status
-    * @param {type} ApiService
     * @param {type} DataService
-    * @param {type} UtilityService
     * @returns {undefined}
     */
-   function Run($window, $rootScope, ApiService, DataService, UtilityService) { // , WS_URL
+   function Run($window, $rootScope, DataService) {
 
       /*
        * Sets a global variable ($rootScope.online) to true when we gain network availability.
@@ -79,5 +77,5 @@
    // Register this with our application module
    angular
       .module('angularcrud')
-      .run(['$window', '$rootScope', 'ApiService', 'DataService', 'UtilityService', Run]);   // , 'WS_URL'
+      .run(['$window', '$rootScope', 'DataService', Run]);
 })();
