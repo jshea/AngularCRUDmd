@@ -7,7 +7,7 @@
 
    'use strict';
 
-   function ApiService($http, $rootScope, $q) {
+   function ApiService($http, $q) {
       var self = this;
 
       // This is the path to add to our source URL to get to the REST url's
@@ -98,11 +98,9 @@
        *           });
        *        }
        */
-      self.loadSeedData = function loadSeedData(successCallback, failureCallback) {
+      self.loadSeedData = function loadSeedData() {
          var sampleDataUrl = 'sampledata/sample.json';   // URL for our sample data
          var self = this;
-
-         $rootScope.isLoading = true;
 
          // Delete the old data
          return $http.delete(WS_URL + '.json')
@@ -122,7 +120,7 @@
                   // Push each promise to an array and then return $q.all([promiseArray])
                   self.promises.push(self.add(result.data[i]));
                }
-               $rootScope.isLoading = false;
+
                return $q.all(self.promises);
             }
          );
@@ -133,5 +131,5 @@
    // Register our service
    angular
       .module('angularcrud')
-      .service('ApiService', ['$http', '$rootScope', '$q', ApiService]);
+      .service('ApiService', ['$http', '$q', ApiService]);
 })();
