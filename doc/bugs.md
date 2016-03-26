@@ -1,3 +1,3 @@
 ## Bug list
 
-### There's bugs, this just needs updating!
+### There's bugs, this document just needs updating!

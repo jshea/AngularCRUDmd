@@ -43,7 +43,7 @@
 //         '<md-virtual-repeat-container id="vertical-container">',
 //            '<div md-virtual-repeat="person in $ctrl.personListData" class="repeated-item" flex="33">',
 
-         '<div ng-repeat="person in $ctrl.personListData">',
+         '<div ng-repeat="person in $ctrl.personListData | orderBy:\'lastName\'">',
 
                '<md-card>',
                   '<md-card-content layout="row" layout-align="center">',

@@ -17,8 +17,16 @@
       self.getAll = function getAll() {
          return $http.get(WS_URL + '.json')
          .then(
-            function (response) {
-               return response.data;
+            function(response) {
+               // Convert the Firebase object into an array
+               var person = {};
+               var personList = [];
+
+               for(person in response.data) {
+                  personList.push(response.data[person]);
+               }
+
+               return personList;
             }
          );
       };
