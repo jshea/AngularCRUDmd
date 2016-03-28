@@ -37,7 +37,13 @@
 
       /*   Getting/Setting data   */
 
-      // Get one person by id
+      /**
+       * Get one person by id
+       *
+       * @param {type} personId
+       * @param {type} successCallBack
+       * @returns {undefined}
+       */
       self.personGet = function personGet(personId, successCallBack) {
          $rootScope.isLoading = true;
 
@@ -61,7 +67,12 @@
       };
 
 
-      // Get all people, no guarantee on sort order!
+      /**
+       * Get all people, no guarantee on sort order!
+       *
+       * @param {type} successCallBack
+       * @returns {undefined}
+       */
       self.personGetAll = function personGetAll(successCallBack) {
          $rootScope.isLoading = true;
 
@@ -85,7 +96,13 @@
       };
 
 
-      // Add a new person
+      /**
+       * Add a new person
+       *
+       * @param {type} person
+       * @param {type} successCallBack
+       * @returns {undefined}
+       */
       self.personAdd = function personAdd(person, successCallBack) {
          $rootScope.isLoading = true;
 
@@ -110,7 +127,13 @@
       };
 
 
-      // Update an existing person
+      /**
+       * Update an existing person
+       *
+       * @param {type} person
+       * @param {type} successCallBack
+       * @returns {undefined}
+       */
       self.personUpdate = function personUpdate(person, successCallBack) {
          $rootScope.isLoading = true;
 
@@ -135,7 +158,13 @@
       };
 
 
-      // Delete a person
+      /**
+       * Delete a person
+       *
+       * @param {type} personId
+       * @param {type} successCallBack
+       * @returns {undefined}
+       */
       self.personDelete = function personDelete(personId, successCallBack) {
          $rootScope.isLoading = true;
 

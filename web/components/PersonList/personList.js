@@ -14,32 +14,8 @@
      },
 
      template: [
-//         '<table id="listTable">',
-//            '<tr ng-repeat="person in $ctrl.personListData">',
-//               '<td>',
-//                  '<md-button href="#/view/{{person.id}}">{{person.lastName}}, {{person.firstName}}</md-button>',
-//               '</td>',
-//               '<td>',
-//                  '{{person.mobile | phoneNumber}}',
-//               '</td>',
-//            '</tr>',
-//         '</table>'
-
-//         '<md-list id="contactList">',
-//
-//            '<md-list-item class="md-1-line" ng-repeat="person in $ctrl.personListData">',
-//               '<div class="md-list-item-text">',
-//                  '<md-button href="#/view/{{person.id}}">',
-//                     '{{person.lastName}}, {{person.firstName}} {{person.mobile | phoneNumber}}',
-//                  '</md-button>',
-//                  '<md-divider></md-divider>',
-//               '</div>',
-//            '</md-list-item>',
-//
-//         '</md-list>'
-
          '<md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>',
-
+// Does virtual repeat work with cards?
 //         '<md-virtual-repeat-container id="vertical-container">',
 //            '<div md-virtual-repeat="person in $ctrl.personListData" class="repeated-item" flex="33">',
 
@@ -49,8 +25,8 @@
                   '<md-card-content layout="row" layout-align="center">',
                      '{{person.lastName}}, {{person.firstName}}<br>{{person.mobile | phoneNumber}}',
                      '<md-card-actions layout="column">',
-                        '<md-button href="#/view/{{person.id}}"><md-icon>zoom_in</md-icon></md-button>',
-                        '<md-button href="#/edit/{{person.id}}"><md-icon>mode_edit</md-icon></md-button>',
+                        '<md-button class="md-icon-button" href="#/view/{{person.id}}"><md-icon>zoom_in</md-icon></md-button>',
+                        '<md-button class="md-icon-button" href="#/edit/{{person.id}}"><md-icon>mode_edit</md-icon></md-button>',
                      '</md-card-actions>',
                   '</md-card-content>',
                '</md-card>',
