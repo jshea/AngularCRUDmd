@@ -2,7 +2,8 @@
 # AngularCRUD
 
 This is a sample AngularJS client application supporting both a Java middle tier/RDBMS backend as well as  Elasticsearch as the middle tier/data base.  These architectures are incorporated because
-* Elasticsearch makes a great development platform as it's the easiest to download, install, configure and run. This allows the repo to concentrate on sharing AngularJS knowledge and be the basis for business/CRUD applications.
+* [Firebase](http://firebase.com) is a commercial service that makes application and NoSQL hosting trivial and has a generous free plan.
+* [Elasticsearch](http://elastic.co) makes a great development platform as it's the easiest to download, install, configure and run. This allows the repo to concentrate on sharing AngularJS knowledge and be the basis for business/CRUD applications.
 * Java middle tier with a RDBMS backend happens to be the architecture of my day job.
 
 Platform specific notes and artifacts are contained in the doc folder.

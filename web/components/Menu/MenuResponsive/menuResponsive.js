@@ -13,7 +13,7 @@
       },
 
       template: [
-         '<div layout="column" layout-fill>',
+         '<div layout="column">',
             '<md-toolbar>',
                '<div class="md-toolbar-tools">',
                   '<md-button class="md-icon-button" ng-click="$ctrl.toggle()">',
@@ -27,13 +27,13 @@
             '<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="sidenav">',
 
                '<md-content>',
-                  '<md-button href="#/list">Contact List</md-button>',
-                  '<br><md-button href="#/new">New Contact</md-button>',
-                  '<br><md-button href="#/load">Initialize Data</md-button>',
-                  '<br><md-button href="#/instructions">Instructions</md-button>',
-                  '<br><md-button href="#/faq">FAQs</md-button>',
+                  '<md-button ng-click="$ctrl.menuAction(\'/list\')">Contact List</md-button>',
+                  '<br><md-button ng-click="$ctrl.menuAction(\'/new\')">New Contact</md-button>',
+                  '<br><md-button ng-click="$ctrl.menuAction(\'/load\')">Initialize Data</md-button>',
+                  '<br><md-button ng-click="$ctrl.menuAction(\'/instructions\')">Instructions</md-button>',
+                  '<br><md-button ng-click="$ctrl.menuAction(\'/faq\')">FAQs</md-button>',
 
-                  '<md-button ng-click="$ctrl.close()" class="md-primary">',
+                  '<p><md-button ng-click="$ctrl.close()" class="md-primary">',
                     'Close',
                   '</md-button>',
                '</md-content>',
@@ -43,8 +43,13 @@
          '</div>'
       ].join(''),
 
-      controller: function ($mdSidenav) {
+      controller: function ($mdSidenav, $location) {
          var self = this;
+
+         self.menuAction = function (location) {
+            $location.path(location);
+            $mdSidenav('sidenav').close();
+         };
 
          self.close = function () {
             $mdSidenav('sidenav').close();

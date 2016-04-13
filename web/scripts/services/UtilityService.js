@@ -11,7 +11,7 @@
          $mdToast.show(
             $mdToast.simple()
                .textContent(message)         // Message to display
-//               .highlightClass('md-accent')  // md-primary, md-warn and md-accent (default) new in 1.1
+               .highlightClass('md-accent')  // md-primary, md-warn and md-accent (default) new in 1.1
                .capsule(true)                // Rounded corners
                .position('top right')
                .hideDelay(3000)
@@ -22,7 +22,7 @@
          $mdToast.show(
             $mdToast.simple()
                .textContent(message)         // Message to display
-//               .highlightClass('md-accent')    // md-primary, md-warn and md-accent (default)
+               .highlightClass('md-warn')    // md-primary, md-warn and md-accent (default)
                .capsule(true)                // Rounded corners
                .position('top right')
                .hideDelay(3000)

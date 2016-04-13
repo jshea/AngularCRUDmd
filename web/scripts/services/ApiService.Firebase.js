@@ -14,6 +14,11 @@
       var WS_URL = 'https://YOUR-APP.firebaseio.com/data/';
 
 
+      /**
+       * Get all data in our data store.
+       *
+       * @returns {unresolved}
+       */
       self.getAll = function getAll() {
          return $http.get(WS_URL + '.json')
          .then(
@@ -32,6 +37,12 @@
       };
 
 
+      /**
+       * Get one object by its id.
+       *
+       * @param {type} id
+       * @returns {unresolved}
+       */
       self.getById = function getById(id) {
          return $http.get(WS_URL + id + '/.json')
          .then(
@@ -42,7 +53,13 @@
       };
 
 
-      // Note firebase returns the created id as "name"
+      /**
+       * Note firebase returns the created id as "name". We'll stick this back into
+       * our person object as an Id.
+       *
+       * @param {type} person
+       * @returns {unresolved}
+       */
       self.add = function add(person) {
          return $http.post(WS_URL + '.json', person)
          .then(
@@ -56,6 +73,12 @@
       };
 
 
+      /**
+       * Save updated person object.
+       *
+       * @param {type} person
+       * @returns {unresolved}
+       */
       self.update = function update(person) {
          return $http.put(WS_URL + person.id + '/.json', person)
          .then(
