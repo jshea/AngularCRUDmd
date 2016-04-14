@@ -15,36 +15,36 @@ import org.junit.Test;
  * @author jshea
  */
 public class WebServiceTest {
-	private static WebServiceUtil wsUtil = null;
+   private static WebServiceUtil wsUtil = null;
 
     public WebServiceTest() {}
 
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		wsUtil = new WebServiceUtil();
-	}
+   @BeforeClass
+   public static void setUpClass() throws Exception {
+      wsUtil = new WebServiceUtil();
+   }
 
-	@AfterClass
-	public static void tearDownClass() throws Exception {
+   @AfterClass
+   public static void tearDownClass() throws Exception {
       // Do any global data cleanup
-	}
+   }
 
-	@Before
-	public void setUp() {
+   @Before
+   public void setUp() {
       // Do setup prior to each test
    }
 
-	@After
-	public void tearDown() { }
+   @After
+   public void tearDown() { }
 
 
-	/**
-	 *
-	 *
-	 */
-	@Test
-	public void testWebServices() {
+   /**
+    *
+    *
+    */
+   @Test
+   public void testWebServices() {
       List<Person> personList;
       Person before, after;
 
@@ -55,13 +55,13 @@ public class WebServiceTest {
        */
 
       // Delete all data
-		ClientResponse cr = wsUtil.runDelete("/deleteall");
-		assertEquals(200, cr.getStatus());
+      ClientResponse cr = wsUtil.runDelete("/deleteall");
+      assertEquals(200, cr.getStatus());
 
       // Get the full list of everybody in our db
-		cr = wsUtil.runGet("/");
+      cr = wsUtil.runGet("/");
       // There should be no response body because all data was deleted
-		assertEquals(204, cr.getStatus());
+      assertEquals(204, cr.getStatus());
 
       /*
        * Test adding a person
@@ -80,9 +80,9 @@ public class WebServiceTest {
       before.setWebsite("http://jpl.nasa.gov");
 
       // Note add returns the saved values. This is from a select from the table.
-		cr = wsUtil.runPost("/", before);
+      cr = wsUtil.runPost("/", before);
       // Should be HTTP 201 - Created
-		assertEquals(201, cr.getStatus());
+      assertEquals(201, cr.getStatus());
       after = WebServiceUtil.jsonToPerson(cr.getEntity(String.class));
 
       /*

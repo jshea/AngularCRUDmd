@@ -11,7 +11,7 @@
       var self = this;
 
       // This is the path to add to our source URL to get to the REST url's
-      var WS_URL = 'https://YOUR-APP.firebaseio.com/data/';
+      var WS_URL = 'https://angularcrudmaterial.firebaseio.com/data/';
 
 
       /**
